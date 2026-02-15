@@ -59,6 +59,16 @@ let App = {
     document.getElementById('hc-review-skip-btn').addEventListener('click', () => this.skipHcReview());
     document.getElementById('hc-review-confirm-btn').addEventListener('click', () => this.confirmHcReview());
 
+    // Scoreboard tabs
+    document.querySelectorAll('.sb-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.sb-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.sb-tab-content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+
     // Scoreboard
     document.getElementById('back-to-round-btn').addEventListener('click', () => {
       this.showScreen('round-screen');
@@ -682,6 +692,8 @@ let App = {
   updateHoleResult() {
     const gs = this.gameState;
     const hole = gs.currentHole;
+    const courseHole = gs.course.holes.find(h => h.hole === hole);
+    const par = courseHole ? courseHole.par : 4;
 
     // Update score labels (Eagle, Birdie, Par, etc.)
     this.updateScoreLabels();
@@ -712,8 +724,8 @@ let App = {
       }
     }
 
-    // Calculate
-    const result = LasVegas.calcHolePoints(scores, teams);
+    // Calculate (rawScores, par for birdie detection)
+    const result = LasVegas.calcHolePoints(scores, teams, rawScores, par);
     gs.holeResults[hole] = result;
 
     // Display result
@@ -726,18 +738,43 @@ let App = {
     const hcInfoB1 = gs.handicapHoles[b1].includes(hole) ? ' (HC-1)' : '';
     const hcInfoB2 = gs.handicapHoles[b2].includes(hole) ? ' (HC-1)' : '';
 
+    // LV number display (show original → flipped if birdie)
+    const bi = result.birdieInfo;
+    let lvADisplay = `${result.lasVegasA}`;
+    let lvBDisplay = `${result.lasVegasB}`;
+    if (bi && bi.flipped) {
+      if (bi.teamABirdies > 0) {
+        // Team A had birdie → Team B's number was flipped
+        lvBDisplay = `<s>${result.originalLvB}</s> → ${result.lasVegasB}`;
+      } else {
+        // Team B had birdie → Team A's number was flipped
+        lvADisplay = `<s>${result.originalLvA}</s> → ${result.lasVegasA}`;
+      }
+    }
+
+    // Birdie flip banner
+    let birdieHtml = '';
+    if (bi && bi.flipped) {
+      const flipTarget = bi.teamABirdies > 0 ? 'B' : 'A';
+      const mult = bi.multiplier > 1 ? ` x${bi.multiplier}` : '';
+      birdieHtml = `<div class="birdie-flip-banner">Birdie! チーム${flipTarget}の数字が反転${mult}</div>`;
+    } else if (bi && bi.teamABirdies > 0 && bi.teamBBirdies > 0) {
+      birdieHtml = `<div class="birdie-cancel-banner">両チームBirdie - 相殺</div>`;
+    }
+
     resultDiv.innerHTML = `
+      ${birdieHtml}
       <div class="result-row">
         <div class="result-team">
           <span class="result-team-label">チームA</span>
           <span>${gs.playerNames[a1]}${hcInfoA1}: ${scores[a1]}  ${gs.playerNames[a2]}${hcInfoA2}: ${scores[a2]}</span>
-          <span class="lv-number">${result.lasVegasA}</span>
+          <span class="lv-number">${lvADisplay}</span>
         </div>
         <div class="result-vs">vs</div>
         <div class="result-team">
           <span class="result-team-label">チームB</span>
           <span>${gs.playerNames[b1]}${hcInfoB1}: ${scores[b1]}  ${gs.playerNames[b2]}${hcInfoB2}: ${scores[b2]}</span>
-          <span class="lv-number">${result.lasVegasB}</span>
+          <span class="lv-number">${lvBDisplay}</span>
         </div>
       </div>
       <div class="result-points">
@@ -984,6 +1021,11 @@ let App = {
   // ============================
   showScoreboard() {
     this.showScreen('scoreboard-screen');
+    // Reset tabs to default (LV points)
+    document.querySelectorAll('.sb-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.sb-tab-content').forEach(c => c.classList.remove('active'));
+    document.querySelector('.sb-tab[data-tab="lv-tab"]').classList.add('active');
+    document.getElementById('lv-tab').classList.add('active');
     this.renderScoreboard();
   },
 
@@ -1149,9 +1191,20 @@ let App = {
         const [b1, b2] = result.teams.teamB;
         const teamStr = `${gs.playerNames[a1][0]}${gs.playerNames[a2][0]} vs ${gs.playerNames[b1][0]}${gs.playerNames[b2][0]}`;
 
+        const bi = result.birdieInfo;
+        let lvDisplay = `${result.lasVegasA}-${result.lasVegasB}`;
+        let birdieClass = '';
+        if (bi && bi.flipped) {
+          const origA = result.originalLvA != null ? result.originalLvA : result.lasVegasA;
+          const origB = result.originalLvB != null ? result.originalLvB : result.lasVegasB;
+          lvDisplay = `${origA}-${origB} → ${result.lasVegasA}-${result.lasVegasB}`;
+          birdieClass = ' lv-birdie-flip';
+          if (bi.multiplier > 1) lvDisplay += ` x${bi.multiplier}`;
+        }
+
         let cells = `<td class="lv-hole">${h}</td>`;
         cells += `<td class="lv-team">${teamStr}</td>`;
-        cells += `<td class="lv-nums">${result.lasVegasA}-${result.lasVegasB}</td>`;
+        cells += `<td class="lv-nums${birdieClass}">${lvDisplay}</td>`;
 
         for (let i = 0; i < 4; i++) {
           const p = result.points[i];

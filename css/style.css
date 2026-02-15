@@ -624,6 +624,28 @@ body {
 .score-value::-webkit-outer-spin-button { -webkit-appearance: none; }
 
 /* Hole Result */
+/* Birdie flip banners */
+.birdie-flip-banner {
+  background: #e91e63;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+}
+.birdie-cancel-banner {
+  background: #9e9e9e;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+}
+
 .hole-result {
   background: var(--white);
   border-radius: var(--radius);
@@ -729,6 +751,44 @@ body {
   margin-bottom: 12px;
   text-align: center;
 }
+/* Scoreboard tabs */
+.sb-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--gray-light);
+}
+.sb-tab {
+  flex: 1;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.15s;
+}
+.sb-tab.active {
+  color: var(--green-dark);
+  border-bottom-color: var(--green);
+}
+.sb-tab-content {
+  display: none;
+}
+.sb-tab-content.active {
+  display: block;
+}
+
+/* LV birdie flip highlight in table */
+.lv-birdie-flip {
+  color: #e91e63;
+  font-weight: 700;
+  font-size: 11px;
+}
+
 .lv-section-title {
   font-size: 15px;
   color: var(--green-dark);

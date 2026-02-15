@@ -58,19 +58,50 @@ const LasVegas = {
     return Math.ceil(value / 5) * 5;
   },
 
+  // ラスベガス数の桁を反転: 57 → 75
+  flipDigits(num) {
+    const tens = Math.floor(num / 10);
+    const ones = num % 10;
+    return ones * 10 + tens;
+  },
+
   // 1ホール分のポイント計算
   // scores: [4人のスコア]  (ハンディキャップ適用済み)
-  // rankings or battingOrder に基づくチーム分け
-  calcHolePoints(scores, teams) {
+  // rawScores, par: バーディ判定用（純スコアで判定）
+  calcHolePoints(scores, teams, rawScores, par) {
     const [a1, a2] = teams.teamA;
     const [b1, b2] = teams.teamB;
 
-    const lvA = this.calcLasVegasNumber(scores[a1], scores[a2]);
-    const lvB = this.calcLasVegasNumber(scores[b1], scores[b2]);
+    const origLvA = this.calcLasVegasNumber(scores[a1], scores[a2]);
+    const origLvB = this.calcLasVegasNumber(scores[b1], scores[b2]);
+    let lvA = origLvA;
+    let lvB = origLvB;
+
+    // バーディフリップ判定（純スコアで判定、HC考慮なし）
+    let birdieInfo = { flipped: false, multiplier: 1, teamABirdies: 0, teamBBirdies: 0 };
+    if (rawScores && par) {
+      const teamABirdies = [a1, a2].filter(p => rawScores[p] < par).length;
+      const teamBBirdies = [b1, b2].filter(p => rawScores[p] < par).length;
+      birdieInfo.teamABirdies = teamABirdies;
+      birdieInfo.teamBBirdies = teamBBirdies;
+
+      if (teamABirdies > 0 && teamBBirdies === 0) {
+        // チームAにバーディ → チームBの数字を反転
+        lvB = this.flipDigits(lvB);
+        birdieInfo.flipped = true;
+        if (teamABirdies === 2) birdieInfo.multiplier = 2;
+      } else if (teamBBirdies > 0 && teamABirdies === 0) {
+        // チームBにバーディ → チームAの数字を反転
+        lvA = this.flipDigits(lvA);
+        birdieInfo.flipped = true;
+        if (teamBBirdies === 2) birdieInfo.multiplier = 2;
+      }
+      // 両チームにバーディがいる場合は相殺（何もしない）
+    }
 
     const diff = lvB - lvA; // 正ならteamA勝ち、負ならteamB勝ち
     const absDiff = Math.abs(diff);
-    const roundedDiff = this.roundUpTo5(absDiff);
+    const roundedDiff = this.roundUpTo5(absDiff) * birdieInfo.multiplier;
 
     // 各プレイヤーのポイント
     const points = new Array(4).fill(0);
@@ -93,9 +124,12 @@ const LasVegas = {
       teams,
       lasVegasA: lvA,
       lasVegasB: lvB,
+      originalLvA: origLvA,
+      originalLvB: origLvB,
       diff,
       roundedDiff,
       points,
+      birdieInfo,
     };
   },
 

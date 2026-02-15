@@ -150,25 +150,32 @@
     <div class="container scoreboard-container">
       <h2 class="scoreboard-title">スコアボード</h2>
 
-      <!-- Golf Scorecard -->
-      <div class="scorecard-scroll">
-        <table class="scorecard-table" id="scorecard-table">
-          <thead><tr id="scorecard-header"></tr></thead>
-          <tbody id="scorecard-body"></tbody>
-        </table>
+      <!-- Tab navigation -->
+      <div class="sb-tabs">
+        <button class="sb-tab active" data-tab="lv-tab">ラスベガスポイント</button>
+        <button class="sb-tab" data-tab="score-tab">ラウンドスコア</button>
       </div>
 
-      <!-- Las Vegas Points -->
-      <h3 class="lv-section-title">ラスベガスポイント</h3>
-      <div class="scorecard-scroll">
-        <table class="lv-points-table" id="lv-points-table">
-          <thead><tr id="lv-points-header"></tr></thead>
-          <tbody id="lv-points-body"></tbody>
-        </table>
+      <!-- Tab: Las Vegas Points (default) -->
+      <div id="lv-tab" class="sb-tab-content active">
+        <div class="scorecard-scroll">
+          <table class="lv-points-table" id="lv-points-table">
+            <thead><tr id="lv-points-header"></tr></thead>
+            <tbody id="lv-points-body"></tbody>
+          </table>
+        </div>
+        <div id="ranking" class="ranking"></div>
       </div>
 
-      <!-- Ranking -->
-      <div id="ranking" class="ranking"></div>
+      <!-- Tab: Round Score -->
+      <div id="score-tab" class="sb-tab-content">
+        <div class="scorecard-scroll">
+          <table class="scorecard-table" id="scorecard-table">
+            <thead><tr id="scorecard-header"></tr></thead>
+            <tbody id="scorecard-body"></tbody>
+          </table>
+        </div>
+      </div>
 
       <div class="step-nav">
         <button id="back-to-round-btn" class="btn btn-secondary">ラウンドに戻る</button>
