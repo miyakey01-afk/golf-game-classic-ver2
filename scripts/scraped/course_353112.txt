@@ -1,0 +1,25 @@
+# ダイナミックゴルフ千葉 - Hole-by-Hole Data
+
+## Course Layout
+
+| Hole | Par | Yardage (Regular) | HDCP |
+|------|-----|-------------------|------|
+| 1 | 3 | 65 | — |
+| 2 | 3 | 125 | — |
+| 3 | 3 | 135 | — |
+| 4 | 3 | 80 | — |
+| 5 | 3 | 40 | — |
+| 6 | 3 | 45 | — |
+| 7 | 3 | 145 | — |
+| 8 | 3 | 110 | — |
+| 9 | 3 | 210 | — |
+| **Total** | **27** | **955** | — |
+
+## Key Details
+
+This is a "9-hole par-3 executive course" facility. All holes are par 3s, making it a short-game focused venue. The course measurements range from a shortest hole at 40 yards (Hole 5) to the longest at 210 yards (Hole 9).
+
+**Location:** Chiba City, Wakaba Ward
+**Phone:** 043-228-5725
+
+The page notes that layout diagrams represent general features rather than precise configurations and may differ from actual course conditions.

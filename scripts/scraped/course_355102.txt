@@ -1,0 +1,31 @@
+# 浜野ゴルフクラブ - Hole-by-Hole Data
+
+## OUT (Front 9)
+
+| Hole | Par | HDCP | Blue(A) | Regular(A) | Ladies(A) | Black(A) |
+|------|-----|------|---------|-----------|-----------|----------|
+| 1 | 4 | 3 | 402yd | 381yd | 357yd | 423yd |
+| 2 | 4 | 13 | 397yd | 374yd | 341yd | 413yd |
+| 3 | 4 | 15 | 352yd | 335yd | 318yd | 370yd |
+| 4 | 4 | 7 | 404yd | 377yd | 341yd | 414yd |
+| 5 | 3 | 17 | 155yd | 137yd | 118yd | 172yd |
+| 6 | 5 | 5 | 545yd | 526yd | 504yd | 559yd |
+| 7 | 4 | 1 | 421yd | 385yd | 349yd | 454yd |
+| 8 | 5 | 9 | 530yd | 500yd | 474yd | 547yd |
+| 9 | 3 | 11 | 208yd | 186yd | 164yd | 231yd |
+
+## IN (Back 9)
+
+| Hole | Par | HDCP | Blue(A) | Regular(A) | Ladies(A) | Black(A) |
+|------|-----|------|---------|-----------|-----------|----------|
+| 10 | 4 | 4 | 423yd | 404yd | 376yd | 445yd |
+| 11 | 4 | 6 | 406yd | 381yd | 329yd | 439yd |
+| 12 | 5 | 12 | 545yd | 524yd | 470yd | 577yd |
+| 13 | 3 | 18 | 188yd | 167yd | 144yd | 209yd |
+| 14 | 4 | 16 | 380yd | 355yd | 324yd | 394yd |
+| 15 | 4 | 2 | 428yd | 353yd | 335yd | 451yd |
+| 16 | 4 | 8 | 353yd | 331yd | 308yd | 374yd |
+| 17 | 3 | 10 | 202yd | 184yd | 174yd | 218yd |
+| 18 | 5 | 14 | 516yd | 498yd | 444yd | 527yd |
+
+**Course Summary:** 18ホール パー72, total distance 7,231 yards across two green configurations (Bent A & B).

@@ -1,0 +1,39 @@
+# ジャパンPGAゴルフクラブ - Course Data
+
+**Course Name:** ジャパンPGAゴルフクラブ (Japan PGA Golf Club)
+**Location:** Chiba Prefecture, Kimitsu
+**Total Layout:** 18 holes, Par 72
+
+## OUT (Front Nine)
+
+| Hole | Par | HDCP | Reg Yardage |
+|------|-----|------|-------------|
+| 1 | 4 | 3 | 413 |
+| 2 | 3 | 5 | 201 |
+| 3 | 5 | 9 | 514 |
+| 4 | 4 | 17 | 325 |
+| 5 | 4 | 1 | 351 |
+| 6 | 4 | 7 | 386 |
+| 7 | 3 | 13 | 151 |
+| 8 | 4 | 15 | 338 |
+| 9 | 5 | 11 | 538 |
+
+**OUT Totals:** Par 36, 3,217 yards
+
+## IN (Back Nine)
+
+| Hole | Par | HDCP | Reg Yardage |
+|------|-----|------|-------------|
+| 10 | 4 | 10 | 365 |
+| 11 | 4 | 2 | 414 |
+| 12 | 4 | 8 | 389 |
+| 13 | 5 | 16 | 494 |
+| 14 | 3 | 18 | 164 |
+| 15 | 4 | 6 | 406 |
+| 16 | 4 | 4 | 418 |
+| 17 | 3 | 12 | 168 |
+| 18 | 5 | 14 | 503 |
+
+**IN Totals:** Par 36, 3,321 yards
+
+**Course Total:** Par 72, 6,538 yards (Regular tees)

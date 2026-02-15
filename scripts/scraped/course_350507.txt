@@ -1,0 +1,39 @@
+# Golf Course Data: ゴルフ５カントリーオークビレッヂ
+
+**Course Name:** ゴルフ５カントリーオークビレッジ (Golf 5 Country Oak Village)
+**Location:** Chiba Prefecture, Ichihara
+**Total Holes:** 18 (Par 72)
+
+## OUT (Front Nine)
+
+| Hole | Par | HDCP | Reg. Yardage |
+|------|-----|------|--------------|
+| 1 | 4 | 15 | 349 |
+| 2 | 4 | 9 | 333 |
+| 3 | 5 | 3 | 529 |
+| 4 | 3 | 13 | 207 |
+| 5 | 4 | 7 | 342 |
+| 6 | 5 | 1 | 488 |
+| 7 | 4 | 11 | 272 |
+| 8 | 3 | 17 | 147 |
+| 9 | 4 | 5 | 345 |
+
+**OUT Total:** Par 36, 3,012 yards
+
+## IN (Back Nine)
+
+| Hole | Par | HDCP | Reg. Yardage |
+|------|-----|------|--------------|
+| 10 | 4 | 10 | 380 |
+| 11 | 4 | 16 | 355 |
+| 12 | 4 | 4 | 407 |
+| 13 | 5 | 2 | 452 |
+| 14 | 3 | 14 | 165 |
+| 15 | 4 | 8 | 364 |
+| 16 | 5 | 6 | 454 |
+| 17 | 3 | 18 | 142 |
+| 18 | 4 | 12 | 397 |
+
+**IN Total:** Par 36, 3,116 yards
+
+**18-Hole Total:** Par 72, 6,128 yards (Regular tees)

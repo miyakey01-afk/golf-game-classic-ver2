@@ -1,0 +1,14 @@
+{
+  "prefecture": "千葉県",
+  "total_courses": 161,
+  "scraped_count": 161,
+  "remaining_count": 0,
+  "courses_in_json": 128,
+  "last_updated": "2026-02-15",
+  "status": "complete",
+  "notes": "全161コース取得完了。128コースがcourses.jsonに追加（18ホール以上）。27ホール/9ホールコースは9ホール単位でスキップ。",
+  "source": "GDO (reserve.golfdigest.co.jp)",
+  "url_pattern": "https://reserve.golfdigest.co.jp/golf-course/course-layout/{courseID}",
+  "scraped_ids": "全161コース取得済み（scripts/scraped/course_*.txt）",
+  "skipped_courses_reason": "27ホールコース（3x9H構成で各9ホールしかパースできない）、ショートコース等が含まれる"
+}

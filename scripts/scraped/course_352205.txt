@@ -1,0 +1,38 @@
+# 白井ゴルフ林間ショートコース - Course Data
+
+**Course Name:** 白井ゴルフ林間ショートコース (Shirai Golf Rinkan Short Course)
+**Location:** Chiba Prefecture (千葉県白井市根412)
+
+## Bent Grass Course
+
+| Hole | Par | HDCP | Yardage |
+|------|-----|------|---------|
+| 1 | 3 | 7 | 88 |
+| 2 | 3 | 1 | 118 |
+| 3 | 3 | 3 | 125 |
+| 4 | 3 | 5 | 134 |
+| 5 | 3 | 4 | 122 |
+| 6 | 3 | 2 | 147 |
+| 7 | 3 | 6 | 121 |
+| 8 | 3 | 8 | 101 |
+| 9 | 3 | 9 | 0 |
+
+**Total:** Par 27, 956 yards
+
+## Kourai Grass Course
+
+| Hole | Par | Yardage |
+|------|-----|---------|
+| 1 | 3 | 89 |
+| 2 | 3 | 105 |
+| 3 | 3 | 124 |
+| 4 | 3 | 127 |
+| 5 | 3 | 125 |
+| 6 | 3 | 148 |
+| 7 | 3 | 103 |
+| 8 | 3 | 102 |
+| 9 | 3 | 81 |
+
+**Total:** Par 27, 1,004 yards
+
+**Note:** Hole 9 on the Bent course shows 0 yards in the data provided.

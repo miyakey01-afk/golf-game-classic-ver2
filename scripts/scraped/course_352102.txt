@@ -1,0 +1,39 @@
+# ザ・カントリークラブ・ジャパン - Hole-by-Hole Data
+
+**Course Name:** ザ・カントリークラブ・ジャパン (The Country Club Japan)
+**Location:** Chiba Prefecture, Kisarazu
+**Total Holes:** 18 (Par 72)
+
+## OUT (Holes 1-9)
+
+| Hole | Par | HDCP | Yardage (Black) |
+|------|-----|------|-----------------|
+| 1 | 5 | 9 | 573 |
+| 2 | 4 | 15 | 371 |
+| 3 | 4 | 3 | 469 |
+| 4 | 3 | 13 | 190 |
+| 5 | 4 | 1 | 401 |
+| 6 | 3 | 7 | 176 |
+| 7 | 5 | 5 | 532 |
+| 8 | 4 | 11 | 396 |
+| 9 | 4 | 17 | 429 |
+
+**OUT Total:** Par 36, 3,537 yards
+
+## IN (Holes 10-18)
+
+| Hole | Par | HDCP | Yardage (Black) |
+|------|-----|------|-----------------|
+| 10 | 4 | 16 | 382 |
+| 11 | 4 | 4 | 405 |
+| 12 | 4 | 10 | 374 |
+| 13 | 3 | 14 | 188 |
+| 14 | 5 | 2 | 559 |
+| 15 | 4 | 8 | 390 |
+| 16 | 4 | 12 | 392 |
+| 17 | 3 | 18 | 178 |
+| 18 | 5 | 6 | 559 |
+
+**IN Total:** Par 36, 3,427 yards
+
+**Course Total:** 7,247 yards, Par 72, Course Rating 72.3

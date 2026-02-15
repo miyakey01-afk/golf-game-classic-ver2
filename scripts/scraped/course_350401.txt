@@ -1,0 +1,35 @@
+# 江戸川ラインゴルフ松戸コース - Hole-by-Hole Data
+
+**Course Name:** 江戸川ラインゴルフ松戸コース (Edogawa Line Golf Matsudo Course)
+
+## OUT (Front 9)
+
+| Hole | Par | HDCP | Regular | Ladies |
+|------|-----|------|---------|--------|
+| 1 | 4 | 3 | 308yd | 279yd |
+| 2 | 3 | 11 | 137yd | 108yd |
+| 3 | 4 | 13 | 249yd | 249yd |
+| 4 | 4 | 15 | 248yd | 248yd |
+| 5 | 4 | 9 | 282yd | 241yd |
+| 6 | 4 | 7 | 273yd | 229yd |
+| 7 | 4 | 1 | 395yd | 306yd |
+| 8 | 4 | 17 | 231yd | 231yd |
+| 9 | 4 | 5 | 269yd | 225yd |
+| **OUT Total** | **35** | — | **2,392yd** | **2,116yd** |
+
+## IN (Back 9)
+
+| Hole | Par | HDCP | Regular | Ladies |
+|------|-----|------|---------|--------|
+| 10 | 4 | 4 | 343yd | 302yd |
+| 11 | 3 | 10 | 137yd | 102yd |
+| 12 | 5 | 6 | 483yd | 447yd |
+| 13 | 3 | 14 | 112yd | 112yd |
+| 14 | 3 | 16 | 114yd | 92yd |
+| 15 | 4 | 18 | 270yd | 213yd |
+| 16 | 4 | 2 | 332yd | 307yd |
+| 17 | 3 | 12 | 119yd | 103yd |
+| 18 | 4 | 8 | 307yd | 272yd |
+| **IN Total** | **33** | — | **2,217yd** | **1,950yd** |
+
+**Course Stats:** 18 holes, Par 68, Total yardage 4,609 yards (Regular tees)

@@ -1,0 +1,35 @@
+# 大網グリーンゴルフ - Course Data
+
+**Course Name:** 大網グリーンゴルフ (Oami Green Golf)
+
+**Location:** 千葉県大網白里市大竹２７０－１ (Chiba Prefecture)
+
+**Course Type:** 林間 (Woodland course)
+
+---
+
+## Hole-by-Hole Data
+
+| Hole | Par | HDCP | Regular (yd) |
+|------|-----|------|-------------|
+| 1 | 3 | — | 105 |
+| 2 | 3 | — | 95 |
+| 3 | 3 | — | 105 |
+| 4 | 3 | — | 130 |
+| 5 | 3 | — | 110 |
+| 6 | 3 | — | 110 |
+| 7 | 3 | — | 140 |
+| 8 | 3 | — | 110 |
+| 9 | 3 | — | 58 |
+| **Total** | **27** | — | **963** |
+
+---
+
+## Course Details
+
+- **Total Distance:** 963 yards
+- **Course Rating:** Not available
+- **Greens:** 1 green, コーライ芝 (Korai grass)
+- **Fairway:** コーライ (Korai grass)
+- **Hazards:** 0 bunkers; 3 holes with water hazards
+- **Practice Range:** 250 yards available

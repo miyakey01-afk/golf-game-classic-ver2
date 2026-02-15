@@ -1,0 +1,43 @@
+# 東京ベイサイドゴルフコース 【PGM】 - Hole-by-Hole Data
+
+## Course Overview
+- **Total Holes:** 18 (Par 72)
+- **Total Distance:** 6,515 yards
+- **Course Type:** Hillside
+- **Location:** Chiba Prefecture, Kimitsu
+
+---
+
+## OUT (Front 9)
+
+| Hole | Par | Yardage (Blue) | HDCP |
+|------|-----|----------------|------|
+| 1 | 4 | 403 | 13 |
+| 2 | 3 | 139 | 9 |
+| 3 | 4 | 381 | 11 |
+| 4 | 4 | 386 | 1 |
+| 5 | 3 | 201 | 15 |
+| 6 | 4 | 425 | 3 |
+| 7 | 5 | 508 | 7 |
+| 8 | 4 | 366 | 17 |
+| 9 | 5 | 503 | 5 |
+
+**OUT Total:** Par 36, 3,312 yards
+
+---
+
+## IN (Back 9)
+
+| Hole | Par | Yardage (Blue) | HDCP |
+|------|-----|----------------|------|
+| 10 | 3 | 202 | 14 |
+| 11 | 5 | 544 | 2 |
+| 12 | 4 | 334 | 18 |
+| 13 | 3 | 153 | 8 |
+| 14 | 4 | 352 | 10 |
+| 15 | 4 | 353 | 12 |
+| 16 | 4 | 414 | 6 |
+| 17 | 4 | 350 | 16 |
+| 18 | 5 | 501 | 4 |
+
+**IN Total:** Par 36, 3,203 yards
