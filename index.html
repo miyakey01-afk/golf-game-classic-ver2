@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ラスベガス - ゴルフスコア</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ========== Screen 1: Start ========== -->
+  <div id="start-screen" class="screen active">
+    <div class="container">
+      <h1 class="app-title">LAS VEGAS</h1>
+      <p class="app-subtitle">ゴルフスコアアプリ</p>
+      <button id="new-game-btn" class="btn btn-primary btn-large">新しいゲームを開始</button>
+      <button id="resume-btn" class="btn btn-secondary" style="display:none;">前回のゲームを再開</button>
+    </div>
+  </div>
+
+  <!-- ========== Screen 2: Setup ========== -->
+  <div id="setup-screen" class="screen">
+    <div class="container">
+      <!-- Step 1: Course & Players -->
+      <div id="setup-step-1" class="setup-step active">
+        <h2>Step 1: ゴルフ場 & プレイヤー</h2>
+
+        <div class="section">
+          <h3>ゴルフ場選択</h3>
+          <input type="text" id="course-search" class="input-text" placeholder="コース名 or 都道府県で検索...">
+          <div id="course-list" class="course-list"></div>
+          <p class="selected-info">選択中: <strong id="selected-course-name">未選択</strong></p>
+        </div>
+
+        <div class="section">
+          <h3>プレイヤー登録（4名）</h3>
+          <div class="player-inputs">
+            <input type="text" id="player-name-0" class="input-text" placeholder="プレイヤー1の名前">
+            <input type="text" id="player-name-1" class="input-text" placeholder="プレイヤー2の名前">
+            <input type="text" id="player-name-2" class="input-text" placeholder="プレイヤー3の名前">
+            <input type="text" id="player-name-3" class="input-text" placeholder="プレイヤー4の名前">
+          </div>
+        </div>
+
+        <button id="setup-next-1" class="btn btn-primary">次へ</button>
+      </div>
+
+      <!-- Step 2: Course Info -->
+      <div id="setup-step-2" class="setup-step">
+        <h2>Step 2: コース情報</h2>
+        <h3 id="course-info-title"></h3>
+        <table class="info-table">
+          <thead><tr><th>HOLE</th><th>PAR</th><th>HDCP</th></tr></thead>
+          <tbody id="course-info-body"></tbody>
+        </table>
+        <div class="step-nav">
+          <button id="setup-back-2" class="btn btn-secondary">戻る</button>
+          <button id="setup-next-2" class="btn btn-primary">次へ</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Handicap -->
+      <div id="setup-step-3" class="setup-step">
+        <h2>Step 3: ハンディキャップ設定</h2>
+        <label class="checkbox-label">
+          <input type="checkbox" id="hc-enable">
+          ハンディキャップを設定しますか？
+        </label>
+        <div id="hc-settings" style="display:none;"></div>
+        <div class="step-nav">
+          <button id="setup-back-3" class="btn btn-secondary">戻る</button>
+          <button id="setup-next-3" class="btn btn-primary">次へ</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Batting Order -->
+      <div id="setup-step-4" class="setup-step">
+        <h2>Step 4: 1番ホールの打順</h2>
+        <p class="step-desc">各プレイヤー名をタップして打順を設定してください</p>
+        <div id="batting-order-list"></div>
+        <div class="step-nav">
+          <button id="setup-back-4" class="btn btn-secondary">戻る</button>
+          <button id="setup-next-4" class="btn btn-primary">次へ</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Confirmation -->
+      <div id="setup-step-5" class="setup-step">
+        <h2>確認</h2>
+        <div id="confirmation-content"></div>
+        <div class="step-nav">
+          <button id="setup-back-5" class="btn btn-secondary">戻る</button>
+          <button id="round-start-btn" class="btn btn-primary btn-large">ラウンドスタート</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Screen 3: Round ========== -->
+  <div id="round-screen" class="screen">
+    <div class="container">
+      <div class="hole-header">
+        <h2>HOLE <span id="hole-number">1</span></h2>
+        <span class="hole-par">PAR <span id="hole-par">4</span></span>
+      </div>
+
+      <div id="team-display" class="team-display"></div>
+
+      <div class="section">
+        <h3>スコア入力</h3>
+        <div id="score-inputs"></div>
+      </div>
+
+      <div id="hole-result" class="hole-result"></div>
+
+      <div id="cumulative-points" class="cumulative-points"></div>
+
+      <div class="hole-nav">
+        <button id="prev-hole-btn" class="btn btn-secondary">前のホールへ</button>
+        <button id="scoreboard-btn" class="btn btn-outline">スコアボード</button>
+        <button id="next-hole-btn" class="btn btn-primary">次のホールへ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Screen 4: Scoreboard ========== -->
+  <div id="scoreboard-screen" class="screen">
+    <div class="container">
+      <h2>スコアボード</h2>
+      <div class="table-scroll">
+        <table class="scoreboard-table">
+          <thead><tr id="scoreboard-header"></tr></thead>
+          <tbody id="scoreboard-body"></tbody>
+        </table>
+      </div>
+      <div id="ranking" class="ranking"></div>
+      <div class="step-nav">
+        <button id="back-to-round-btn" class="btn btn-secondary">ラウンドに戻る</button>
+        <button id="new-game-from-result-btn" class="btn btn-primary">新しいゲーム</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/game.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
