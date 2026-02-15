@@ -724,22 +724,26 @@ let App = {
       }
     }
 
-    // Calculate (rawScores, par for birdie detection)
-    const result = LasVegas.calcHolePoints(scores, teams, rawScores, par);
+    // Calculate (rawScores, par, handicapHoles, hole for birdie + HC cancel)
+    const result = LasVegas.calcHolePoints(scores, teams, rawScores, par, gs.handicapHoles, hole);
     gs.holeResults[hole] = result;
 
     // Display result
     const resultDiv = document.getElementById('hole-result');
     const [a1, a2] = teams.teamA;
     const [b1, b2] = teams.teamB;
+    const bi = result.birdieInfo;
+    const eff = result.effectiveScores || scores;
+    const hcCancelled = (bi && bi.hcCancelled) || [];
 
-    const hcInfoA1 = gs.handicapHoles[a1].includes(hole) ? ' (HC-1)' : '';
-    const hcInfoA2 = gs.handicapHoles[a2].includes(hole) ? ' (HC-1)' : '';
-    const hcInfoB1 = gs.handicapHoles[b1].includes(hole) ? ' (HC-1)' : '';
-    const hcInfoB2 = gs.handicapHoles[b2].includes(hole) ? ' (HC-1)' : '';
+    // HC label helper: if HC was cancelled by birdie, show strikethrough
+    const hcLabel = (playerIdx) => {
+      if (!gs.handicapHoles[playerIdx].includes(hole)) return '';
+      if (hcCancelled.includes(playerIdx)) return ' <s>(HC-1)</s>';
+      return ' (HC-1)';
+    };
 
     // LV number display (show original → flipped if birdie)
-    const bi = result.birdieInfo;
     let lvADisplay = `${result.lasVegasA}`;
     let lvBDisplay = `${result.lasVegasB}`;
     if (bi && bi.flipped) {
@@ -767,13 +771,13 @@ let App = {
       <div class="result-row">
         <div class="result-team">
           <span class="result-team-label">チームA</span>
-          <span>${gs.playerNames[a1]}${hcInfoA1}: ${scores[a1]}  ${gs.playerNames[a2]}${hcInfoA2}: ${scores[a2]}</span>
+          <span>${gs.playerNames[a1]}${hcLabel(a1)}: ${eff[a1]}  ${gs.playerNames[a2]}${hcLabel(a2)}: ${eff[a2]}</span>
           <span class="lv-number">${lvADisplay}</span>
         </div>
         <div class="result-vs">vs</div>
         <div class="result-team">
           <span class="result-team-label">チームB</span>
-          <span>${gs.playerNames[b1]}${hcInfoB1}: ${scores[b1]}  ${gs.playerNames[b2]}${hcInfoB2}: ${scores[b2]}</span>
+          <span>${gs.playerNames[b1]}${hcLabel(b1)}: ${eff[b1]}  ${gs.playerNames[b2]}${hcLabel(b2)}: ${eff[b2]}</span>
           <span class="lv-number">${lvBDisplay}</span>
         </div>
       </div>

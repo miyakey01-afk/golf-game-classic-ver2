@@ -68,33 +68,47 @@ const LasVegas = {
   // 1ホール分のポイント計算
   // scores: [4人のスコア]  (ハンディキャップ適用済み)
   // rawScores, par: バーディ判定用（純スコアで判定）
-  calcHolePoints(scores, teams, rawScores, par) {
+  // handicapHoles, hole: バーディ+HC無効判定用
+  calcHolePoints(scores, teams, rawScores, par, handicapHoles, hole) {
     const [a1, a2] = teams.teamA;
     const [b1, b2] = teams.teamB;
 
-    const origLvA = this.calcLasVegasNumber(scores[a1], scores[a2]);
-    const origLvB = this.calcLasVegasNumber(scores[b1], scores[b2]);
-    let lvA = origLvA;
-    let lvB = origLvB;
-
     // バーディフリップ判定（純スコアで判定、HC考慮なし）
-    let birdieInfo = { flipped: false, multiplier: 1, teamABirdies: 0, teamBBirdies: 0 };
+    let birdieInfo = { flipped: false, multiplier: 1, teamABirdies: 0, teamBBirdies: 0, hcCancelled: [] };
+
+    // バーディ+HC保持者はHC-1を無効にした effectiveScores を作成
+    const effectiveScores = [...scores];
     if (rawScores && par) {
+      for (let i = 0; i < 4; i++) {
+        if (rawScores[i] < par && handicapHoles && hole && handicapHoles[i] && handicapHoles[i].includes(hole)) {
+          // バーディ取得者 かつ このホールでHC-1 → 生スコアに戻す
+          effectiveScores[i] = rawScores[i];
+          birdieInfo.hcCancelled.push(i);
+        }
+      }
+
       const teamABirdies = [a1, a2].filter(p => rawScores[p] < par).length;
       const teamBBirdies = [b1, b2].filter(p => rawScores[p] < par).length;
       birdieInfo.teamABirdies = teamABirdies;
       birdieInfo.teamBBirdies = teamBBirdies;
+    }
 
-      if (teamABirdies > 0 && teamBBirdies === 0) {
+    const origLvA = this.calcLasVegasNumber(effectiveScores[a1], effectiveScores[a2]);
+    const origLvB = this.calcLasVegasNumber(effectiveScores[b1], effectiveScores[b2]);
+    let lvA = origLvA;
+    let lvB = origLvB;
+
+    if (rawScores && par) {
+      if (birdieInfo.teamABirdies > 0 && birdieInfo.teamBBirdies === 0) {
         // チームAにバーディ → チームBの数字を反転
         lvB = this.flipDigits(lvB);
         birdieInfo.flipped = true;
-        if (teamABirdies === 2) birdieInfo.multiplier = 2;
-      } else if (teamBBirdies > 0 && teamABirdies === 0) {
+        if (birdieInfo.teamABirdies === 2) birdieInfo.multiplier = 2;
+      } else if (birdieInfo.teamBBirdies > 0 && birdieInfo.teamABirdies === 0) {
         // チームBにバーディ → チームAの数字を反転
         lvA = this.flipDigits(lvA);
         birdieInfo.flipped = true;
-        if (teamBBirdies === 2) birdieInfo.multiplier = 2;
+        if (birdieInfo.teamBBirdies === 2) birdieInfo.multiplier = 2;
       }
       // 両チームにバーディがいる場合は相殺（何もしない）
     }
@@ -130,6 +144,7 @@ const LasVegas = {
       roundedDiff,
       points,
       birdieInfo,
+      effectiveScores,
     };
   },
 
