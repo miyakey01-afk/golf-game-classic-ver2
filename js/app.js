@@ -34,6 +34,18 @@ let App = {
     document.getElementById('new-game-btn').addEventListener('click', () => this.startSetup());
     document.getElementById('resume-btn').addEventListener('click', () => this.resumeGame());
 
+    // Rulebook modal
+    const rulebookModal = document.getElementById('rulebook-modal');
+    document.getElementById('rulebook-btn').addEventListener('click', () => {
+      rulebookModal.classList.add('active');
+    });
+    document.getElementById('rulebook-close-btn').addEventListener('click', () => {
+      rulebookModal.classList.remove('active');
+    });
+    rulebookModal.addEventListener('click', (e) => {
+      if (e.target === rulebookModal) rulebookModal.classList.remove('active');
+    });
+
     // Setup steps (4 steps: 1=Course&Players, 2=CourseInfo+HC, 3=BattingOrder, 4=Confirm)
     document.getElementById('setup-next-1').addEventListener('click', () => this.setupStep1Next());
     document.getElementById('setup-back-2').addEventListener('click', () => this.showSetupStep(1));

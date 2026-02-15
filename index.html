@@ -18,6 +18,105 @@
       <p class="app-subtitle">ゴルフスコアアプリ</p>
       <button id="new-game-btn" class="btn btn-primary btn-large">新しいゲームを開始</button>
       <button id="resume-btn" class="btn btn-secondary" style="display:none;">前回のゲームを再開</button>
+      <button id="rulebook-btn" class="btn btn-outline btn-large rulebook-open-btn">ルールブック</button>
+    </div>
+  </div>
+
+  <!-- ========== Rulebook Modal ========== -->
+  <div id="rulebook-modal" class="rulebook-overlay">
+    <div class="rulebook-modal">
+      <div class="rulebook-header">
+        <h2>LAS VEGAS ルールブック</h2>
+        <button id="rulebook-close-btn" class="rulebook-close">&times;</button>
+      </div>
+      <div class="rulebook-body">
+
+        <div class="rule-section">
+          <h3>概要</h3>
+          <p>ラスベガスは4人でプレーするゴルフの賭けゲームです。毎ホール2対2のチーム戦で、各チームのスコアを2桁の数字にして勝負します。</p>
+        </div>
+
+        <div class="rule-section">
+          <h3>チーム編成</h3>
+          <div class="rule-card">
+            <div class="rule-card-title">1番ホール</div>
+            <p>打順で決定:<br>
+              <strong>Team A</strong> = 1番目 & 4番目<br>
+              <strong>Team B</strong> = 2番目 & 3番目</p>
+          </div>
+          <div class="rule-card">
+            <div class="rule-card-title">2番ホール以降</div>
+            <p>前ホールのゴルフスコア順位で決定:<br>
+              <strong>Team A</strong> = 1位 & 4位<br>
+              <strong>Team B</strong> = 2位 & 3位</p>
+          </div>
+        </div>
+
+        <div class="rule-section">
+          <h3>ラスベガスナンバー</h3>
+          <p>チーム2人のスコアから2桁の数字を作ります。</p>
+          <div class="rule-card rule-example">
+            <div class="rule-card-title">計算方法</div>
+            <p><strong>小さいスコア</strong>が十の位<br>
+               <strong>大きいスコア</strong>が一の位</p>
+            <div class="rule-divider"></div>
+            <p class="rule-example-text">例: スコアが <strong>4</strong> と <strong>5</strong> の場合<br>
+              LVナンバー = <span class="rule-highlight">45</span></p>
+            <p class="rule-example-text">例: スコアが <strong>6</strong> と <strong>3</strong> の場合<br>
+              LVナンバー = <span class="rule-highlight">36</span></p>
+          </div>
+        </div>
+
+        <div class="rule-section">
+          <h3>ポイント計算</h3>
+          <ol class="rule-steps">
+            <li>両チームのLVナンバーの<strong>差</strong>を計算</li>
+            <li>差を<strong>5の倍数に切り上げ</strong></li>
+            <li>LVナンバーが<strong>小さいチームが勝ち</strong></li>
+          </ol>
+          <div class="rule-card rule-example">
+            <div class="rule-card-title">例</div>
+            <p>Team A: <strong>45</strong> vs Team B: <strong>58</strong><br>
+              差 = |58 - 45| = 13 → <span class="rule-highlight">15pt</span> に切り上げ<br>
+              Team A が <span class="rule-win">+15</span>、Team B が <span class="rule-lose">-15</span></p>
+          </div>
+        </div>
+
+        <div class="rule-section">
+          <h3>バーディフリップ</h3>
+          <p>バーディ（パー未満のスコア）を取ると特殊効果が発動します。</p>
+          <div class="rule-card rule-birdie">
+            <div class="rule-card-title">片方のチームにバーディが1つ</div>
+            <p>相手チームのLVナンバーの<strong>十の位と一の位を逆転</strong>させる!</p>
+            <p class="rule-example-text">例: 相手が <strong>45</strong> → <span class="rule-highlight">54</span> に変化<br>
+              例: 相手が <strong>36</strong> → <span class="rule-highlight">63</span> に変化</p>
+          </div>
+          <div class="rule-card rule-birdie">
+            <div class="rule-card-title">片方のチームにバーディが2つ</div>
+            <p>ポイントが <span class="rule-highlight">2倍</span> になる!</p>
+          </div>
+          <div class="rule-card">
+            <div class="rule-card-title">両チームにバーディ</div>
+            <p>バーディ効果は<strong>相殺</strong>されて通常計算になります。</p>
+          </div>
+        </div>
+
+        <div class="rule-section">
+          <h3>ハンディキャップ (HC)</h3>
+          <p>プレイヤーごとに指定ホールで<strong>スコアが-1</strong>されます。</p>
+          <ul class="rule-list">
+            <li>OUT(1-9H)とIN(10-18H)で個別に設定</li>
+            <li>9Hと10Hの間でINのHCを見直し可能</li>
+            <li>HC適用ホールでバーディの場合、<strong>HC効果は取消</strong>（素のスコアで計算）</li>
+          </ul>
+        </div>
+
+        <div class="rule-section">
+          <h3>勝敗</h3>
+          <p>18ホール終了後、<strong>累計ポイントが最も高いプレイヤーが優勝</strong>です。</p>
+        </div>
+
+      </div>
     </div>
   </div>
 

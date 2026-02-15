@@ -1051,6 +1051,179 @@ body {
   border-bottom: 2px solid var(--green-light);
 }
 
+/* ========== Rulebook Modal ========== */
+.rulebook-open-btn {
+  color: var(--gold-light);
+  border-color: var(--gold-light);
+  margin-top: 4px;
+}
+.rulebook-open-btn:active {
+  background: rgba(245, 208, 96, 0.15);
+}
+
+.rulebook-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  align-items: flex-end;
+  justify-content: center;
+}
+.rulebook-overlay.active {
+  display: flex;
+}
+
+.rulebook-modal {
+  background: var(--bg);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90dvh;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.rulebook-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: var(--green-dark);
+  border-radius: 16px 16px 0 0;
+  flex-shrink: 0;
+}
+.rulebook-header h2 {
+  font-size: 16px;
+  color: var(--gold-light);
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.rulebook-close {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  font-size: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.rulebook-close:active {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.rulebook-body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 20px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+}
+
+.rule-section {
+  margin-bottom: 20px;
+}
+.rule-section h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--green-dark);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--green-light);
+}
+.rule-section p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.rule-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin: 8px 0;
+  box-shadow: var(--shadow);
+}
+.rule-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+.rule-card p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.rule-example {
+  border-left: 4px solid var(--green-light);
+}
+.rule-birdie {
+  border-left: 4px solid #e91e63;
+}
+.rule-birdie .rule-card-title {
+  color: #e91e63;
+}
+
+.rule-divider {
+  height: 1px;
+  background: var(--gray-light);
+  margin: 8px 0;
+}
+
+.rule-example-text {
+  margin-top: 4px;
+}
+
+.rule-highlight {
+  display: inline-block;
+  background: var(--gold-light);
+  color: var(--green-dark);
+  font-weight: 900;
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.rule-win {
+  color: var(--green-dark);
+  font-weight: 800;
+}
+.rule-lose {
+  color: var(--red);
+  font-weight: 800;
+}
+
+.rule-steps {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+.rule-steps li {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
+.rule-list {
+  padding-left: 18px;
+  margin: 8px 0;
+}
+.rule-list li {
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
 /* ========== Small phone adjustments ========== */
 @media (max-width: 374px) {
   .container {
