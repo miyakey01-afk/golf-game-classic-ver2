@@ -124,15 +124,29 @@
 
   <!-- ========== Screen 4: Scoreboard ========== -->
   <div id="scoreboard-screen" class="screen">
-    <div class="container">
-      <h2>スコアボード</h2>
-      <div class="table-scroll">
-        <table class="scoreboard-table">
-          <thead><tr id="scoreboard-header"></tr></thead>
-          <tbody id="scoreboard-body"></tbody>
+    <div class="container scoreboard-container">
+      <h2 class="scoreboard-title">スコアボード</h2>
+
+      <!-- Golf Scorecard -->
+      <div class="scorecard-scroll">
+        <table class="scorecard-table" id="scorecard-table">
+          <thead><tr id="scorecard-header"></tr></thead>
+          <tbody id="scorecard-body"></tbody>
         </table>
       </div>
+
+      <!-- Las Vegas Points -->
+      <h3 class="lv-section-title">ラスベガスポイント</h3>
+      <div class="scorecard-scroll">
+        <table class="lv-points-table" id="lv-points-table">
+          <thead><tr id="lv-points-header"></tr></thead>
+          <tbody id="lv-points-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Ranking -->
       <div id="ranking" class="ranking"></div>
+
       <div class="step-nav">
         <button id="back-to-round-btn" class="btn btn-secondary">ラウンドに戻る</button>
         <button id="new-game-from-result-btn" class="btn btn-primary">新しいゲーム</button>

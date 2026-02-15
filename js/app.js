@@ -602,63 +602,210 @@ let App = {
 
   renderScoreboard() {
     const gs = this.gameState;
-    const tbody = document.getElementById('scoreboard-body');
+    this.renderScorecard(gs);
+    this.renderLVPointsTable(gs);
+  },
+
+  // --- Golf Scorecard (reference image style) ---
+  renderScorecard(gs) {
+    const holes = gs.course.holes;
+    const front9 = holes.filter(h => h.hole <= 9);
+    const back9 = holes.filter(h => h.hole >= 10);
+
+    // Header
+    const header = document.getElementById('scorecard-header');
+    header.innerHTML = '<th class="sc-label-col"></th><th class="sc-par-col">PAR</th>';
+    gs.playerNames.forEach(name => {
+      header.innerHTML += `<th class="sc-player-col">${name}</th>`;
+    });
+
+    const tbody = document.getElementById('scorecard-body');
+    tbody.innerHTML = '';
+
+    // Helper: add a hole row
+    const addHoleRow = (holeInfo) => {
+      const h = holeInfo.hole;
+      const rawScores = gs.holeScores[h];
+      const tr = document.createElement('tr');
+
+      let cells = `<td class="sc-label">${h}</td><td class="sc-par">${holeInfo.par}</td>`;
+      for (let i = 0; i < 4; i++) {
+        const score = rawScores ? rawScores[i] : null;
+        if (score !== null) {
+          const diff = score - holeInfo.par;
+          let cls = 'sc-even';
+          if (diff <= -2) cls = 'sc-eagle';
+          else if (diff === -1) cls = 'sc-birdie';
+          else if (diff === 1) cls = 'sc-bogey';
+          else if (diff >= 2) cls = 'sc-dblbogey';
+          cells += `<td class="sc-score ${cls}">${score}</td>`;
+        } else {
+          cells += `<td class="sc-score">-</td>`;
+        }
+      }
+      tr.innerHTML = cells;
+      tbody.appendChild(tr);
+    };
+
+    // Helper: add subtotal row
+    const addSubtotalRow = (label, parTotal, scoreTotals, cssClass) => {
+      const tr = document.createElement('tr');
+      tr.className = cssClass;
+      let cells = `<td class="sc-label">${label}</td><td class="sc-par">${parTotal}</td>`;
+      for (let i = 0; i < 4; i++) {
+        cells += `<td class="sc-score">${scoreTotals[i] > 0 ? scoreTotals[i] : '-'}</td>`;
+      }
+      tr.innerHTML = cells;
+      tbody.appendChild(tr);
+    };
+
+    // Front 9
+    let outPar = 0;
+    const outScores = [0, 0, 0, 0];
+    const outHasScore = [false, false, false, false];
+    front9.forEach(holeInfo => {
+      addHoleRow(holeInfo);
+      outPar += holeInfo.par;
+      const rawScores = gs.holeScores[holeInfo.hole];
+      if (rawScores) {
+        for (let i = 0; i < 4; i++) {
+          outScores[i] += rawScores[i];
+          outHasScore[i] = true;
+        }
+      }
+    });
+
+    // OUT row
+    const outDisplay = outScores.map((s, i) => outHasScore[i] ? s : 0);
+    addSubtotalRow('OUT', outPar, outDisplay, 'sc-subtotal-row');
+
+    // Back 9
+    let inPar = 0;
+    const inScores = [0, 0, 0, 0];
+    const inHasScore = [false, false, false, false];
+    back9.forEach(holeInfo => {
+      addHoleRow(holeInfo);
+      inPar += holeInfo.par;
+      const rawScores = gs.holeScores[holeInfo.hole];
+      if (rawScores) {
+        for (let i = 0; i < 4; i++) {
+          inScores[i] += rawScores[i];
+          inHasScore[i] = true;
+        }
+      }
+    });
+
+    // IN row
+    const inDisplay = inScores.map((s, i) => inHasScore[i] ? s : 0);
+    addSubtotalRow('IN', inPar, inDisplay, 'sc-subtotal-row');
+
+    // GROSS row
+    const grossPar = outPar + inPar;
+    const grossScores = outScores.map((s, i) => s + inScores[i]);
+    const grossHas = outHasScore.map((s, i) => s || inHasScore[i]);
+    const grossDisplay = grossScores.map((s, i) => grossHas[i] ? s : 0);
+    addSubtotalRow('GROSS', grossPar, grossDisplay, 'sc-total-row');
+
+    // NET row (gross - number of HC holes)
+    const netScores = grossScores.map((s, i) => {
+      if (!grossHas[i]) return 0;
+      const hcCount = gs.handicapHoles[i] ? gs.handicapHoles[i].length : 0;
+      return s - hcCount;
+    });
+    addSubtotalRow('NET', '', netScores, 'sc-total-row');
+
+    // Ranking row (based on NET, lower = better in golf)
+    const netForRank = netScores.map((s, i) => ({ score: grossHas[i] ? s : Infinity, index: i }));
+    netForRank.sort((a, b) => a.score - b.score);
+    const golfRanks = new Array(4).fill('-');
+    netForRank.forEach((item, rank) => {
+      if (item.score < Infinity) golfRanks[item.index] = rank + 1;
+    });
+
+    const rankRow = document.createElement('tr');
+    rankRow.className = 'sc-rank-row';
+    let rankCells = `<td class="sc-label">順位</td><td class="sc-par"></td>`;
+    for (let i = 0; i < 4; i++) {
+      rankCells += `<td class="sc-score sc-rank-val">${golfRanks[i]}</td>`;
+    }
+    rankRow.innerHTML = rankCells;
+    tbody.appendChild(rankRow);
+  },
+
+  // --- Las Vegas Points Table ---
+  renderLVPointsTable(gs) {
+    const header = document.getElementById('lv-points-header');
+    header.innerHTML = '<th>H</th><th>チーム</th><th>LV</th>';
+    gs.playerNames.forEach(name => {
+      header.innerHTML += `<th>${name}</th>`;
+    });
+
+    const tbody = document.getElementById('lv-points-body');
     tbody.innerHTML = '';
 
     const totalPoints = [0, 0, 0, 0];
+    const holes = gs.course.holes;
+    const front9 = holes.filter(h => h.hole <= 9);
+    const back9 = holes.filter(h => h.hole >= 10);
 
-    gs.course.holes.forEach(holeInfo => {
+    // Partial totals for OUT/IN
+    const outPoints = [0, 0, 0, 0];
+    const inPoints = [0, 0, 0, 0];
+
+    const addLVHoleRow = (holeInfo, partialPoints) => {
       const h = holeInfo.hole;
-      const rawScores = gs.holeScores[h];
       const result = gs.holeResults[h];
       const tr = document.createElement('tr');
 
-      let cells = `<td>${h}</td><td>${holeInfo.par}</td>`;
-      for (let i = 0; i < 4; i++) {
-        cells += `<td>${rawScores ? rawScores[i] : '-'}</td>`;
-      }
-
       if (result) {
-        cells += `<td>${result.lasVegasA}-${result.lasVegasB}</td>`;
+        const [a1, a2] = result.teams.teamA;
+        const [b1, b2] = result.teams.teamB;
+        const teamStr = `${gs.playerNames[a1][0]}${gs.playerNames[a2][0]} vs ${gs.playerNames[b1][0]}${gs.playerNames[b2][0]}`;
+
+        let cells = `<td class="lv-hole">${h}</td>`;
+        cells += `<td class="lv-team">${teamStr}</td>`;
+        cells += `<td class="lv-nums">${result.lasVegasA}-${result.lasVegasB}</td>`;
+
         for (let i = 0; i < 4; i++) {
           const p = result.points[i];
           totalPoints[i] += p;
-          cells += `<td class="${p > 0 ? 'win' : p < 0 ? 'lose' : ''}">${p > 0 ? '+' : ''}${p}</td>`;
+          partialPoints[i] += p;
+          const cls = p > 0 ? 'lv-win' : p < 0 ? 'lv-lose' : '';
+          cells += `<td class="lv-pt ${cls}">${p > 0 ? '+' : ''}${p}</td>`;
         }
+        tr.innerHTML = cells;
       } else {
-        cells += '<td>-</td>';
-        for (let i = 0; i < 4; i++) cells += '<td>-</td>';
+        tr.innerHTML = `<td class="lv-hole">${h}</td><td>-</td><td>-</td>` +
+          '<td>-</td><td>-</td><td>-</td><td>-</td>';
       }
+      tbody.appendChild(tr);
+    };
 
+    const addLVSubtotalRow = (label, pts, cssClass) => {
+      const tr = document.createElement('tr');
+      tr.className = cssClass;
+      let cells = `<td class="lv-hole">${label}</td><td></td><td></td>`;
+      for (let i = 0; i < 4; i++) {
+        const p = pts[i];
+        const cls = p > 0 ? 'lv-win' : p < 0 ? 'lv-lose' : '';
+        cells += `<td class="lv-pt ${cls}"><strong>${p > 0 ? '+' : ''}${p}</strong></td>`;
+      }
       tr.innerHTML = cells;
       tbody.appendChild(tr);
-    });
+    };
 
-    // Total row
-    const totalRow = document.createElement('tr');
-    totalRow.className = 'total-row';
-    let totalCells = '<td colspan="2">合計</td>';
-    for (let i = 0; i < 4; i++) totalCells += '<td></td>';
-    totalCells += '<td></td>';
-    for (let i = 0; i < 4; i++) {
-      totalCells += `<td class="${totalPoints[i] > 0 ? 'win' : totalPoints[i] < 0 ? 'lose' : ''}">
-        <strong>${totalPoints[i] > 0 ? '+' : ''}${totalPoints[i]}</strong></td>`;
-    }
-    totalRow.innerHTML = totalCells;
-    tbody.appendChild(totalRow);
+    // Front 9
+    front9.forEach(h => addLVHoleRow(h, outPoints));
+    addLVSubtotalRow('OUT', outPoints, 'lv-subtotal-row');
 
-    // Update header
-    const headerRow = document.getElementById('scoreboard-header');
-    headerRow.innerHTML = `<th>H</th><th>PAR</th>`;
-    gs.playerNames.forEach(name => {
-      headerRow.innerHTML += `<th>${name}</th>`;
-    });
-    headerRow.innerHTML += '<th>LV</th>';
-    gs.playerNames.forEach(name => {
-      headerRow.innerHTML += `<th>${name}</th>`;
-    });
+    // Back 9
+    back9.forEach(h => addLVHoleRow(h, inPoints));
+    addLVSubtotalRow('IN', inPoints, 'lv-subtotal-row');
 
-    // Ranking
+    // Total
+    addLVSubtotalRow('合計', totalPoints, 'lv-total-row');
+
+    // Ranking (LV points, higher = better)
     this.renderRanking(totalPoints);
   },
 
@@ -668,8 +815,8 @@ let App = {
     const sorted = gs.playerNames.map((name, i) => ({ name, points: totalPoints[i] }))
       .sort((a, b) => b.points - a.points);
 
-    const medals = ['🥇', '🥈', '🥉', '4'];
-    container.innerHTML = '<h3>最終結果</h3>' +
+    const medals = ['1st', '2nd', '3rd', '4th'];
+    container.innerHTML = '<h3 class="ranking-title">最終結果（ラスベガスポイント）</h3>' +
       sorted.map((p, i) => `
         <div class="ranking-item rank-${i + 1}">
           <span class="rank-medal">${medals[i]}</span>

@@ -540,53 +540,221 @@ body {
 .hole-nav .btn { flex: 1; font-size: 14px; padding: 10px 8px; }
 
 /* ========== Scoreboard ========== */
-.table-scroll {
-  overflow-x: auto;
-  margin-bottom: 16px;
+.scoreboard-container {
+  max-width: 560px;
 }
-.scoreboard-table {
+.scoreboard-title {
+  font-size: 18px;
+  color: var(--green-dark);
+  margin-bottom: 12px;
+  text-align: center;
+}
+.lv-section-title {
+  font-size: 15px;
+  color: var(--green-dark);
+  margin: 20px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--green-light);
+}
+
+/* Scorecard scroll wrapper */
+.scorecard-scroll {
+  overflow-x: auto;
+  margin-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---- Golf Scorecard Table ---- */
+.scorecard-table {
   width: 100%;
-  min-width: 600px;
+  min-width: 380px;
   border-collapse: collapse;
   background: var(--white);
   box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 14px;
+}
+.scorecard-table th {
+  background: var(--green-dark);
+  color: var(--white);
+  padding: 8px 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+.scorecard-table td {
+  padding: 7px 6px;
+  text-align: center;
+  border-bottom: 1px solid #e0e4e0;
+  font-size: 14px;
+}
+.sc-label-col { width: 44px; }
+.sc-par-col { width: 40px; }
+.sc-player-col { min-width: 56px; }
+
+/* Hole label */
+.sc-label {
+  font-weight: 700;
+  color: var(--green-dark);
+  background: #f5f8f5;
+  white-space: nowrap;
+}
+.sc-par {
+  color: var(--gray-dark);
+  font-weight: 600;
+  background: #f5f8f5;
+}
+
+/* Score cells - color coding */
+.sc-score { font-weight: 600; }
+.sc-even { color: var(--text); }
+.sc-birdie {
+  color: #1565c0;
+  background: #e3f2fd;
+}
+.sc-eagle {
+  color: #fff;
+  background: #1565c0;
+  font-weight: 800;
+}
+.sc-bogey {
+  color: #c62828;
+  background: #ffebee;
+}
+.sc-dblbogey {
+  color: #fff;
+  background: #c62828;
+  font-weight: 800;
+}
+
+/* Subtotal rows (OUT / IN) */
+.sc-subtotal-row {
+  background: #e8f0e8 !important;
+}
+.sc-subtotal-row td {
+  font-weight: 700;
+  border-bottom: 2px solid var(--green);
+  color: var(--green-dark);
+}
+
+/* Total rows (GROSS / NET) */
+.sc-total-row {
+  background: var(--green-dark) !important;
+}
+.sc-total-row td {
+  color: var(--white);
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.sc-total-row .sc-label,
+.sc-total-row .sc-par {
+  background: var(--green-dark);
+  color: var(--white);
+}
+
+/* Ranking row */
+.sc-rank-row {
+  background: var(--gold) !important;
+}
+.sc-rank-row td {
+  color: var(--white);
+  font-weight: 800;
+  border-bottom: none;
+}
+.sc-rank-row .sc-label,
+.sc-rank-row .sc-par {
+  background: var(--gold);
+  color: var(--white);
+}
+.sc-rank-val {
+  font-size: 16px !important;
+}
+
+/* Alternating rows */
+.scorecard-table tbody tr:nth-child(odd):not(.sc-subtotal-row):not(.sc-total-row):not(.sc-rank-row) {
+  background: var(--white);
+}
+.scorecard-table tbody tr:nth-child(even):not(.sc-subtotal-row):not(.sc-total-row):not(.sc-rank-row) {
+  background: #fafcfa;
+}
+
+/* ---- Las Vegas Points Table ---- */
+.lv-points-table {
+  width: 100%;
+  min-width: 420px;
+  border-collapse: collapse;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  overflow: hidden;
   font-size: 13px;
 }
-.scoreboard-table th {
-  background: var(--green);
+.lv-points-table th {
+  background: #37474f;
   color: var(--white);
-  padding: 6px 4px;
-  position: sticky;
-  top: 0;
+  padding: 7px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
   white-space: nowrap;
-  font-size: 12px;
 }
-.scoreboard-table td {
+.lv-points-table td {
   padding: 5px 4px;
   text-align: center;
-  border-bottom: 1px solid var(--gray-light);
+  border-bottom: 1px solid #e0e4e0;
 }
-.scoreboard-table tr:nth-child(even) { background: #f7faf7; }
-.scoreboard-table td.win { color: var(--green-dark); font-weight: 700; }
-.scoreboard-table td.lose { color: var(--red); font-weight: 700; }
-.total-row {
-  background: var(--green-dark) !important;
-  color: var(--white);
-}
-.total-row td { color: var(--white); border: none; }
-.total-row td.win { color: var(--gold-light) !important; }
-.total-row td.lose { color: #ff8a80 !important; }
 
-/* Ranking */
+.lv-hole { font-weight: 700; color: var(--gray-dark); width: 32px; }
+.lv-team { font-size: 11px; color: var(--gray-dark); white-space: nowrap; }
+.lv-nums { font-weight: 700; font-size: 12px; white-space: nowrap; }
+
+.lv-pt { font-weight: 600; }
+.lv-win { color: #1b5e20; background: #e8f5e9; }
+.lv-lose { color: #b71c1c; background: #ffebee; }
+
+.lv-subtotal-row {
+  background: #eceff1 !important;
+}
+.lv-subtotal-row td {
+  font-weight: 700;
+  border-bottom: 2px solid #90a4ae;
+  color: #37474f;
+}
+.lv-subtotal-row .lv-win { background: #c8e6c9; }
+.lv-subtotal-row .lv-lose { background: #ffcdd2; }
+
+.lv-total-row {
+  background: #263238 !important;
+}
+.lv-total-row td {
+  color: var(--white);
+  font-weight: 800;
+  font-size: 14px;
+  border-bottom: none;
+}
+.lv-total-row .lv-win { color: #69f0ae !important; background: transparent !important; }
+.lv-total-row .lv-lose { color: #ff8a80 !important; background: transparent !important; }
+
+.lv-points-table tbody tr:nth-child(odd):not(.lv-subtotal-row):not(.lv-total-row) {
+  background: var(--white);
+}
+.lv-points-table tbody tr:nth-child(even):not(.lv-subtotal-row):not(.lv-total-row) {
+  background: #fafafa;
+}
+
+/* ---- Ranking ---- */
 .ranking {
   background: var(--white);
   border-radius: var(--radius);
   padding: 16px;
   box-shadow: var(--shadow);
-  margin-bottom: 16px;
+  margin: 16px 0;
 }
-.ranking h3 {
-  font-size: 16px;
+.ranking-title {
+  font-size: 15px;
   color: var(--green-dark);
   margin-bottom: 12px;
 }
@@ -594,7 +762,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px;
+  padding: 10px 12px;
   border-radius: var(--radius);
   margin-bottom: 6px;
 }
@@ -602,7 +770,12 @@ body {
 .rank-2 { background: linear-gradient(135deg, #eceff1, #cfd8dc); }
 .rank-3 { background: linear-gradient(135deg, #ffe0b2, #ffcc80); }
 .rank-4 { background: var(--gray-light); }
-.rank-medal { font-size: 24px; }
+.rank-medal {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--gray-dark);
+  min-width: 32px;
+}
 .rank-name { flex: 1; font-weight: 600; font-size: 16px; }
 .rank-points {
   font-size: 18px;
