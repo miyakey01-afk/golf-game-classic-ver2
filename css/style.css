@@ -253,21 +253,28 @@ body {
 /* HC Count inputs per player */
 .hc-count-section {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 8px;
   margin-bottom: 12px;
 }
 .hc-count-row {
-  flex: 1;
-  min-width: 100px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   background: var(--white);
   border-radius: var(--radius);
-  padding: 8px;
+  padding: 8px 12px;
   box-shadow: var(--shadow);
+}
+.hc-count-halves {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+}
+.hc-count-half {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 .hc-count-name {
   font-size: 13px;
@@ -344,6 +351,45 @@ body {
   font-weight: 600;
   color: var(--blue);
   background: #f5f8f5;
+}
+
+/* OUT/IN section header in HC table */
+.cht-section-row {
+  background: var(--green-dark) !important;
+}
+.cht-section-label {
+  color: var(--white);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 6px 12px !important;
+  text-align: left !important;
+}
+
+/* HC Review screen */
+.hc-review-title {
+  font-size: 18px;
+  color: var(--green-dark);
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--green-light);
+}
+.hc-review-cell {
+  cursor: pointer;
+  transition: all 0.15s;
+  min-height: 28px;
+  font-size: 16px;
+  font-weight: 700;
+  user-select: none;
+  -webkit-user-select: none;
+  text-align: center;
+  padding: 6px 4px;
+}
+.hc-review-cell:hover {
+  background: #e8f5e9;
+}
+.hc-review-cell.hc-selected {
+  background: var(--gold-light) !important;
+  color: var(--green-dark);
 }
 
 /* HC selectable cells */
