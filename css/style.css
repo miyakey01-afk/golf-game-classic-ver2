@@ -25,12 +25,18 @@ body {
   color: var(--text);
   line-height: 1.5;
   min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;
 }
 
 .container {
   max-width: 480px;
   margin: 0 auto;
   padding: 16px;
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
 }
 
 /* Screen management */
@@ -53,7 +59,7 @@ body {
 #start-screen .container { text-align: center; }
 
 .app-title {
-  font-size: 48px;
+  font-size: clamp(36px, 10vw, 48px);
   font-weight: 900;
   color: var(--gold-light);
   letter-spacing: 6px;
@@ -84,7 +90,7 @@ body {
   background: var(--green);
   color: var(--white);
 }
-.btn-primary:hover { background: var(--green-dark); }
+.btn-primary:active { background: var(--green-dark); }
 
 .btn-secondary {
   background: var(--gray-light);
@@ -147,21 +153,22 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 6px 12px;
+  padding: 10px 14px;
   border: 2px solid var(--gray-light);
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--gray-dark);
   cursor: pointer;
   transition: all 0.15s;
   user-select: none;
   -webkit-user-select: none;
+  min-height: 44px;
 }
 .pref-chip .pref-cb {
   display: none;
 }
-.pref-chip:hover {
+.pref-chip:active {
   border-color: var(--green-light);
   background: #e8f5e9;
 }
@@ -173,11 +180,12 @@ body {
 
 /* ========== Course List ========== */
 .course-list {
-  max-height: 200px;
+  max-height: 40vh;
   overflow-y: auto;
   border: 1px solid var(--gray-light);
   border-radius: var(--radius);
   margin: 8px 0;
+  -webkit-overflow-scrolling: touch;
 }
 .pref-label {
   font-size: 12px;
@@ -188,13 +196,14 @@ body {
   top: 0;
 }
 .course-item {
-  padding: 10px 12px;
+  padding: 12px;
   border-bottom: 1px solid var(--gray-light);
   cursor: pointer;
   font-size: 14px;
   transition: background 0.15s;
+  min-height: 44px;
 }
-.course-item:hover { background: #e8f5e9; }
+.course-item:active { background: #e8f5e9; }
 .course-item.selected {
   background: var(--green);
   color: var(--white);
@@ -208,7 +217,7 @@ body {
 .player-inputs {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 /* ========== Step 2: Course Info + HC (Combined) ========== */
@@ -233,7 +242,7 @@ body {
   gap: 0;
 }
 .hc-toggle-btn {
-  padding: 8px 20px;
+  padding: 12px 24px;
   border: 2px solid var(--gray-light);
   background: var(--white);
   font-size: 14px;
@@ -241,6 +250,7 @@ body {
   cursor: pointer;
   transition: all 0.15s;
   color: var(--gray);
+  min-height: 44px;
 }
 .hc-toggle-btn:first-child { border-radius: var(--radius) 0 0 var(--radius); }
 .hc-toggle-btn:last-child { border-radius: 0 var(--radius) var(--radius) 0; border-left: none; }
@@ -307,7 +317,7 @@ body {
 /* Combined Course + HC Table */
 .course-hc-table {
   width: 100%;
-  min-width: 380px;
+  min-width: 340px;
   border-collapse: collapse;
   background: var(--white);
   box-shadow: var(--shadow);
@@ -384,7 +394,7 @@ body {
   text-align: center;
   padding: 6px 4px;
 }
-.hc-review-cell:hover {
+.hc-review-cell:active {
   background: #e8f5e9;
 }
 .hc-review-cell.hc-selected {
@@ -406,7 +416,7 @@ body {
   cursor: default;
   color: var(--gray-light);
 }
-.cht-hc-cell:not(.hc-disabled):hover {
+.cht-hc-cell:not(.hc-disabled):active {
   background: #e8f5e9;
 }
 .cht-hc-cell.hc-selected {
@@ -448,8 +458,9 @@ body {
   display: flex;
   gap: 12px;
   margin-top: 20px;
+  padding-bottom: env(safe-area-inset-bottom);
 }
-.step-nav .btn { flex: 1; }
+.step-nav .btn { flex: 1; min-height: 44px; }
 .step-desc {
   font-size: 14px;
   color: var(--gray-dark);
@@ -492,7 +503,7 @@ body {
   margin-bottom: 16px;
 }
 .hole-header h2 {
-  font-size: 28px;
+  font-size: clamp(22px, 6vw, 28px);
   color: var(--green-dark);
 }
 .hole-par {
@@ -563,8 +574,8 @@ body {
   gap: 0;
 }
 .score-btn {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border: 2px solid var(--gray-light);
   background: var(--white);
   font-size: 20px;
@@ -611,7 +622,7 @@ body {
 
 .score-value {
   width: 48px;
-  height: 40px;
+  height: 44px;
   border: 2px solid var(--gray-light);
   border-left: none;
   border-right: none;
@@ -738,12 +749,13 @@ body {
   display: flex;
   gap: 8px;
   margin-top: 16px;
+  padding-bottom: env(safe-area-inset-bottom);
 }
-.hole-nav .btn { flex: 1; font-size: 14px; padding: 10px 8px; }
+.hole-nav .btn { flex: 1; font-size: 14px; padding: 12px 8px; min-height: 44px; }
 
 /* ========== Scoreboard ========== */
 .scoreboard-container {
-  max-width: 560px;
+  max-width: 480px;
 }
 .scoreboard-title {
   font-size: 18px;
@@ -807,7 +819,7 @@ body {
 /* ---- Golf Scorecard Table ---- */
 .scorecard-table {
   width: 100%;
-  min-width: 380px;
+  min-width: 340px;
   border-collapse: collapse;
   background: var(--white);
   box-shadow: var(--shadow);
@@ -924,7 +936,7 @@ body {
 /* ---- Las Vegas Points Table ---- */
 .lv-points-table {
   width: 100%;
-  min-width: 420px;
+  min-width: 360px;
   border-collapse: collapse;
   background: var(--white);
   box-shadow: var(--shadow);
@@ -1037,4 +1049,23 @@ body {
   margin-bottom: 16px;
   padding-bottom: 8px;
   border-bottom: 2px solid var(--green-light);
+}
+
+/* ========== Small phone adjustments ========== */
+@media (max-width: 374px) {
+  .container {
+    padding: 12px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+  .section { padding: 12px; }
+  .hole-header h2 { font-size: 20px; }
+  .lv-number { font-size: 26px !important; }
+  .result-team span { font-size: 12px; }
+  .score-player-name { font-size: 13px; }
+  .team-members { font-size: 13px; }
+  .hc-count-row { padding: 6px 8px; gap: 4px; }
+  .hc-count-name { font-size: 12px; }
+  .pref-chip { padding: 8px 10px; font-size: 13px; }
+  .sb-tab { font-size: 13px; padding: 10px 8px; }
 }
