@@ -14856,5 +14856,353 @@
         "yardage": 364
       }
     ]
+  },
+  {
+    "id": "gdo_353104_west_east",
+    "name": "館山カントリークラブ 西・東コース",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 5,
+        "hdcp": 5,
+        "yardage": 532
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 406
+      },
+      {
+        "hole": 3,
+        "par": 3,
+        "hdcp": 8,
+        "yardage": 221
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 401
+      },
+      {
+        "hole": 5,
+        "par": 3,
+        "hdcp": 6,
+        "yardage": 130
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 357
+      },
+      {
+        "hole": 7,
+        "par": 5,
+        "hdcp": 1,
+        "yardage": 560
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 394
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 4,
+        "yardage": 418
+      },
+      {
+        "hole": 10,
+        "par": 5,
+        "hdcp": 4,
+        "yardage": 526
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 345
+      },
+      {
+        "hole": 12,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 370
+      },
+      {
+        "hole": 13,
+        "par": 3,
+        "hdcp": 5,
+        "yardage": 170
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 382
+      },
+      {
+        "hole": 15,
+        "par": 3,
+        "hdcp": 9,
+        "yardage": 130
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 345
+      },
+      {
+        "hole": 17,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 355
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 2,
+        "yardage": 561
+      }
+    ]
+  },
+  {
+    "id": "gdo_353104_west_center",
+    "name": "館山カントリークラブ 西・中コース",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 5,
+        "hdcp": 5,
+        "yardage": 532
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 406
+      },
+      {
+        "hole": 3,
+        "par": 3,
+        "hdcp": 8,
+        "yardage": 221
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 401
+      },
+      {
+        "hole": 5,
+        "par": 3,
+        "hdcp": 6,
+        "yardage": 130
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 357
+      },
+      {
+        "hole": 7,
+        "par": 5,
+        "hdcp": 1,
+        "yardage": 560
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 394
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 4,
+        "yardage": 418
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 5,
+        "yardage": 367
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 273
+      },
+      {
+        "hole": 12,
+        "par": 3,
+        "hdcp": 7,
+        "yardage": 154
+      },
+      {
+        "hole": 13,
+        "par": 5,
+        "hdcp": 4,
+        "yardage": 537
+      },
+      {
+        "hole": 14,
+        "par": 3,
+        "hdcp": 9,
+        "yardage": 132
+      },
+      {
+        "hole": 15,
+        "par": 5,
+        "hdcp": 1,
+        "yardage": 565
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 367
+      },
+      {
+        "hole": 17,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 298
+      },
+      {
+        "hole": 18,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 378
+      }
+    ]
+  },
+  {
+    "id": "gdo_353104_east_center",
+    "name": "館山カントリークラブ 東・中コース",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 5,
+        "hdcp": 4,
+        "yardage": 526
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 345
+      },
+      {
+        "hole": 3,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 370
+      },
+      {
+        "hole": 4,
+        "par": 3,
+        "hdcp": 5,
+        "yardage": 170
+      },
+      {
+        "hole": 5,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 382
+      },
+      {
+        "hole": 6,
+        "par": 3,
+        "hdcp": 9,
+        "yardage": 130
+      },
+      {
+        "hole": 7,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 345
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 355
+      },
+      {
+        "hole": 9,
+        "par": 5,
+        "hdcp": 2,
+        "yardage": 561
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 5,
+        "yardage": 367
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 273
+      },
+      {
+        "hole": 12,
+        "par": 3,
+        "hdcp": 7,
+        "yardage": 154
+      },
+      {
+        "hole": 13,
+        "par": 5,
+        "hdcp": 4,
+        "yardage": 537
+      },
+      {
+        "hole": 14,
+        "par": 3,
+        "hdcp": 9,
+        "yardage": 132
+      },
+      {
+        "hole": 15,
+        "par": 5,
+        "hdcp": 1,
+        "yardage": 565
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 367
+      },
+      {
+        "hole": 17,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 298
+      },
+      {
+        "hole": 18,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 378
+      }
+    ]
   }
 ]

@@ -71,6 +71,8 @@ let App = {
   // ============================
   startSetup() {
     this.showScreen('setup-screen');
+    this._selectedPrefs = new Set();
+    this.renderPrefFilter();
     this.renderCourseList();
     this.showSetupStep(1);
   },
@@ -81,15 +83,58 @@ let App = {
   },
 
   // --- Step 1: Course selection & Player names ---
+  _selectedPrefs: new Set(),
+
+  renderPrefFilter() {
+    const container = document.getElementById('pref-filter');
+    const allCourses = [...this.courses, ...Storage.loadCustomCourses()];
+    const prefCounts = {};
+    allCourses.forEach(c => {
+      const pref = c.prefecture || 'その他';
+      prefCounts[pref] = (prefCounts[pref] || 0) + 1;
+    });
+
+    container.innerHTML = '';
+    Object.keys(prefCounts).sort().forEach(pref => {
+      const label = document.createElement('label');
+      label.className = 'pref-chip';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = pref;
+      cb.className = 'pref-cb';
+      cb.addEventListener('change', () => {
+        if (cb.checked) {
+          this._selectedPrefs.add(pref);
+        } else {
+          this._selectedPrefs.delete(pref);
+        }
+        label.classList.toggle('checked', cb.checked);
+        this.renderCourseList(document.getElementById('course-search').value);
+      });
+      const span = document.createElement('span');
+      span.textContent = `${pref}(${prefCounts[pref]})`;
+      label.appendChild(cb);
+      label.appendChild(span);
+      container.appendChild(label);
+    });
+  },
+
   renderCourseList(filter = '') {
     const list = document.getElementById('course-list');
     const allCourses = [...this.courses, ...Storage.loadCustomCourses()];
     const lowerFilter = filter.toLowerCase();
-    const filtered = filter
-      ? allCourses.filter(c =>
-          c.name.toLowerCase().includes(lowerFilter) ||
-          (c.prefecture || '').toLowerCase().includes(lowerFilter))
-      : allCourses;
+
+    // Filter by selected prefectures first
+    let filtered = allCourses;
+    if (this._selectedPrefs.size > 0) {
+      filtered = filtered.filter(c => this._selectedPrefs.has(c.prefecture || 'その他'));
+    }
+
+    // Then filter by search text
+    if (filter) {
+      filtered = filtered.filter(c =>
+        c.name.toLowerCase().includes(lowerFilter));
+    }
 
     // Group by prefecture
     const grouped = {};
@@ -100,6 +145,10 @@ let App = {
     });
 
     list.innerHTML = '';
+    if (this._selectedPrefs.size === 0 && !filter) {
+      list.innerHTML = '<p class="empty-msg">都道府県を選択してください</p>';
+      return;
+    }
     if (filtered.length === 0) {
       list.innerHTML = '<p class="empty-msg">該当するコースがありません</p>';
       return;

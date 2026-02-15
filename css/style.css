@@ -136,6 +136,41 @@ body {
   margin: 0 -8px;
 }
 
+/* ========== Prefecture Filter ========== */
+.pref-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+.pref-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border: 2px solid var(--gray-light);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-dark);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.pref-chip .pref-cb {
+  display: none;
+}
+.pref-chip:hover {
+  border-color: var(--green-light);
+  background: #e8f5e9;
+}
+.pref-chip.checked {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+
 /* ========== Course List ========== */
 .course-list {
   max-height: 200px;
