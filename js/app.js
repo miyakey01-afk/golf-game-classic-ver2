@@ -616,7 +616,8 @@ let App = {
                  value="${existingScores[pIdx] || (courseHole ? courseHole.par : 4)}"
                  min="1" max="20" data-player="${pIdx}">
           <button class="score-btn plus" data-player="${pIdx}">+</button>
-        </div>`;
+        </div>
+        <span class="score-label" id="score-label-${pIdx}"></span>`;
       inputArea.appendChild(row);
     });
 
@@ -650,9 +651,40 @@ let App = {
     this.renderCumulativePoints();
   },
 
+  getScoreLabel(score, par) {
+    const diff = score - par;
+    if (diff <= -3) return { text: `${diff}`, cls: 'score-eagle' };
+    if (diff === -2) return { text: 'Eagle', cls: 'score-eagle' };
+    if (diff === -1) return { text: 'Birdie', cls: 'score-birdie' };
+    if (diff === 0)  return { text: 'Par', cls: 'score-par' };
+    if (diff === 1)  return { text: 'Bogey', cls: 'score-bogey' };
+    if (diff === 2)  return { text: 'D.Bogey', cls: 'score-dbogey' };
+    return { text: `+${diff}`, cls: 'score-dbogey' };
+  },
+
+  updateScoreLabels() {
+    const gs = this.gameState;
+    const hole = gs.currentHole;
+    const courseHole = gs.course.holes.find(h => h.hole === hole);
+    if (!courseHole) return;
+    const par = courseHole.par;
+
+    for (let i = 0; i < 4; i++) {
+      const score = parseInt(document.getElementById(`score-${i}`).value) || 0;
+      const label = document.getElementById(`score-label-${i}`);
+      if (!label) continue;
+      const info = this.getScoreLabel(score, par);
+      label.textContent = info.text;
+      label.className = `score-label ${info.cls}`;
+    }
+  },
+
   updateHoleResult() {
     const gs = this.gameState;
     const hole = gs.currentHole;
+
+    // Update score labels (Eagle, Birdie, Par, etc.)
+    this.updateScoreLabels();
 
     // Read scores
     const rawScores = [];

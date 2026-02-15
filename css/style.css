@@ -578,6 +578,37 @@ body {
 .score-btn:active { background: var(--gray-light); }
 .score-btn.minus { border-radius: var(--radius) 0 0 var(--radius); }
 .score-btn.plus { border-radius: 0 var(--radius) var(--radius) 0; }
+/* Score labels (Eagle, Birdie, Par, etc.) */
+.score-label {
+  min-width: 56px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.score-eagle {
+  background: #ffd700;
+  color: #7b5e00;
+}
+.score-birdie {
+  background: #e91e63;
+  color: #fff;
+}
+.score-par {
+  background: #4caf50;
+  color: #fff;
+}
+.score-bogey {
+  background: #2196f3;
+  color: #fff;
+}
+.score-dbogey {
+  background: #9e9e9e;
+  color: #fff;
+}
+
 .score-value {
   width: 48px;
   height: 40px;
