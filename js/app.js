@@ -34,19 +34,18 @@ let App = {
     document.getElementById('new-game-btn').addEventListener('click', () => this.startSetup());
     document.getElementById('resume-btn').addEventListener('click', () => this.resumeGame());
 
-    // Setup steps
+    // Setup steps (4 steps: 1=Course&Players, 2=CourseInfo+HC, 3=BattingOrder, 4=Confirm)
     document.getElementById('setup-next-1').addEventListener('click', () => this.setupStep1Next());
     document.getElementById('setup-back-2').addEventListener('click', () => this.showSetupStep(1));
     document.getElementById('setup-next-2').addEventListener('click', () => this.setupStep2Next());
     document.getElementById('setup-back-3').addEventListener('click', () => this.showSetupStep(2));
     document.getElementById('setup-next-3').addEventListener('click', () => this.setupStep3Next());
     document.getElementById('setup-back-4').addEventListener('click', () => this.showSetupStep(3));
-    document.getElementById('setup-next-4').addEventListener('click', () => this.setupStep4Next());
-    document.getElementById('setup-back-5').addEventListener('click', () => this.showSetupStep(4));
     document.getElementById('round-start-btn').addEventListener('click', () => this.startRound());
 
-    // Handicap checkbox
-    document.getElementById('hc-enable').addEventListener('change', (e) => this.toggleHandicap(e.target.checked));
+    // HC toggle buttons
+    document.getElementById('hc-yes-btn').addEventListener('click', () => this.toggleHcEnabled(true));
+    document.getElementById('hc-no-btn').addEventListener('click', () => this.toggleHcEnabled(false));
 
     // Course search
     document.getElementById('course-search').addEventListener('input', (e) => this.filterCourses(e.target.value));
@@ -152,113 +151,213 @@ let App = {
     }
     this._playerNames = names;
 
-    // Show Step 2: Course info
-    this.renderCourseInfo();
+    // Show Step 2: Course info + HC (combined)
+    this.renderCourseInfoWithHC();
     this.showSetupStep(2);
   },
 
-  // --- Step 2: Course info display ---
-  renderCourseInfo() {
+  // ============================
+  // Step 2: Course Info + Handicap (combined)
+  // ============================
+  renderCourseInfoWithHC() {
     const course = this._selectedCourse;
-    const tbody = document.getElementById('course-info-body');
-    tbody.innerHTML = '';
     document.getElementById('course-info-title').textContent = course.name;
+
+    // Initialize state
+    this._hcEnabled = false;
+    this._handicapHoles = [[], [], [], []];
+
+    // Reset toggle buttons
+    document.getElementById('hc-yes-btn').classList.remove('active');
+    document.getElementById('hc-no-btn').classList.add('active');
+
+    // HC count inputs per player (shown when HC enabled)
+    const countSection = document.getElementById('hc-count-section');
+    countSection.style.display = 'none';
+    countSection.innerHTML = '';
+    this._playerNames.forEach((name, i) => {
+      const row = document.createElement('div');
+      row.className = 'hc-count-row';
+      row.innerHTML = `
+        <span class="hc-count-name">${name}</span>
+        <label class="hc-count-label">HC数:
+          <input type="number" id="hc-count-${i}" min="0" max="18" value="0"
+                 class="hc-count-input" data-player="${i}">
+        </label>
+        <span class="hc-count-status" id="hc-status-${i}">0/0</span>`;
+      countSection.appendChild(row);
+    });
+
+    // Bind HC count change events
+    for (let i = 0; i < 4; i++) {
+      document.getElementById(`hc-count-${i}`).addEventListener('change', () => {
+        this.onHcCountChange(i);
+      });
+    }
+
+    // Build table header
+    const thead = document.getElementById('course-hc-head');
+    thead.innerHTML = '';
+    const headerRow = document.createElement('tr');
+    headerRow.innerHTML = '<th class="cht-hole">HOLE</th><th class="cht-par">PAR</th><th class="cht-hdcp">HDCP</th>';
+    this._playerNames.forEach(name => {
+      headerRow.innerHTML += `<th class="cht-player">${name}</th>`;
+    });
+    thead.appendChild(headerRow);
+
+    // Build table body
+    const tbody = document.getElementById('course-hc-body');
+    tbody.innerHTML = '';
 
     course.holes.forEach(h => {
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${h.hole}</td><td>${h.par}</td><td>${h.hdcp}</td>`;
+      let cells = `<td class="cht-hole-num">${h.hole}</td><td class="cht-par-val">${h.par}</td><td class="cht-hdcp-val">${h.hdcp}</td>`;
+
+      for (let i = 0; i < 4; i++) {
+        const td = document.createElement('td');
+        td.className = 'cht-hc-cell hc-disabled';
+        td.dataset.hole = h.hole;
+        td.dataset.player = i;
+        td.addEventListener('click', () => this.toggleHcCell(i, h.hole, td));
+        // Build cells HTML first, then append td
+        const tempTr = document.createElement('tr');
+        tempTr.innerHTML = cells;
+        // We need a different approach: build all fixed cells, then append clickable tds
+        tr.innerHTML = cells;
+        cells = ''; // Clear so we don't re-add
+        tr.appendChild(td);
+      }
+
+      // If cells weren't appended yet (first player), set them
+      if (tr.children.length === 0) {
+        tr.innerHTML = cells;
+      }
+
+      tbody.appendChild(tr);
+    });
+
+    // Fix: rebuild properly with event listeners
+    tbody.innerHTML = '';
+    course.holes.forEach(h => {
+      const tr = document.createElement('tr');
+
+      // Fixed cells
+      const holeTd = document.createElement('td');
+      holeTd.className = 'cht-hole-num';
+      holeTd.textContent = h.hole;
+      tr.appendChild(holeTd);
+
+      const parTd = document.createElement('td');
+      parTd.className = 'cht-par-val';
+      parTd.textContent = h.par;
+      tr.appendChild(parTd);
+
+      const hdcpTd = document.createElement('td');
+      hdcpTd.className = 'cht-hdcp-val';
+      hdcpTd.textContent = h.hdcp;
+      tr.appendChild(hdcpTd);
+
+      // Player HC cells
+      for (let i = 0; i < 4; i++) {
+        const td = document.createElement('td');
+        td.className = 'cht-hc-cell hc-disabled';
+        td.dataset.hole = String(h.hole);
+        td.dataset.player = String(i);
+        td.addEventListener('click', () => this.toggleHcCell(i, h.hole, td));
+        tr.appendChild(td);
+      }
+
       tbody.appendChild(tr);
     });
   },
 
-  setupStep2Next() {
-    this.renderHandicapSetup();
-    this.showSetupStep(3);
-  },
+  toggleHcEnabled(enabled) {
+    this._hcEnabled = enabled;
+    document.getElementById('hc-yes-btn').classList.toggle('active', enabled);
+    document.getElementById('hc-no-btn').classList.toggle('active', !enabled);
+    document.getElementById('hc-count-section').style.display = enabled ? 'flex' : 'none';
 
-  // --- Step 3: Handicap setup ---
-  toggleHandicap(enabled) {
-    document.getElementById('hc-settings').style.display = enabled ? 'block' : 'none';
-  },
-
-  renderHandicapSetup() {
-    const container = document.getElementById('hc-settings');
-    container.innerHTML = '';
-
-    this._playerNames.forEach((name, pIdx) => {
-      const div = document.createElement('div');
-      div.className = 'hc-player-section';
-
-      // Player name + HC count input
-      const header = document.createElement('div');
-      header.className = 'hc-player-header';
-      header.innerHTML = `
-        <span class="hc-player-name">${name}</span>
-        <label>ハンディキャップ数:
-          <input type="number" id="hc-count-${pIdx}" min="0" max="18" value="0"
-                 class="hc-count-input" data-player="${pIdx}">
-        </label>
-      `;
-      div.appendChild(header);
-
-      // Hole selection grid
-      const grid = document.createElement('div');
-      grid.className = 'hc-hole-grid';
-      grid.id = `hc-grid-${pIdx}`;
-
-      this._selectedCourse.holes.forEach(h => {
-        const btn = document.createElement('button');
-        btn.className = 'hc-hole-btn';
-        btn.textContent = h.hole;
-        btn.dataset.hole = h.hole;
-        btn.dataset.player = pIdx;
-        btn.addEventListener('click', () => this.toggleHcHole(pIdx, h.hole, btn));
-        grid.appendChild(btn);
-      });
-      div.appendChild(grid);
-
-      // Selected count display
-      const countDisplay = document.createElement('div');
-      countDisplay.className = 'hc-selected-count';
-      countDisplay.id = `hc-selected-count-${pIdx}`;
-      countDisplay.textContent = '選択: 0';
-      div.appendChild(countDisplay);
-
-      container.appendChild(div);
+    // Toggle cell interactivity
+    document.querySelectorAll('.cht-hc-cell').forEach(cell => {
+      cell.classList.toggle('hc-disabled', !enabled);
     });
 
-    // Initialize HC holes storage
-    this._handicapHoles = [[], [], [], []];
+    if (!enabled) {
+      // Clear all selections
+      this._handicapHoles = [[], [], [], []];
+      document.querySelectorAll('.cht-hc-cell').forEach(cell => {
+        cell.textContent = '';
+        cell.classList.remove('hc-selected');
+      });
+      for (let i = 0; i < 4; i++) {
+        this.updateHcStatus(i);
+      }
+    }
   },
 
-  toggleHcHole(playerIdx, holeNum, btnEl) {
+  toggleHcCell(playerIdx, holeNum, td) {
+    if (!this._hcEnabled) return;
+
     const maxCount = parseInt(document.getElementById(`hc-count-${playerIdx}`).value) || 0;
     const holes = this._handicapHoles[playerIdx];
     const idx = holes.indexOf(holeNum);
 
     if (idx >= 0) {
+      // Deselect
       holes.splice(idx, 1);
-      btnEl.classList.remove('selected');
+      td.textContent = '';
+      td.classList.remove('hc-selected');
     } else {
+      // Select
+      if (maxCount === 0) {
+        alert(`${this._playerNames[playerIdx]}さんのHC数を先に設定してください`);
+        return;
+      }
       if (holes.length >= maxCount) {
-        alert(`最大${maxCount}ホールまで選択できます`);
+        alert(`${this._playerNames[playerIdx]}さんは最大${maxCount}ホールまでです`);
         return;
       }
       holes.push(holeNum);
-      btnEl.classList.add('selected');
+      td.textContent = '\u25CB'; // ○
+      td.classList.add('hc-selected');
     }
 
-    document.getElementById(`hc-selected-count-${playerIdx}`).textContent =
-      `選択: ${holes.length} / ${maxCount}`;
+    this.updateHcStatus(playerIdx);
   },
 
-  setupStep3Next() {
-    const hcEnabled = document.getElementById('hc-enable').checked;
-    if (hcEnabled) {
+  onHcCountChange(playerIdx) {
+    const maxCount = parseInt(document.getElementById(`hc-count-${playerIdx}`).value) || 0;
+    const holes = this._handicapHoles[playerIdx];
+
+    // If count reduced below current selections, clear excess
+    while (holes.length > maxCount) {
+      const removedHole = holes.pop();
+      const cell = document.querySelector(`.cht-hc-cell[data-player="${playerIdx}"][data-hole="${removedHole}"]`);
+      if (cell) {
+        cell.textContent = '';
+        cell.classList.remove('hc-selected');
+      }
+    }
+
+    this.updateHcStatus(playerIdx);
+  },
+
+  updateHcStatus(playerIdx) {
+    const maxCount = parseInt(document.getElementById(`hc-count-${playerIdx}`).value) || 0;
+    const current = this._handicapHoles[playerIdx].length;
+    const statusEl = document.getElementById(`hc-status-${playerIdx}`);
+    statusEl.textContent = `${current}/${maxCount}`;
+    statusEl.classList.toggle('hc-status-ok', current === maxCount && maxCount > 0);
+    statusEl.classList.toggle('hc-status-ng', current !== maxCount && maxCount > 0);
+  },
+
+  setupStep2Next() {
+    // Validate HC if enabled
+    if (this._hcEnabled) {
       for (let i = 0; i < 4; i++) {
         const maxCount = parseInt(document.getElementById(`hc-count-${i}`).value) || 0;
         if (this._handicapHoles[i].length !== maxCount && maxCount > 0) {
-          alert(`${this._playerNames[i]}さんのハンディキャップホールを${maxCount}個選択してください（現在${this._handicapHoles[i].length}個）`);
+          alert(`${this._playerNames[i]}さんのHCホールを${maxCount}個選択してください（現在${this._handicapHoles[i].length}個）`);
           return;
         }
       }
@@ -267,10 +366,12 @@ let App = {
     }
 
     this.renderBattingOrder();
-    this.showSetupStep(4);
+    this.showSetupStep(3);
   },
 
-  // --- Step 4: 1H batting order ---
+  // ============================
+  // Step 3: Batting Order
+  // ============================
   renderBattingOrder() {
     const container = document.getElementById('batting-order-list');
     container.innerHTML = '';
@@ -317,7 +418,7 @@ let App = {
     btnEl.className = 'bo-order-btn' + (next > 0 ? ' assigned' : '');
   },
 
-  setupStep4Next() {
+  setupStep3Next() {
     // Validate all players have unique orders
     const orders = this._battingOrder;
     if (orders.includes(0)) {
@@ -331,14 +432,16 @@ let App = {
     }
 
     this.renderConfirmation();
-    this.showSetupStep(5);
+    this.showSetupStep(4);
   },
 
-  // --- Step 5: Confirmation ---
+  // ============================
+  // Step 4: Confirmation
+  // ============================
   renderConfirmation() {
     const container = document.getElementById('confirmation-content');
     const orderLabels = ['', 'オーナー', '2番目', '3番目', '4番目'];
-    const hcEnabled = document.getElementById('hc-enable').checked;
+    const hcEnabled = this._hcEnabled;
 
     let html = `<div class="confirm-section">
       <h4>ゴルフ場</h4>

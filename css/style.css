@@ -131,22 +131,9 @@ body {
   margin-bottom: 12px;
 }
 
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  padding: 12px;
-  background: var(--white);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  margin-bottom: 16px;
-  cursor: pointer;
-}
-.checkbox-label input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  accent-color: var(--green);
+/* Step 2 wider container for combined table */
+#setup-step-2 .scorecard-scroll {
+  margin: 0 -8px;
 }
 
 /* ========== Course List ========== */
@@ -189,80 +176,161 @@ body {
   gap: 4px;
 }
 
-/* ========== Course Info Table ========== */
-.info-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--white);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-.info-table th {
-  background: var(--green);
-  color: var(--white);
-  padding: 8px;
-  font-size: 13px;
-}
-.info-table td {
-  padding: 6px 8px;
-  text-align: center;
-  border-bottom: 1px solid var(--gray-light);
-  font-size: 14px;
-}
-.info-table tr:nth-child(even) { background: #f7faf7; }
+/* ========== Step 2: Course Info + HC (Combined) ========== */
 
-/* ========== Handicap Setup ========== */
-.hc-player-section {
+/* HC Toggle YES/NO */
+.hc-toggle-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: var(--white);
   border-radius: var(--radius);
-  padding: 12px;
+  padding: 12px 16px;
   margin-bottom: 12px;
   box-shadow: var(--shadow);
 }
-.hc-player-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
+.hc-toggle-label {
+  font-size: 14px;
+  font-weight: 600;
 }
-.hc-player-name {
+.hc-toggle-btns {
+  display: flex;
+  gap: 0;
+}
+.hc-toggle-btn {
+  padding: 8px 20px;
+  border: 2px solid var(--gray-light);
+  background: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--gray);
+}
+.hc-toggle-btn:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+.hc-toggle-btn:last-child { border-radius: 0 var(--radius) var(--radius) 0; border-left: none; }
+.hc-toggle-btn.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+
+/* HC Count inputs per player */
+.hc-count-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.hc-count-row {
+  flex: 1;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 8px;
+  box-shadow: var(--shadow);
+}
+.hc-count-name {
+  font-size: 13px;
   font-weight: 700;
   color: var(--green-dark);
 }
+.hc-count-label {
+  font-size: 12px;
+  color: var(--gray-dark);
+}
 .hc-count-input {
-  width: 60px;
-  padding: 4px 8px;
+  width: 52px;
+  padding: 4px;
   border: 2px solid var(--gray-light);
   border-radius: 4px;
   text-align: center;
   font-size: 16px;
-}
-.hc-hole-grid {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 4px;
-}
-.hc-hole-btn {
-  padding: 6px 0;
-  border: 2px solid var(--gray-light);
-  border-radius: 4px;
-  background: var(--white);
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.hc-hole-btn.selected {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: var(--white);
   font-weight: 700;
 }
-.hc-selected-count {
+.hc-count-status {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.hc-status-ok { color: var(--green-dark); background: #c8e6c9; }
+.hc-status-ng { color: var(--red); background: #ffcdd2; }
+
+/* Combined Course + HC Table */
+.course-hc-table {
+  width: 100%;
+  min-width: 380px;
+  border-collapse: collapse;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  overflow: hidden;
   font-size: 13px;
+}
+.course-hc-table th {
+  background: var(--green-dark);
+  color: var(--white);
+  padding: 8px 4px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
+.course-hc-table td {
+  padding: 6px 4px;
+  text-align: center;
+  border-bottom: 1px solid #e0e4e0;
+}
+.course-hc-table tbody tr:nth-child(odd) { background: var(--white); }
+.course-hc-table tbody tr:nth-child(even) { background: #f7faf7; }
+
+.cht-hole { width: 36px; }
+.cht-par { width: 36px; }
+.cht-hdcp { width: 40px; }
+.cht-player { min-width: 52px; }
+
+.cht-hole-num {
+  font-weight: 700;
+  color: var(--green-dark);
+  background: #f5f8f5;
+}
+.cht-par-val {
+  font-weight: 600;
   color: var(--gray-dark);
-  margin-top: 6px;
-  text-align: right;
+  background: #f5f8f5;
+}
+.cht-hdcp-val {
+  font-weight: 600;
+  color: var(--blue);
+  background: #f5f8f5;
+}
+
+/* HC selectable cells */
+.cht-hc-cell {
+  cursor: pointer;
+  transition: all 0.15s;
+  min-height: 28px;
+  font-size: 16px;
+  font-weight: 700;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.cht-hc-cell.hc-disabled {
+  cursor: default;
+  color: var(--gray-light);
+}
+.cht-hc-cell:not(.hc-disabled):hover {
+  background: #e8f5e9;
+}
+.cht-hc-cell.hc-selected {
+  background: var(--gold-light) !important;
+  color: var(--green-dark);
 }
 
 /* ========== Batting Order ========== */

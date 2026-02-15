@@ -44,51 +44,51 @@
         <button id="setup-next-1" class="btn btn-primary">次へ</button>
       </div>
 
-      <!-- Step 2: Course Info -->
+      <!-- Step 2: Course Info + Handicap (combined) -->
       <div id="setup-step-2" class="setup-step">
-        <h2>Step 2: コース情報</h2>
+        <h2>Step 2: コース情報 & ハンディキャップ</h2>
         <h3 id="course-info-title"></h3>
-        <table class="info-table">
-          <thead><tr><th>HOLE</th><th>PAR</th><th>HDCP</th></tr></thead>
-          <tbody id="course-info-body"></tbody>
-        </table>
+
+        <div class="hc-toggle-section">
+          <span class="hc-toggle-label">ハンディキャップを設定しますか？</span>
+          <div class="hc-toggle-btns">
+            <button id="hc-yes-btn" class="hc-toggle-btn">YES</button>
+            <button id="hc-no-btn" class="hc-toggle-btn active">NO</button>
+          </div>
+        </div>
+
+        <div id="hc-count-section" class="hc-count-section" style="display:none;"></div>
+
+        <div class="scorecard-scroll">
+          <table class="course-hc-table" id="course-hc-table">
+            <thead id="course-hc-head"></thead>
+            <tbody id="course-hc-body"></tbody>
+          </table>
+        </div>
+
         <div class="step-nav">
           <button id="setup-back-2" class="btn btn-secondary">戻る</button>
           <button id="setup-next-2" class="btn btn-primary">次へ</button>
         </div>
       </div>
 
-      <!-- Step 3: Handicap -->
+      <!-- Step 3: Batting Order -->
       <div id="setup-step-3" class="setup-step">
-        <h2>Step 3: ハンディキャップ設定</h2>
-        <label class="checkbox-label">
-          <input type="checkbox" id="hc-enable">
-          ハンディキャップを設定しますか？
-        </label>
-        <div id="hc-settings" style="display:none;"></div>
+        <h2>Step 3: 1番ホールの打順</h2>
+        <p class="step-desc">各プレイヤー名をタップして打順を設定してください</p>
+        <div id="batting-order-list"></div>
         <div class="step-nav">
           <button id="setup-back-3" class="btn btn-secondary">戻る</button>
           <button id="setup-next-3" class="btn btn-primary">次へ</button>
         </div>
       </div>
 
-      <!-- Step 4: Batting Order -->
+      <!-- Step 4: Confirmation -->
       <div id="setup-step-4" class="setup-step">
-        <h2>Step 4: 1番ホールの打順</h2>
-        <p class="step-desc">各プレイヤー名をタップして打順を設定してください</p>
-        <div id="batting-order-list"></div>
-        <div class="step-nav">
-          <button id="setup-back-4" class="btn btn-secondary">戻る</button>
-          <button id="setup-next-4" class="btn btn-primary">次へ</button>
-        </div>
-      </div>
-
-      <!-- Step 5: Confirmation -->
-      <div id="setup-step-5" class="setup-step">
         <h2>確認</h2>
         <div id="confirmation-content"></div>
         <div class="step-nav">
-          <button id="setup-back-5" class="btn btn-secondary">戻る</button>
+          <button id="setup-back-4" class="btn btn-secondary">戻る</button>
           <button id="round-start-btn" class="btn btn-primary btn-large">ラウンドスタート</button>
         </div>
       </div>
