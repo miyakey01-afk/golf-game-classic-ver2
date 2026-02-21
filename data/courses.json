@@ -21352,5 +21352,2673 @@
         "yardage": 457
       }
     ]
+  },
+  {
+    "id": "gdo_350502",
+    "name": "クリアビューゴルフクラブ＆ホテル 【PGM】",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 374
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 15,
+        "yardage": 308
+      },
+      {
+        "hole": 3,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 358
+      },
+      {
+        "hole": 4,
+        "par": 3,
+        "hdcp": 7,
+        "yardage": 177
+      },
+      {
+        "hole": 5,
+        "par": 5,
+        "hdcp": 1,
+        "yardage": 573
+      },
+      {
+        "hole": 6,
+        "par": 5,
+        "hdcp": 13,
+        "yardage": 472
+      },
+      {
+        "hole": 7,
+        "par": 4,
+        "hdcp": 17,
+        "yardage": 346
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 5,
+        "yardage": 368
+      },
+      {
+        "hole": 9,
+        "par": 3,
+        "hdcp": 11,
+        "yardage": 181
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 16,
+        "yardage": 376
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 4,
+        "yardage": 432
+      },
+      {
+        "hole": 12,
+        "par": 5,
+        "hdcp": 10,
+        "yardage": 501
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 371
+      },
+      {
+        "hole": 14,
+        "par": 3,
+        "hdcp": 14,
+        "yardage": 162
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 414
+      },
+      {
+        "hole": 16,
+        "par": 3,
+        "hdcp": 18,
+        "yardage": 143
+      },
+      {
+        "hole": 17,
+        "par": 5,
+        "hdcp": 12,
+        "yardage": 462
+      },
+      {
+        "hole": 18,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 383
+      }
+    ]
+  },
+  {
+    "id": "gdo_350508",
+    "name": "キャメルゴルフ＆ホテルリゾート (Camel Golf & Hotel Resort)",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 11,
+        "yardage": 357
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 5,
+        "yardage": 381
+      },
+      {
+        "hole": 3,
+        "par": 3,
+        "hdcp": 17,
+        "yardage": 171
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 13,
+        "yardage": 354
+      },
+      {
+        "hole": 5,
+        "par": 5,
+        "hdcp": 1,
+        "yardage": 552
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 401
+      },
+      {
+        "hole": 7,
+        "par": 3,
+        "hdcp": 15,
+        "yardage": 203
+      },
+      {
+        "hole": 8,
+        "par": 5,
+        "hdcp": 3,
+        "yardage": 571
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 417
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 4,
+        "yardage": 419
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 381
+      },
+      {
+        "hole": 12,
+        "par": 3,
+        "hdcp": 18,
+        "yardage": 141
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 12,
+        "yardage": 328
+      },
+      {
+        "hole": 14,
+        "par": 5,
+        "hdcp": 6,
+        "yardage": 532
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 442
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 16,
+        "yardage": 339
+      },
+      {
+        "hole": 17,
+        "par": 3,
+        "hdcp": 14,
+        "yardage": 185
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 10,
+        "yardage": 486
+      }
+    ]
+  },
+  {
+    "id": "gdo_351204",
+    "name": "京カントリークラブ 【PGM】",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 417
+      },
+      {
+        "hole": 2,
+        "par": 3,
+        "hdcp": 15,
+        "yardage": 182
+      },
+      {
+        "hole": 3,
+        "par": 5,
+        "hdcp": 3,
+        "yardage": 535
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 13,
+        "yardage": 342
+      },
+      {
+        "hole": 5,
+        "par": 3,
+        "hdcp": 7,
+        "yardage": 215
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 413
+      },
+      {
+        "hole": 7,
+        "par": 4,
+        "hdcp": 5,
+        "yardage": 433
+      },
+      {
+        "hole": 8,
+        "par": 5,
+        "hdcp": 11,
+        "yardage": 531
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 17,
+        "yardage": 371
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 16,
+        "yardage": 387
+      },
+      {
+        "hole": 11,
+        "par": 3,
+        "hdcp": 4,
+        "yardage": 200
+      },
+      {
+        "hole": 12,
+        "par": 3,
+        "hdcp": 10,
+        "yardage": 192
+      },
+      {
+        "hole": 13,
+        "par": 5,
+        "hdcp": 8,
+        "yardage": 502
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 14,
+        "yardage": 345
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 395
+      },
+      {
+        "hole": 16,
+        "par": 5,
+        "hdcp": 18,
+        "yardage": 430
+      },
+      {
+        "hole": 17,
+        "par": 5,
+        "hdcp": 6,
+        "yardage": 521
+      },
+      {
+        "hole": 18,
+        "par": 3,
+        "hdcp": 12,
+        "yardage": 184
+      }
+    ]
+  },
+  {
+    "id": "gdo_351302",
+    "name": "国際レディースゴルフ倶楽部 - ホール別データ",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 350
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 210
+      },
+      {
+        "hole": 3,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 230
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 330
+      },
+      {
+        "hole": 5,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 300
+      },
+      {
+        "hole": 6,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 410
+      },
+      {
+        "hole": 7,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 110
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 230
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 250
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 300
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 210
+      },
+      {
+        "hole": 12,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 135
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 330
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 300
+      },
+      {
+        "hole": 15,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 410
+      },
+      {
+        "hole": 16,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 110
+      },
+      {
+        "hole": 17,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 230
+      },
+      {
+        "hole": 18,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 250
+      }
+    ]
+  },
+  {
+    "id": "gdo_352105",
+    "name": "グリッサンドゴルフクラブ (Glissando Golf Club)",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 5,
+        "hdcp": 13,
+        "yardage": 536
+      },
+      {
+        "hole": 2,
+        "par": 3,
+        "hdcp": 7,
+        "yardage": 208
+      },
+      {
+        "hole": 3,
+        "par": 4,
+        "hdcp": 17,
+        "yardage": 343
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 371
+      },
+      {
+        "hole": 5,
+        "par": 5,
+        "hdcp": 1,
+        "yardage": 563
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 15,
+        "yardage": 395
+      },
+      {
+        "hole": 7,
+        "par": 3,
+        "hdcp": 5,
+        "yardage": 195
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 11,
+        "yardage": 360
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 470
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 4,
+        "yardage": 412
+      },
+      {
+        "hole": 11,
+        "par": 5,
+        "hdcp": 12,
+        "yardage": 529
+      },
+      {
+        "hole": 12,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 405
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 443
+      },
+      {
+        "hole": 14,
+        "par": 3,
+        "hdcp": 18,
+        "yardage": 170
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 10,
+        "yardage": 365
+      },
+      {
+        "hole": 16,
+        "par": 3,
+        "hdcp": 6,
+        "yardage": 218
+      },
+      {
+        "hole": 17,
+        "par": 5,
+        "hdcp": 16,
+        "yardage": 497
+      },
+      {
+        "hole": 18,
+        "par": 4,
+        "hdcp": 14,
+        "yardage": 393
+      }
+    ]
+  },
+  {
+    "id": "gdo_352505",
+    "name": "袖ヶ浦カンツリークラブ 袖ヶ浦コース",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 441
+      },
+      {
+        "hole": 2,
+        "par": 5,
+        "hdcp": 15,
+        "yardage": 491
+      },
+      {
+        "hole": 3,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 456
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 446
+      },
+      {
+        "hole": 5,
+        "par": 3,
+        "hdcp": 13,
+        "yardage": 199
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 399
+      },
+      {
+        "hole": 7,
+        "par": 4,
+        "hdcp": 5,
+        "yardage": 452
+      },
+      {
+        "hole": 8,
+        "par": 3,
+        "hdcp": 17,
+        "yardage": 177
+      },
+      {
+        "hole": 9,
+        "par": 5,
+        "hdcp": 11,
+        "yardage": 587
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 4,
+        "yardage": 418
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 10,
+        "yardage": 350
+      },
+      {
+        "hole": 12,
+        "par": 3,
+        "hdcp": 16,
+        "yardage": 163
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 14,
+        "yardage": 354
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 464
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 400
+      },
+      {
+        "hole": 16,
+        "par": 5,
+        "hdcp": 6,
+        "yardage": 541
+      },
+      {
+        "hole": 17,
+        "par": 3,
+        "hdcp": 18,
+        "yardage": 231
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 12,
+        "yardage": 569
+      }
+    ]
+  },
+  {
+    "id": "gdo_352506",
+    "name": "袖ヶ浦カンツリークラブ新袖コース",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 5,
+        "hdcp": 15,
+        "yardage": 528
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 403
+      },
+      {
+        "hole": 3,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 435
+      },
+      {
+        "hole": 4,
+        "par": 3,
+        "hdcp": 7,
+        "yardage": 193
+      },
+      {
+        "hole": 5,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 368
+      },
+      {
+        "hole": 6,
+        "par": 3,
+        "hdcp": 13,
+        "yardage": 194
+      },
+      {
+        "hole": 7,
+        "par": 5,
+        "hdcp": 5,
+        "yardage": 545
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 11,
+        "yardage": 381
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 17,
+        "yardage": 396
+      },
+      {
+        "hole": 10,
+        "par": 5,
+        "hdcp": 10,
+        "yardage": 494
+      },
+      {
+        "hole": 11,
+        "par": 3,
+        "hdcp": 16,
+        "yardage": 178
+      },
+      {
+        "hole": 12,
+        "par": 4,
+        "hdcp": 4,
+        "yardage": 432
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 436
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 378
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 14,
+        "yardage": 381
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 408
+      },
+      {
+        "hole": 17,
+        "par": 3,
+        "hdcp": 18,
+        "yardage": 189
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 12,
+        "yardage": 506
+      }
+    ]
+  },
+  {
+    "id": "gdo_353101",
+    "name": "大千葉カントリー倶楽部",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 5,
+        "hdcp": 5,
+        "yardage": 500
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 445
+      },
+      {
+        "hole": 3,
+        "par": 3,
+        "hdcp": 8,
+        "yardage": 155
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 375
+      },
+      {
+        "hole": 5,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 430
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 4,
+        "yardage": 395
+      },
+      {
+        "hole": 7,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 390
+      },
+      {
+        "hole": 8,
+        "par": 3,
+        "hdcp": 7,
+        "yardage": 150
+      },
+      {
+        "hole": 9,
+        "par": 5,
+        "hdcp": 9,
+        "yardage": 490
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 415
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 385
+      },
+      {
+        "hole": 12,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 385
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 4,
+        "yardage": 360
+      },
+      {
+        "hole": 14,
+        "par": 3,
+        "hdcp": 8,
+        "yardage": 185
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 395
+      },
+      {
+        "hole": 16,
+        "par": 3,
+        "hdcp": 5,
+        "yardage": 190
+      },
+      {
+        "hole": 17,
+        "par": 5,
+        "hdcp": 7,
+        "yardage": 495
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 1,
+        "yardage": 515
+      }
+    ]
+  },
+  {
+    "id": "gdo_353106",
+    "name": "大栄カントリー倶楽部",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 443
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 15,
+        "yardage": 353
+      },
+      {
+        "hole": 3,
+        "par": 5,
+        "hdcp": 3,
+        "yardage": 544
+      },
+      {
+        "hole": 4,
+        "par": 3,
+        "hdcp": 13,
+        "yardage": 210
+      },
+      {
+        "hole": 5,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 434
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 326
+      },
+      {
+        "hole": 7,
+        "par": 5,
+        "hdcp": 5,
+        "yardage": 517
+      },
+      {
+        "hole": 8,
+        "par": 3,
+        "hdcp": 17,
+        "yardage": 198
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 11,
+        "yardage": 354
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 16,
+        "yardage": 391
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 10,
+        "yardage": 405
+      },
+      {
+        "hole": 12,
+        "par": 5,
+        "hdcp": 4,
+        "yardage": 592
+      },
+      {
+        "hole": 13,
+        "par": 3,
+        "hdcp": 14,
+        "yardage": 190
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 343
+      },
+      {
+        "hole": 15,
+        "par": 5,
+        "hdcp": 2,
+        "yardage": 514
+      },
+      {
+        "hole": 16,
+        "par": 3,
+        "hdcp": 18,
+        "yardage": 204
+      },
+      {
+        "hole": 17,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 369
+      },
+      {
+        "hole": 18,
+        "par": 4,
+        "hdcp": 12,
+        "yardage": 354
+      }
+    ]
+  },
+  {
+    "id": "gdo_353109",
+    "name": "東京ベイサイドゴルフコース 【PGM】",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 13,
+        "yardage": 403
+      },
+      {
+        "hole": 2,
+        "par": 3,
+        "hdcp": 9,
+        "yardage": 139
+      },
+      {
+        "hole": 3,
+        "par": 4,
+        "hdcp": 11,
+        "yardage": 381
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 386
+      },
+      {
+        "hole": 5,
+        "par": 3,
+        "hdcp": 15,
+        "yardage": 201
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 425
+      },
+      {
+        "hole": 7,
+        "par": 5,
+        "hdcp": 7,
+        "yardage": 508
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 17,
+        "yardage": 366
+      },
+      {
+        "hole": 9,
+        "par": 5,
+        "hdcp": 5,
+        "yardage": 503
+      },
+      {
+        "hole": 10,
+        "par": 3,
+        "hdcp": 14,
+        "yardage": 202
+      },
+      {
+        "hole": 11,
+        "par": 5,
+        "hdcp": 2,
+        "yardage": 544
+      },
+      {
+        "hole": 12,
+        "par": 4,
+        "hdcp": 18,
+        "yardage": 334
+      },
+      {
+        "hole": 13,
+        "par": 3,
+        "hdcp": 8,
+        "yardage": 153
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 10,
+        "yardage": 352
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 12,
+        "yardage": 353
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 414
+      },
+      {
+        "hole": 17,
+        "par": 4,
+        "hdcp": 16,
+        "yardage": 350
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 4,
+        "yardage": 501
+      }
+    ]
+  },
+  {
+    "id": "gdo_353216",
+    "name": "長南パブリックコース",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 392
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 396
+      },
+      {
+        "hole": 3,
+        "par": 5,
+        "hdcp": 15,
+        "yardage": 486
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 416
+      },
+      {
+        "hole": 5,
+        "par": 3,
+        "hdcp": 7,
+        "yardage": 180
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 13,
+        "yardage": 326
+      },
+      {
+        "hole": 7,
+        "par": 5,
+        "hdcp": 5,
+        "yardage": 473
+      },
+      {
+        "hole": 8,
+        "par": 3,
+        "hdcp": 17,
+        "yardage": 178
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 11,
+        "yardage": 361
+      },
+      {
+        "hole": 10,
+        "par": 5,
+        "hdcp": 10,
+        "yardage": 537
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 16,
+        "yardage": 326
+      },
+      {
+        "hole": 12,
+        "par": 3,
+        "hdcp": 4,
+        "yardage": 222
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 427
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 14,
+        "yardage": 346
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 394
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 12,
+        "yardage": 367
+      },
+      {
+        "hole": 17,
+        "par": 3,
+        "hdcp": 18,
+        "yardage": 175
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 6,
+        "yardage": 541
+      }
+    ]
+  },
+  {
+    "id": "gdo_353301_east",
+    "name": "鶴舞カントリー倶楽部 - Course Data EASTコース",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 15,
+        "yardage": 390
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 425
+      },
+      {
+        "hole": 3,
+        "par": 5,
+        "hdcp": 3,
+        "yardage": 530
+      },
+      {
+        "hole": 4,
+        "par": 3,
+        "hdcp": 13,
+        "yardage": 160
+      },
+      {
+        "hole": 5,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 390
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 420
+      },
+      {
+        "hole": 7,
+        "par": 3,
+        "hdcp": 17,
+        "yardage": 165
+      },
+      {
+        "hole": 8,
+        "par": 5,
+        "hdcp": 5,
+        "yardage": 545
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 11,
+        "yardage": 395
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 10,
+        "yardage": 435
+      },
+      {
+        "hole": 11,
+        "par": 3,
+        "hdcp": 16,
+        "yardage": 190
+      },
+      {
+        "hole": 12,
+        "par": 5,
+        "hdcp": 4,
+        "yardage": 540
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 400
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 355
+      },
+      {
+        "hole": 15,
+        "par": 3,
+        "hdcp": 14,
+        "yardage": 180
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 12,
+        "yardage": 435
+      },
+      {
+        "hole": 17,
+        "par": 5,
+        "hdcp": 6,
+        "yardage": 535
+      },
+      {
+        "hole": 18,
+        "par": 4,
+        "hdcp": 18,
+        "yardage": 420
+      }
+    ]
+  },
+  {
+    "id": "gdo_353301_west",
+    "name": "鶴舞カントリー倶楽部 - Course Data WESTコース",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 385
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 385
+      },
+      {
+        "hole": 3,
+        "par": 3,
+        "hdcp": 15,
+        "yardage": 175
+      },
+      {
+        "hole": 4,
+        "par": 5,
+        "hdcp": 1,
+        "yardage": 545
+      },
+      {
+        "hole": 5,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 425
+      },
+      {
+        "hole": 6,
+        "par": 3,
+        "hdcp": 13,
+        "yardage": 210
+      },
+      {
+        "hole": 7,
+        "par": 4,
+        "hdcp": 11,
+        "yardage": 435
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 17,
+        "yardage": 360
+      },
+      {
+        "hole": 9,
+        "par": 5,
+        "hdcp": 5,
+        "yardage": 515
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 10,
+        "yardage": 400
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 4,
+        "yardage": 410
+      },
+      {
+        "hole": 12,
+        "par": 4,
+        "hdcp": 16,
+        "yardage": 365
+      },
+      {
+        "hole": 13,
+        "par": 3,
+        "hdcp": 14,
+        "yardage": 190
+      },
+      {
+        "hole": 14,
+        "par": 5,
+        "hdcp": 2,
+        "yardage": 545
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 420
+      },
+      {
+        "hole": 16,
+        "par": 3,
+        "hdcp": 18,
+        "yardage": 160
+      },
+      {
+        "hole": 17,
+        "par": 4,
+        "hdcp": 12,
+        "yardage": 445
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 6,
+        "yardage": 520
+      }
+    ]
+  },
+  {
+    "id": "gdo_353503",
+    "name": "東京国際空港ゴルフ倶楽部",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 422
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 15,
+        "yardage": 374
+      },
+      {
+        "hole": 3,
+        "par": 3,
+        "hdcp": 7,
+        "yardage": 207
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 5,
+        "yardage": 401
+      },
+      {
+        "hole": 5,
+        "par": 5,
+        "hdcp": 11,
+        "yardage": 493
+      },
+      {
+        "hole": 6,
+        "par": 3,
+        "hdcp": 17,
+        "yardage": 134
+      },
+      {
+        "hole": 7,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 423
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 13,
+        "yardage": 383
+      },
+      {
+        "hole": 9,
+        "par": 5,
+        "hdcp": 9,
+        "yardage": 538
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 404
+      },
+      {
+        "hole": 11,
+        "par": 5,
+        "hdcp": 16,
+        "yardage": 492
+      },
+      {
+        "hole": 12,
+        "par": 3,
+        "hdcp": 10,
+        "yardage": 201
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 14,
+        "yardage": 369
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 18,
+        "yardage": 376
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 392
+      },
+      {
+        "hole": 16,
+        "par": 3,
+        "hdcp": 8,
+        "yardage": 199
+      },
+      {
+        "hole": 17,
+        "par": 5,
+        "hdcp": 4,
+        "yardage": 531
+      },
+      {
+        "hole": 18,
+        "par": 4,
+        "hdcp": 12,
+        "yardage": 385
+      }
+    ]
+  },
+  {
+    "id": "gdo_353505_west",
+    "name": "東急セブンハンドレッドクラブ WESTコース",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 5,
+        "hdcp": 3,
+        "yardage": 542
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 9,
+        "yardage": 377
+      },
+      {
+        "hole": 3,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 429
+      },
+      {
+        "hole": 4,
+        "par": 3,
+        "hdcp": 17,
+        "yardage": 156
+      },
+      {
+        "hole": 5,
+        "par": 4,
+        "hdcp": 15,
+        "yardage": 363
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 5,
+        "yardage": 390
+      },
+      {
+        "hole": 7,
+        "par": 5,
+        "hdcp": 11,
+        "yardage": 502
+      },
+      {
+        "hole": 8,
+        "par": 3,
+        "hdcp": 13,
+        "yardage": 193
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 356
+      },
+      {
+        "hole": 10,
+        "par": 5,
+        "hdcp": 12,
+        "yardage": 503
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 424
+      },
+      {
+        "hole": 12,
+        "par": 4,
+        "hdcp": 10,
+        "yardage": 402
+      },
+      {
+        "hole": 13,
+        "par": 3,
+        "hdcp": 18,
+        "yardage": 160
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 381
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 16,
+        "yardage": 331
+      },
+      {
+        "hole": 16,
+        "par": 5,
+        "hdcp": 4,
+        "yardage": 515
+      },
+      {
+        "hole": 17,
+        "par": 3,
+        "hdcp": 14,
+        "yardage": 199
+      },
+      {
+        "hole": 18,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 374
+      }
+    ]
+  },
+  {
+    "id": "gdo_353505_east",
+    "name": "東急セブンハンドレッドクラブ EASTコース",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 5,
+        "yardage": 384
+      },
+      {
+        "hole": 2,
+        "par": 5,
+        "hdcp": 11,
+        "yardage": 490
+      },
+      {
+        "hole": 3,
+        "par": 3,
+        "hdcp": 17,
+        "yardage": 137
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 15,
+        "yardage": 376
+      },
+      {
+        "hole": 5,
+        "par": 3,
+        "hdcp": 9,
+        "yardage": 203
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 393
+      },
+      {
+        "hole": 7,
+        "par": 4,
+        "hdcp": 13,
+        "yardage": 341
+      },
+      {
+        "hole": 8,
+        "par": 5,
+        "hdcp": 1,
+        "yardage": 534
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 376
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 12,
+        "yardage": 381
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 366
+      },
+      {
+        "hole": 12,
+        "par": 3,
+        "hdcp": 18,
+        "yardage": 166
+      },
+      {
+        "hole": 13,
+        "par": 5,
+        "hdcp": 4,
+        "yardage": 522
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 435
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 10,
+        "yardage": 358
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 16,
+        "yardage": 355
+      },
+      {
+        "hole": 17,
+        "par": 3,
+        "hdcp": 14,
+        "yardage": 181
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 8,
+        "yardage": 502
+      }
+    ]
+  },
+  {
+    "id": "gdo_353509",
+    "name": "東京クラシッククラブ",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 388
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 15,
+        "yardage": 303
+      },
+      {
+        "hole": 3,
+        "par": 5,
+        "hdcp": 9,
+        "yardage": 539
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 375
+      },
+      {
+        "hole": 5,
+        "par": 3,
+        "hdcp": 13,
+        "yardage": 209
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 396
+      },
+      {
+        "hole": 7,
+        "par": 3,
+        "hdcp": 17,
+        "yardage": 184
+      },
+      {
+        "hole": 8,
+        "par": 5,
+        "hdcp": 11,
+        "yardage": 522
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 5,
+        "yardage": 345
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 10,
+        "yardage": 324
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 4,
+        "yardage": 402
+      },
+      {
+        "hole": 12,
+        "par": 3,
+        "hdcp": 16,
+        "yardage": 185
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 324
+      },
+      {
+        "hole": 14,
+        "par": 3,
+        "hdcp": 14,
+        "yardage": 154
+      },
+      {
+        "hole": 15,
+        "par": 5,
+        "hdcp": 8,
+        "yardage": 504
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 429
+      },
+      {
+        "hole": 17,
+        "par": 4,
+        "hdcp": 12,
+        "yardage": 411
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 18,
+        "yardage": 545
+      }
+    ]
+  },
+  {
+    "id": "gdo_354103",
+    "name": "空港ゴルフコース 成田 【アコーディア】",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 5,
+        "yardage": 386
+      },
+      {
+        "hole": 2,
+        "par": 3,
+        "hdcp": 13,
+        "yardage": 170
+      },
+      {
+        "hole": 3,
+        "par": 5,
+        "hdcp": 9,
+        "yardage": 537
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 414
+      },
+      {
+        "hole": 5,
+        "par": 4,
+        "hdcp": 15,
+        "yardage": 379
+      },
+      {
+        "hole": 6,
+        "par": 3,
+        "hdcp": 7,
+        "yardage": 180
+      },
+      {
+        "hole": 7,
+        "par": 5,
+        "hdcp": 3,
+        "yardage": 519
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 17,
+        "yardage": 326
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 11,
+        "yardage": 370
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 16,
+        "yardage": 383
+      },
+      {
+        "hole": 11,
+        "par": 5,
+        "hdcp": 4,
+        "yardage": 611
+      },
+      {
+        "hole": 12,
+        "par": 3,
+        "hdcp": 14,
+        "yardage": 189
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 454
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 18,
+        "yardage": 393
+      },
+      {
+        "hole": 15,
+        "par": 5,
+        "hdcp": 10,
+        "yardage": 565
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 427
+      },
+      {
+        "hole": 17,
+        "par": 4,
+        "hdcp": 8,
+        "yardage": 406
+      },
+      {
+        "hole": 18,
+        "par": 3,
+        "hdcp": 12,
+        "yardage": 185
+      }
+    ]
+  },
+  {
+    "id": "gdo_354502",
+    "name": "野田市パブリックゴルフ場けやきコース - ホール別データ",
+    "prefecture": "千葉県",
+    "totalPar": 71,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 517
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 334
+      },
+      {
+        "hole": 3,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 156
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 283
+      },
+      {
+        "hole": 5,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 185
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 336
+      },
+      {
+        "hole": 7,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 435
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 275
+      },
+      {
+        "hole": 9,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 153
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 284
+      },
+      {
+        "hole": 11,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 470
+      },
+      {
+        "hole": 12,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 107
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 318
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 381
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 311
+      },
+      {
+        "hole": 16,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 424
+      },
+      {
+        "hole": 17,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 178
+      },
+      {
+        "hole": 18,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 300
+      }
+    ]
+  },
+  {
+    "id": "gdo_355201",
+    "name": "東我孫子カントリークラブ",
+    "prefecture": "千葉県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 5,
+        "hdcp": 9,
+        "yardage": 492
+      },
+      {
+        "hole": 2,
+        "par": 3,
+        "hdcp": 17,
+        "yardage": 164
+      },
+      {
+        "hole": 3,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 410
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 15,
+        "yardage": 276
+      },
+      {
+        "hole": 5,
+        "par": 4,
+        "hdcp": 7,
+        "yardage": 383
+      },
+      {
+        "hole": 6,
+        "par": 3,
+        "hdcp": 11,
+        "yardage": 192
+      },
+      {
+        "hole": 7,
+        "par": 4,
+        "hdcp": 13,
+        "yardage": 356
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 459
+      },
+      {
+        "hole": 9,
+        "par": 5,
+        "hdcp": 5,
+        "yardage": 558
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 10,
+        "yardage": 321
+      },
+      {
+        "hole": 11,
+        "par": 3,
+        "hdcp": 4,
+        "yardage": 186
+      },
+      {
+        "hole": 12,
+        "par": 4,
+        "hdcp": 18,
+        "yardage": 317
+      },
+      {
+        "hole": 13,
+        "par": 3,
+        "hdcp": 16,
+        "yardage": 181
+      },
+      {
+        "hole": 14,
+        "par": 5,
+        "hdcp": 8,
+        "yardage": 476
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 416
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 14,
+        "yardage": 405
+      },
+      {
+        "hole": 17,
+        "par": 4,
+        "hdcp": 12,
+        "yardage": 383
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 6,
+        "yardage": 523
+      }
+    ]
+  },
+  {
+    "id": "gdo_370101_west",
+    "name": "厚木国際カントリー倶楽部 西コース",
+    "prefecture": "神奈川県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 2,
+        "yardage": 416
+      },
+      {
+        "hole": 2,
+        "par": 5,
+        "hdcp": 5,
+        "yardage": 542
+      },
+      {
+        "hole": 3,
+        "par": 3,
+        "hdcp": 8,
+        "yardage": 171
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 4,
+        "yardage": 397
+      },
+      {
+        "hole": 5,
+        "par": 4,
+        "hdcp": 1,
+        "yardage": 404
+      },
+      {
+        "hole": 6,
+        "par": 3,
+        "hdcp": 9,
+        "yardage": 160
+      },
+      {
+        "hole": 7,
+        "par": 5,
+        "hdcp": 7,
+        "yardage": 530
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 3,
+        "yardage": 462
+      },
+      {
+        "hole": 9,
+        "par": 4,
+        "hdcp": 6,
+        "yardage": 365
+      },
+      {
+        "hole": 10,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 184
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 386
+      },
+      {
+        "hole": 12,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 414
+      },
+      {
+        "hole": 13,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 526
+      },
+      {
+        "hole": 14,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 372
+      },
+      {
+        "hole": 15,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 184
+      },
+      {
+        "hole": 16,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 528
+      },
+      {
+        "hole": 17,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 446
+      },
+      {
+        "hole": 18,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 370
+      }
+    ]
+  },
+  {
+    "id": "gdo_372105",
+    "name": "オリムピックナショナルゴルフクラブ サカワコース",
+    "prefecture": "神奈川県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 367
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 344
+      },
+      {
+        "hole": 3,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 143
+      },
+      {
+        "hole": 4,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 531
+      },
+      {
+        "hole": 5,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 144
+      },
+      {
+        "hole": 6,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 558
+      },
+      {
+        "hole": 7,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 414
+      },
+      {
+        "hole": 8,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 529
+      },
+      {
+        "hole": 9,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 174
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 411
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 330
+      },
+      {
+        "hole": 12,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 420
+      },
+      {
+        "hole": 13,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 333
+      },
+      {
+        "hole": 14,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 182
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 420
+      },
+      {
+        "hole": 16,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 501
+      },
+      {
+        "hole": 17,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 145
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 569
+      }
+    ]
+  },
+  {
+    "id": "gdo_373501",
+    "name": "東名厚木カントリー倶楽部",
+    "prefecture": "神奈川県",
+    "totalPar": 72,
+    "holes": [
+      {
+        "hole": 1,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 561
+      },
+      {
+        "hole": 2,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 327
+      },
+      {
+        "hole": 3,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 155
+      },
+      {
+        "hole": 4,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 424
+      },
+      {
+        "hole": 5,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 334
+      },
+      {
+        "hole": 6,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 349
+      },
+      {
+        "hole": 7,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 164
+      },
+      {
+        "hole": 8,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 465
+      },
+      {
+        "hole": 9,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 483
+      },
+      {
+        "hole": 10,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 347
+      },
+      {
+        "hole": 11,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 384
+      },
+      {
+        "hole": 12,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 286
+      },
+      {
+        "hole": 13,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 135
+      },
+      {
+        "hole": 14,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 422
+      },
+      {
+        "hole": 15,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 345
+      },
+      {
+        "hole": 16,
+        "par": 4,
+        "hdcp": 0,
+        "yardage": 374
+      },
+      {
+        "hole": 17,
+        "par": 3,
+        "hdcp": 0,
+        "yardage": 177
+      },
+      {
+        "hole": 18,
+        "par": 5,
+        "hdcp": 0,
+        "yardage": 524
+      }
+    ]
   }
 ]
