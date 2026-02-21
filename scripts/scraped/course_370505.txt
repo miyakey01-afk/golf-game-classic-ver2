@@ -1,0 +1,16 @@
+# 大磯ゴルフコース - Hole-by-Hole Data
+# 9-hole par-27 short course (all par-3s) - will be skipped by parser
+
+## OUT (Holes 1-9)
+
+| Hole | Par | HDCP | Yardage |
+|------|-----|------|---------|
+| 1 | 3 | 7 | 101 |
+| 2 | 3 | 6 | 105 |
+| 3 | 3 | 8 | 85 |
+| 4 | 3 | 9 | 94 |
+| 5 | 3 | 1 | 167 |
+| 6 | 3 | 4 | 120 |
+| 7 | 3 | 3 | 160 |
+| 8 | 3 | 5 | 83 |
+| 9 | 3 | 2 | 125 |
