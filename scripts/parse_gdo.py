@@ -11,7 +11,18 @@ import os
 import sys
 
 
-def parse_course_text(text, gdo_id, fallback_name):
+def get_prefecture_for_id(gdo_id):
+    """Determine prefecture from GDO course ID prefix."""
+    if gdo_id.startswith('35'):
+        return '千葉県'
+    elif gdo_id.startswith('37'):
+        return '神奈川県'
+    elif gdo_id.startswith('13'):
+        return '東京都'
+    return '千葉県'  # default fallback
+
+
+def parse_course_text(text, gdo_id, fallback_name, prefecture='千葉県'):
     """Parse the text output from WebFetch for a single course."""
     courses = []
     lines = text.strip().split('\n')
@@ -102,7 +113,7 @@ def parse_course_text(text, gdo_id, fallback_name):
         courses.append({
             'id': course_id,
             'name': full_name,
-            'prefecture': '千葉県',
+            'prefecture': prefecture,
             'totalPar': total_par,
             'holes': holes_arr
         })
@@ -166,11 +177,22 @@ def merge_results(scripts_dir, output_file):
         with open(existing_file, 'r', encoding='utf-8') as f:
             all_courses = json.load(f)
 
-    # Load course ID mapping
-    ids_file = os.path.join(scripts_dir, 'chiba_course_ids.json')
-    with open(ids_file, 'r', encoding='utf-8') as f:
-        course_ids = json.load(f)
-    id_map = {c['id']: c['name'] for c in course_ids}
+    # Load course ID mapping from all available prefecture files
+    id_map = {}
+    for ids_filename in ['chiba_course_ids.json', 'kanagawa_course_ids.json']:
+        ids_file = os.path.join(scripts_dir, ids_filename)
+        if os.path.exists(ids_file):
+            with open(ids_file, 'r', encoding='utf-8') as f:
+                course_ids = json.load(f)
+            id_map.update({c['id']: c['name'] for c in course_ids})
+
+    # Fix any existing GDO courses that have incorrect prefecture
+    for course in all_courses:
+        if course['id'].startswith('gdo_'):
+            raw_id = course['id'].replace('gdo_', '').split('_')[0]
+            correct_pref = get_prefecture_for_id(raw_id)
+            if course.get('prefecture') != correct_pref:
+                course['prefecture'] = correct_pref
 
     # Parse each scraped file
     existing_ids = {c['id'] for c in all_courses}
@@ -188,7 +210,8 @@ def merge_results(scripts_dir, output_file):
         with open(filepath, 'r', encoding='utf-8') as f:
             text = f.read()
 
-        parsed = parse_course_text(text, gdo_id, fallback_name)
+        prefecture = get_prefecture_for_id(gdo_id)
+        parsed = parse_course_text(text, gdo_id, fallback_name, prefecture)
         for course in parsed:
             if course['id'] not in existing_ids and len(course['holes']) >= 18:
                 all_courses.append(course)
