@@ -62,6 +62,38 @@ def _parse_int(s):
     return int(clean) if clean else None
 
 
+# ── Name cleanup ──────────────────────────────────────────────────────────────
+_NAME_CLEAN_RES = [
+    re.compile(r'^(?:Golf Course Data|Course Name):\s*', re.IGNORECASE),  # leading prefix
+    re.compile(r'\s*[-–]\s*(?:ホール別データ|Course Data|Hole-by-Hole Data|Hole by Hole Data)', re.IGNORECASE),  # dash suffix
+    re.compile(r'\s+Course Data\s*$', re.IGNORECASE),             # trailing without dash
+]
+
+def clean_course_name(name):
+    """Remove metadata suffixes/prefixes from course names."""
+    for pattern in _NAME_CLEAN_RES:
+        name = pattern.sub('', name)
+    return name.strip()
+
+
+# ── 50-on sort key ─────────────────────────────────────────────────────────────
+def _sort_key(course):
+    """Sort key for 50-on (Japanese syllabary) order.
+
+    Converts full-width katakana → hiragana so both sort identically.
+    """
+    name = course.get('name', '')
+    chars = []
+    for ch in name:
+        code = ord(ch)
+        # Full-width katakana (ァ-ヶ) → hiragana by subtracting 0x60
+        if 0x30A1 <= code <= 0x30F6:
+            chars.append(chr(code - 0x60))
+        else:
+            chars.append(ch)
+    return ''.join(chars)
+
+
 def parse_course_text(text, gdo_id, fallback_name, prefecture='千葉県'):
     """Parse the text output from WebFetch for a single course."""
     lines = text.strip().split('\n')
@@ -74,7 +106,7 @@ def parse_course_text(text, gdo_id, fallback_name, prefecture='千葉県'):
         cleaned = re.sub(r'\*\*.*?\*\*\s*', '', cleaned).strip()
         if cleaned and any(kw in cleaned for kw in ['コース', 'ゴルフ', 'カントリー', '倶楽部', 'クラブ', 'カンツリー']):
             course_name = cleaned.split('|')[0].strip().strip('#').strip()
-            course_name = course_name.replace('**', '').strip()
+            course_name = clean_course_name(course_name.replace('**', '').strip())
             break
 
     # hole_data: {label: {hole_num: {par, hdcp, yardage}}}
@@ -284,10 +316,14 @@ def merge_results(scripts_dir, output_file):
                 course_ids = json.load(f)
             id_map.update({c['id']: c['name'] for c in course_ids})
 
-    # Fix any existing GDO courses that have incorrect prefecture
+    # Fix any existing GDO courses: clean names, fix fallback names, fix prefecture
     for course in all_courses:
+        course['name'] = clean_course_name(course['name'])
         if course['id'].startswith('gdo_'):
             raw_id = course['id'].replace('gdo_', '').split('_')[0]
+            # Replace fallback names like "コース XXXXXX" with proper name from id_map
+            if re.match(r'^コース \d+', course['name']) and raw_id in id_map:
+                course['name'] = id_map[raw_id]
             correct_pref = get_prefecture_for_id(raw_id)
             if course.get('prefecture') != correct_pref:
                 course['prefecture'] = correct_pref
@@ -328,7 +364,8 @@ def merge_results(scripts_dir, output_file):
                 skipped += 1
                 print(f"  Skipped (< 18 holes): {course['name']} ({n_holes} holes)")
 
-    # Write output
+    # Sort by 50-on (Japanese syllabary) order and write output
+    all_courses.sort(key=_sort_key)
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(all_courses, f, ensure_ascii=False, indent=2)
 
