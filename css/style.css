@@ -554,6 +554,43 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* ========== Start Type Selector ========== */
+.start-type-btns {
+  display: flex;
+  gap: var(--space-md);
+}
+.start-type-btn {
+  flex: 1;
+  padding: var(--space-lg);
+  border: 2px solid var(--neutral-300);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition-base);
+  min-height: 44px;
+}
+.start-type-btn.active {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+.start-type-label {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+}
+.start-type-desc {
+  display: block;
+  font-size: 12px;
+  margin-top: var(--space-xs);
+  color: var(--text-secondary);
+}
+.start-type-btn.active .start-type-desc {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 /* ========== Prefecture Filter ========== */
 .pref-filter {
   display: flex;

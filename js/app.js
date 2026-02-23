@@ -4,6 +4,7 @@ let App = {
   // --- State ---
   courses: [],
   gameState: null,
+  _startType: 'out',
 
   // --- Init ---
   async init() {
@@ -87,6 +88,18 @@ let App = {
     // Course search
     document.getElementById('course-search').addEventListener('input', (e) => this.filterCourses(e.target.value));
 
+    // Start type selection
+    document.getElementById('start-out-btn').addEventListener('click', () => {
+      this._startType = 'out';
+      document.getElementById('start-out-btn').classList.add('active');
+      document.getElementById('start-in-btn').classList.remove('active');
+    });
+    document.getElementById('start-in-btn').addEventListener('click', () => {
+      this._startType = 'in';
+      document.getElementById('start-in-btn').classList.add('active');
+      document.getElementById('start-out-btn').classList.remove('active');
+    });
+
     // Round screen
     document.getElementById('next-hole-btn').addEventListener('click', () => this.nextHole());
     document.getElementById('prev-hole-btn').addEventListener('click', () => this.prevHole());
@@ -115,6 +128,24 @@ let App = {
       Storage.clearGame();
       location.reload();
     });
+  },
+
+  // ============================
+  // HELPERS
+  // ============================
+  buildHoleOrder(startType) {
+    if (startType === 'in') {
+      return [10, 11, 12, 13, 14, 15, 16, 17, 18, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    }
+    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+  },
+
+  parseStartLabels(courseName) {
+    const match = courseName.match(/(\S+)・(\S+)コース$/);
+    if (match) {
+      return { out: `${match[1]}スタート`, in: `${match[2]}スタート` };
+    }
+    return { out: 'OUTスタート', in: 'INスタート' };
   },
 
   // ============================
@@ -227,6 +258,15 @@ let App = {
     const el = document.querySelector(`.course-item[data-course-id="${course.id}"]`);
     if (el) el.classList.add('selected');
     document.getElementById('selected-course-name').textContent = course.name;
+
+    // Show start type selector and update labels
+    document.getElementById('start-type-section').style.display = 'block';
+    const labels = this.parseStartLabels(course.name);
+    document.getElementById('start-out-label').textContent = labels.out;
+    document.getElementById('start-in-label').textContent = labels.in;
+    this._startType = 'out';
+    document.getElementById('start-out-btn').classList.add('active');
+    document.getElementById('start-in-btn').classList.remove('active');
   },
 
   filterCourses(query) {
@@ -555,9 +595,14 @@ let App = {
     const orderLabels = ['', 'オーナー', '2番目', '3番目', '4番目'];
     const hcEnabled = this._hcEnabled;
 
+    const startLabels = this.parseStartLabels(this._selectedCourse.name);
+    const startLabel = this._startType === 'out' ? startLabels.out : startLabels.in;
+    const startHoleNum = this._startType === 'out' ? '1番ホール' : '10番ホール';
+
     let html = `<div class="confirm-section">
       <h4>ゴルフ場</h4>
       <p>${this._selectedCourse.name}</p>
+      <p style="margin-top:4px;font-weight:700;color:var(--primary);">${startLabel}（${startHoleNum}から）</p>
     </div>`;
 
     html += `<div class="confirm-section">
@@ -584,13 +629,17 @@ let App = {
   // ROUND
   // ============================
   startRound() {
+    const holeOrder = this.buildHoleOrder(this._startType);
     this.gameState = {
       course: this._selectedCourse,
       playerNames: this._playerNames,
       battingOrder: this._battingOrder,
       handicapHoles: this._handicapHoles,
       hcEnabled: this._hcEnabled,
-      currentHole: 1,
+      startType: this._startType,
+      holeOrder: holeOrder,
+      currentHoleIndex: 0,
+      currentHole: holeOrder[0],
       holeScores: {},   // { 1: [scores], 2: [scores], ... }
       holeResults: {},  // { 1: { result }, ... }
     };
@@ -604,6 +653,13 @@ let App = {
     if (!this.gameState) {
       alert('保存データが見つかりません');
       return;
+    }
+    // Backward compatibility for saved games without holeOrder
+    const gs = this.gameState;
+    if (!gs.holeOrder) {
+      gs.startType = 'out';
+      gs.holeOrder = this.buildHoleOrder('out');
+      gs.currentHoleIndex = gs.currentHole - 1;
     }
     this.showScreen('round-screen');
     this.renderHole();
@@ -619,11 +675,13 @@ let App = {
     document.getElementById('hole-par').textContent = courseHole ? courseHole.par : '-';
 
     // Determine teams for display
+    const holeIndex = gs.currentHoleIndex;
     let teams, rankings;
-    if (hole === 1) {
+    if (holeIndex === 0) {
       teams = LasVegas.formTeamsFromBattingOrder(gs.battingOrder);
     } else {
-      const prevScores = gs.holeScores[hole - 1];
+      const prevHoleNum = gs.holeOrder[holeIndex - 1];
+      const prevScores = gs.holeScores[prevHoleNum];
       if (prevScores) {
         rankings = LasVegas.calcRankings(prevScores);
         teams = LasVegas.formTeams(rankings);
@@ -692,8 +750,8 @@ let App = {
     });
 
     // Navigation
-    document.getElementById('prev-hole-btn').style.visibility = hole > 1 ? 'visible' : 'hidden';
-    const isLastHole = hole >= gs.course.holes.length;
+    document.getElementById('prev-hole-btn').style.visibility = holeIndex > 0 ? 'visible' : 'hidden';
+    const isLastHole = holeIndex >= gs.holeOrder.length - 1;
     document.getElementById('next-hole-btn').textContent = isLastHole ? '結果を見る' : '次のホールへ';
 
     // Update result
@@ -754,10 +812,11 @@ let App = {
 
     // Get teams
     let teams;
-    if (hole === 1) {
+    if (gs.currentHoleIndex === 0) {
       teams = LasVegas.formTeamsFromBattingOrder(gs.battingOrder);
     } else {
-      const prevScores = gs.holeScores[hole - 1];
+      const prevHoleNum = gs.holeOrder[gs.currentHoleIndex - 1];
+      const prevScores = gs.holeScores[prevHoleNum];
       if (prevScores) {
         const rankings = LasVegas.calcRankings(prevScores);
         teams = LasVegas.formTeams(rankings);
@@ -856,26 +915,28 @@ let App = {
 
   nextHole() {
     const gs = this.gameState;
-    if (gs.currentHole >= gs.course.holes.length) {
+    if (gs.currentHoleIndex >= gs.holeOrder.length - 1) {
       this.showScoreboard();
       return;
     }
 
-    // Show HC review between hole 9 and 10
-    if (gs.currentHole === 9 && gs.hcEnabled) {
+    // Show HC review after the 9th hole played (index 8)
+    if (gs.currentHoleIndex === 8 && gs.hcEnabled) {
       this.showHcReview();
       return;
     }
 
-    gs.currentHole++;
+    gs.currentHoleIndex++;
+    gs.currentHole = gs.holeOrder[gs.currentHoleIndex];
     Storage.saveGame(gs);
     this.renderHole();
   },
 
   prevHole() {
     const gs = this.gameState;
-    if (gs.currentHole <= 1) return;
-    gs.currentHole--;
+    if (gs.currentHoleIndex <= 0) return;
+    gs.currentHoleIndex--;
+    gs.currentHole = gs.holeOrder[gs.currentHoleIndex];
     Storage.saveGame(gs);
     this.renderHole();
   },
@@ -887,27 +948,41 @@ let App = {
     const gs = this.gameState;
     this.showScreen('hc-review-screen');
 
-    // Copy current IN holes for editing (don't modify originals until confirm)
-    this._reviewInHoles = gs.handicapHoles.map(holes =>
-      holes.filter(h => h >= 10).slice()
+    const startType = gs.startType || 'out';
+    const isSecondHalfOut = (startType === 'in');
+
+    // Update dynamic text
+    if (isSecondHalfOut) {
+      document.getElementById('hc-review-title-text').textContent = '後半のハンディを見直しますか？';
+      document.getElementById('hc-review-desc-text').textContent = 'OUTコース（1-9H）のハンディキャップを変更できます';
+    } else {
+      document.getElementById('hc-review-title-text').textContent = '後半のハンディを見直しますか？';
+      document.getElementById('hc-review-desc-text').textContent = 'INコース（10-18H）のハンディキャップを変更できます';
+    }
+
+    // Copy second-half holes for editing
+    const filterFn = isSecondHalfOut ? (h => h <= 9) : (h => h >= 10);
+    this._reviewSecondHalfHoles = gs.handicapHoles.map(holes =>
+      holes.filter(filterFn).slice()
     );
 
     // Build count inputs
+    const halfLabel = isSecondHalfOut ? 'OUT' : 'IN';
     const countSection = document.getElementById('hc-review-count-section');
     countSection.innerHTML = '';
     gs.playerNames.forEach((name, i) => {
-      const inCount = this._reviewInHoles[i].length;
+      const count = this._reviewSecondHalfHoles[i].length;
       const row = document.createElement('div');
       row.className = 'hc-count-row';
       row.innerHTML = `
         <span class="hc-count-name">${name}</span>
         <div class="hc-count-halves">
           <div class="hc-count-half">
-            <label class="hc-count-label">IN HC数:
-              <input type="number" id="hc-review-count-${i}" min="0" max="9" value="${inCount}"
+            <label class="hc-count-label">${halfLabel} HC数:
+              <input type="number" id="hc-review-count-${i}" min="0" max="9" value="${count}"
                      class="hc-count-input">
             </label>
-            <span class="hc-count-status" id="hc-review-status-${i}">${inCount}/${inCount}</span>
+            <span class="hc-count-status" id="hc-review-status-${i}">${count}/${count}</span>
           </div>
         </div>`;
       countSection.appendChild(row);
@@ -929,12 +1004,14 @@ let App = {
     });
     thead.appendChild(headerRow);
 
-    // Build table body (IN holes only)
+    // Build table body (second-half holes)
     const tbody = document.getElementById('hc-review-body');
     tbody.innerHTML = '';
-    const back9 = gs.course.holes.filter(h => h.hole >= 10);
+    const secondHalfHoles = isSecondHalfOut
+      ? gs.course.holes.filter(h => h.hole <= 9)
+      : gs.course.holes.filter(h => h.hole >= 10);
 
-    back9.forEach(h => {
+    secondHalfHoles.forEach(h => {
       const tr = document.createElement('tr');
 
       const holeTd = document.createElement('td');
@@ -963,7 +1040,7 @@ let App = {
         td.dataset.hole = String(h.hole);
         td.dataset.player = String(i);
 
-        if (this._reviewInHoles[i].includes(h.hole)) {
+        if (this._reviewSecondHalfHoles[i].includes(h.hole)) {
           td.textContent = '\u25CB';
           td.classList.add('hc-selected');
         }
@@ -983,8 +1060,10 @@ let App = {
 
   toggleHcReviewCell(playerIdx, holeNum, td) {
     const gs = this.gameState;
+    const startType = gs.startType || 'out';
+    const halfLabel = (startType === 'in') ? 'OUT' : 'IN';
     const maxCount = parseInt(document.getElementById(`hc-review-count-${playerIdx}`).value) || 0;
-    const holes = this._reviewInHoles[playerIdx];
+    const holes = this._reviewSecondHalfHoles[playerIdx];
     const idx = holes.indexOf(holeNum);
 
     if (idx >= 0) {
@@ -993,11 +1072,11 @@ let App = {
       td.classList.remove('hc-selected');
     } else {
       if (maxCount === 0) {
-        alert(`${gs.playerNames[playerIdx]}さんのIN HC数を先に設定してください`);
+        alert(`${gs.playerNames[playerIdx]}さんの${halfLabel} HC数を先に設定してください`);
         return;
       }
       if (holes.length >= maxCount) {
-        alert(`${gs.playerNames[playerIdx]}さんはINで最大${maxCount}ホールまでです`);
+        alert(`${gs.playerNames[playerIdx]}さんは${halfLabel}で最大${maxCount}ホールまでです`);
         return;
       }
       holes.push(holeNum);
@@ -1010,7 +1089,7 @@ let App = {
 
   onHcReviewCountChange(playerIdx) {
     const maxCount = parseInt(document.getElementById(`hc-review-count-${playerIdx}`).value) || 0;
-    const holes = this._reviewInHoles[playerIdx];
+    const holes = this._reviewSecondHalfHoles[playerIdx];
 
     while (holes.length > maxCount) {
       const removedHole = holes.pop();
@@ -1026,7 +1105,7 @@ let App = {
 
   updateHcReviewStatus(playerIdx) {
     const maxCount = parseInt(document.getElementById(`hc-review-count-${playerIdx}`).value) || 0;
-    const current = this._reviewInHoles[playerIdx].length;
+    const current = this._reviewSecondHalfHoles[playerIdx].length;
     const statusEl = document.getElementById(`hc-review-status-${playerIdx}`);
     statusEl.textContent = `${current}/${maxCount}`;
     statusEl.classList.toggle('hc-status-ok', current === maxCount && maxCount > 0);
@@ -1035,7 +1114,8 @@ let App = {
 
   skipHcReview() {
     const gs = this.gameState;
-    gs.currentHole = 10;
+    gs.currentHoleIndex = 9;
+    gs.currentHole = gs.holeOrder[9];
     Storage.saveGame(gs);
     this.showScreen('round-screen');
     this.renderHole();
@@ -1043,25 +1123,31 @@ let App = {
 
   confirmHcReview() {
     const gs = this.gameState;
+    const startType = gs.startType || 'out';
+    const isSecondHalfOut = (startType === 'in');
+    const halfLabel = isSecondHalfOut ? 'OUT' : 'IN';
+
     // Validate
     for (let i = 0; i < 4; i++) {
       const maxCount = parseInt(document.getElementById(`hc-review-count-${i}`).value) || 0;
-      const currentCount = this._reviewInHoles[i].length;
+      const currentCount = this._reviewSecondHalfHoles[i].length;
       if (currentCount !== maxCount && maxCount > 0) {
-        alert(`${gs.playerNames[i]}さんのIN HCホールを${maxCount}個選択してください（現在${currentCount}個）`);
+        alert(`${gs.playerNames[i]}さんの${halfLabel} HCホールを${maxCount}個選択してください（現在${currentCount}個）`);
         return;
       }
     }
 
-    // Apply: replace IN holes with reviewed selections
+    // Apply: replace second-half holes with reviewed selections
+    const keepFn = isSecondHalfOut ? (h => h >= 10) : (h => h <= 9);
     for (let i = 0; i < 4; i++) {
       gs.handicapHoles[i] = [
-        ...gs.handicapHoles[i].filter(h => h <= 9),
-        ...this._reviewInHoles[i]
+        ...gs.handicapHoles[i].filter(keepFn),
+        ...this._reviewSecondHalfHoles[i]
       ];
     }
 
-    gs.currentHole = 10;
+    gs.currentHoleIndex = 9;
+    gs.currentHole = gs.holeOrder[9];
     Storage.saveGame(gs);
     this.showScreen('round-screen');
     this.renderHole();

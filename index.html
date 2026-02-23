@@ -157,6 +157,20 @@
           <p class="selected-info">選択中: <strong id="selected-course-name">未選択</strong></p>
         </div>
 
+        <div class="section" id="start-type-section" style="display:none;">
+          <h3>スタートホール</h3>
+          <div class="start-type-btns">
+            <button id="start-out-btn" class="start-type-btn active" data-start="out">
+              <span class="start-type-label" id="start-out-label">OUTスタート</span>
+              <span class="start-type-desc">1番ホールから</span>
+            </button>
+            <button id="start-in-btn" class="start-type-btn" data-start="in">
+              <span class="start-type-label" id="start-in-label">INスタート</span>
+              <span class="start-type-desc">10番ホールから</span>
+            </button>
+          </div>
+        </div>
+
         <div class="section">
           <h3>プレイヤー登録（4名）</h3>
           <div class="player-inputs">
@@ -251,8 +265,8 @@
   <!-- ========== HC Review (between hole 9 and 10) ========== -->
   <div id="hc-review-screen" class="screen">
     <div class="container">
-      <h2 class="hc-review-title">後半のハンディを見直しますか？</h2>
-      <p class="step-desc">INコース（10-18H）のハンディキャップを変更できます</p>
+      <h2 class="hc-review-title" id="hc-review-title-text">後半のハンディを見直しますか？</h2>
+      <p class="step-desc" id="hc-review-desc-text">INコース（10-18H）のハンディキャップを変更できます</p>
 
       <div id="hc-review-count-section" class="hc-count-section"></div>
 
