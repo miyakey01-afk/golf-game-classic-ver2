@@ -3,13 +3,14 @@
 ## GDOコーススクレイピング手順（再開用）
 
 ### 概要
-千葉県のゴルフコース情報（HOLE/PAR/HDCP/ヤード）をGDO（Golf Digest Online）から取得してcourses.jsonに追加する作業。
+都道府県のゴルフコース情報（HOLE/PAR/HDCP/ヤード）をGDO（Golf Digest Online）から取得してcourses.jsonに追加する作業。
 
-### 進捗状況
-- **全161コース中、80コース取得済み、81コース未取得**
-- 進捗ファイル: `scripts/scraping_progress.json`
+### 現状
+- **千葉県**: 161コース中144コース取得済み（17コースは9Hまたは27H施設のためスキップ）
+- **神奈川県**: 56コース取得済み
+- **合計**: 207コース（50音順でソート済み）
 - 取得済みテキストデータ: `scripts/scraped/course_{ID}.txt`
-- コースID一覧: `scripts/chiba_course_ids.json`
+- コースID一覧: `scripts/chiba_course_ids.json`、`scripts/kanagawa_course_ids.json`
 
 ### スクレイピング手順
 
@@ -96,34 +97,56 @@ python3 scripts/parse_gdo.py
 
 パーサー（`scripts/parse_gdo.py`）が以下を行う:
 1. `data/courses.json` の既存データを読み込み
-2. `scripts/scraped/course_*.txt` を全てパース
-3. 18ホール以上のコースのみ追加
-4. 結果を `data/courses.json` に書き出し
+2. 既存コースの名前クリーニング・都道府県修正を適用
+3. `scripts/scraped/course_*.txt` を全てパース（全都道府県対象）
+4. 18ホール以上・パー55以上のコースのみ追加
+5. **コース名から不要なメタデータを自動除去**:
+   - `Golf Course Data:` / `Course Name:` プレフィックス
+   - `- ホール別データ` / `- Course Data` / `- Hole-by-Hole Data` サフィックス
+6. **50音順（カタカナ→ひらがな変換）でソート**して `data/courses.json` に書き出し
 
-#### Step 5: scraping_progress.jsonの更新
-取得完了後、`scripts/scraping_progress.json` の scraped_ids / remaining_ids を更新する。
+#### Step 5: 新しい都道府県を追加する場合
+1. `scripts/{prefecture}_course_ids.json` を作成（例: `tokyo_course_ids.json`）
+2. `parse_gdo.py` の `get_prefecture_for_id()` にIDプレフィックスと都道府県名を追加
+3. `merge_results()` のIDマップ読み込み部分に新ファイルを追加
+4. スクレイピング後に `python3 scripts/parse_gdo.py` を実行
 
 ### コース分類
 - **標準18ホール**: OUT(1-9) + IN(10-18) → そのまま1コースとして登録
 - **36ホール（東/西等）**: 東OUT+東IN(18H) + 西OUT+西IN(18H) → 2コースとして登録
 - **27ホール（3x9）**: さくら/かえで/まつ等 → 各9ホール、18ホール未満はスキップ
-- **ショートコース**: HDCP無し → スキップ
+- **ショートコース**: パー54以下（全ホールpar3）→ スキップ
+
+### テーブル形式の対応（parse_gdo.py）
+パーサーは以下の複数フォーマットに対応:
+- `Hole | Par | HDCP | Yardage(s)` ← HDCPが3列目
+- `Hole | Par | Yardage(s) | HDCP` ← HDCPが最終列
+- HDCP が `—` または `-` の場合は 0 として扱う
+- 複数ヤーデージ列がある場合は最初の列（最長ティー）を使用
+- INコースのホール番号が1-9の場合は自動的に10-18に変換
 
 ### URL パターン
-- コース一覧: `https://reserve.golfdigest.co.jp/golf-course/area/12/` (12=千葉県)
+- コース一覧: `https://reserve.golfdigest.co.jp/course-guide/area/{code}/`
 - コースレイアウト: `https://reserve.golfdigest.co.jp/golf-course/course-layout/{courseID}`
-- 都道府県コード: 東京=13, 千葉=12, 神奈川=14
+- 都道府県コード: 東京=13, 千葉=12, 神奈川=14, 大阪=27, 兵庫=28
+
+### GDO コースIDプレフィックス対応表
+| 都道府県 | IDプレフィックス | IDファイル |
+|---------|---------------|-----------|
+| 千葉県 | 35xxxx | chiba_course_ids.json |
+| 神奈川県 | 37xxxx | kanagawa_course_ids.json |
+| 東京都 | 13xxxx | (未作成) |
 
 ### ファイル構成
 ```
 scripts/
-  chiba_course_ids.json   # 千葉県全161コースのID一覧
-  scraping_progress.json  # スクレイピング進捗管理
-  parse_gdo.py            # テキスト→JSON変換パーサー
-  scraped/                # 取得済みテキストデータ
-    course_350101.txt
-    course_350102.txt
+  chiba_course_ids.json      # 千葉県全161コースのID一覧
+  kanagawa_course_ids.json   # 神奈川県全55コースのID一覧
+  parse_gdo.py               # テキスト→JSON変換パーサー（全都道府県対応）
+  scraped/                   # 取得済みテキストデータ
+    course_350101.txt        # 千葉県コース (35xxxx)
+    course_370101.txt        # 神奈川県コース (37xxxx)
     ...
 data/
-  courses.json            # アプリで使用するコースデータ（最終出力）
+  courses.json               # アプリで使用するコースデータ（50音順）
 ```
