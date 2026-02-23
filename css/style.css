@@ -108,7 +108,6 @@ body {
 #start-screen.screen {
   position: relative;
   background: linear-gradient(135deg, #0f3a25 0%, #1a5a3e 50%, #0f3a25 100%);
-  display: flex !important;
   justify-content: center;
   align-items: center;
   min-height: 100dvh;
