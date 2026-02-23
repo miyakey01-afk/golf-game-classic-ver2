@@ -12,13 +12,35 @@
 </head>
 <body>
   <!-- ========== Screen 1: Start ========== -->
-  <div id="start-screen" class="screen active">
-    <div class="container">
-      <h1 class="app-title">LAS VEGAS</h1>
-      <p class="app-subtitle">ゴルフスコアアプリ</p>
-      <button id="new-game-btn" class="btn btn-primary btn-large">新しいゲームを開始</button>
-      <button id="resume-btn" class="btn btn-secondary" style="display:none;">前回のゲームを再開</button>
-      <button id="rulebook-btn" class="btn btn-outline btn-large rulebook-open-btn">ルールブック</button>
+  <div id="start-screen" class="screen active start-screen">
+    <!-- 背景の動的グローレイヤー -->
+    <div class="start-bg-overlay"></div>
+    
+    <!-- メインコンテンツ -->
+    <div class="start-content">
+      <!-- ゴルフアイコン -->
+      <div class="golf-icon">
+        <div class="golf-green"></div>
+        <div class="flag-pole"></div>
+        <div class="flag"></div>
+        <div class="golf-ball"></div>
+      </div>
+
+      <!-- タイトル -->
+      <h1 class="start-title">LAS VEGAS</h1>
+      
+      <!-- タイトルの下線 -->
+      <div class="start-title-line"></div>
+
+      <!-- サブタイトル -->
+      <p class="start-subtitle">GOLF SCORE APP</p>
+
+      <!-- ボタン -->
+      <div class="start-button-container">
+        <button id="new-game-btn" class="btn btn-start-primary">新しいゲームを開始</button>
+        <button id="resume-btn" class="btn btn-start-secondary" style="display:none;">前回のゲームを再開</button>
+        <button id="rulebook-btn" class="btn btn-start-secondary">ルールブック</button>
+      </div>
     </div>
   </div>
 

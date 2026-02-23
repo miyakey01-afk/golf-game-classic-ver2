@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>LAS VEGAS - デザイン案3: グラデーション×ダイナミック</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: #0f1419;
+      color: #1a1a1a;
+      line-height: 1.6;
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated gradient background */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, #1a7d56 0%, #54d686 25%, #d97706 50%, #1a7d56 75%, #1a7d56 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
+      z-index: 0;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .start-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .start-container {
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    /* ========== Header Section ========== */
+    .start-header {
+      margin-bottom: 48px;
+    }
+
+    .logo-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .app-title {
+      font-size: clamp(54px, 16vw, 76px);
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+      line-height: 1;
+      text-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      animation: slideDown 0.8s ease-out;
+      perspective: 1000px;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .app-subtitle {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+      letter-spacing: 2px;
+      margin-bottom: 48px;
+      animation: slideUp 0.8s ease-out 0.1s both;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========== Floating Feature Cards ========== */
+    .feature-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      animation: float 0.6s ease-out both;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      transition: all 300ms ease-out;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.2s; }
+    .feature-card:nth-child(2) { animation-delay: 0.3s; }
+    .feature-card:nth-child(3) { animation-delay: 0.4s; }
+    .feature-card:nth-child(4) { animation-delay: 0.5s; }
+
+    @keyframes float {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .card-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a7d56;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* ========== Buttons ========== */
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      animation: slideUp 0.8s ease-out 0.3s both;
+    }
+
+    .btn {
+      padding: 16px 32px;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 200ms ease-out;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ffffff, #f5f5f5);
+      color: #1a7d56;
+      box-shadow: 0 12px 40px rgba(255, 255, 255, 0.2);
+      font-weight: 800;
+    }
+
+    .btn-primary:active {
+      transform: translateY(2px) scale(0.98);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:active {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #ffffff;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-outline:active {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.7);
+      transform: translateY(2px);
+    }
+
+    /* ========== Particles ========== */
+    .particle {
+      position: absolute;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="start-screen">
+    <div class="start-container">
+      <div class="start-header">
+        <div class="logo-badge">🏆 Premium Golf Gaming</div>
+        <h1 class="app-title">LAS VEGAS</h1>
+        <p class="app-subtitle">ゴルフスコアゲーム</p>
+      </div>
+
+      <div class="feature-cards">
+        <div class="feature-card">
+          <div class="card-icon">🏌️</div>
+          <div class="card-label">スマート計算</div>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">🎯</div>
+          <div class="card-label">リアルタイム</div>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">🔄</div>
+          <div class="card-label">自動集計</div>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">📊</div>
+          <div class="card-label">詳細分析</div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-primary">新しいゲームを開始</button>
+        <button class="btn btn-secondary" style="display: none;">前回のゲームを再開</button>
+        <button class="btn btn-outline">ルールブック</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

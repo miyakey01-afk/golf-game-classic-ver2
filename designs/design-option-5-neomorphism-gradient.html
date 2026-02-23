@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>LAS VEGAS - デザイン案5: グラデーション×ネオモーフィズム</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, #1a7d56 0%, #0f5a3e 50%, #0d4a32 100%);
+      color: #1a1a1a;
+      line-height: 1.6;
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated mesh gradient background */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(84, 214, 134, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(217, 119, 6, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(84, 214, 134, 0.08) 0%, transparent 50%);
+      animation: meshFloat 15s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes meshFloat {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(20px, -15px); }
+      66% { transform: translate(-10px, 20px); }
+    }
+
+    .start-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .start-container {
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    /* ========== Header Section ========== */
+    .start-header {
+      margin-bottom: 56px;
+      animation: headerSlideDown 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes headerSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .logo-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      padding: 10px 20px;
+      border-radius: 32px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.85);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      box-shadow: 
+        inset 0 2px 8px rgba(255, 255, 255, 0.1),
+        0 4px 16px rgba(0, 0, 0, 0.2);
+      animation: badgePulse 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes badgePulse {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .app-title {
+      font-size: clamp(54px, 16vw, 76px);
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      line-height: 1;
+      text-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.4),
+        0 0 80px rgba(84, 214, 134, 0.2);
+      animation: titleSlideIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+      perspective: 1000px;
+    }
+
+    @keyframes titleSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px) rotateX(10deg);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
+    }
+
+    .app-subtitle {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 400;
+      letter-spacing: 2px;
+      margin-bottom: 48px;
+      animation: subtitleFade 0.9s ease-out 0.2s both;
+    }
+
+    @keyframes subtitleFade {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========== Neomorphic Feature Cards ========== */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .neo-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 24px 16px;
+      text-align: center;
+      animation: cardPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      cursor: pointer;
+      transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.2),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.1),
+        0 8px 32px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .neo-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .neo-card:nth-child(1) { animation-delay: 0.3s; }
+    .neo-card:nth-child(2) { animation-delay: 0.4s; }
+    .neo-card:nth-child(3) { animation-delay: 0.5s; }
+    .neo-card:nth-child(4) { animation-delay: 0.6s; }
+
+    @keyframes cardPopIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.85);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .neo-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.3),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.2),
+        0 16px 48px rgba(84, 214, 134, 0.25);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+    }
+
+    .neo-card:active {
+      transform: translateY(-4px);
+    }
+
+    .card-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+      animation: iconBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    .neo-card:nth-child(1) .card-icon { animation-delay: 0.4s; }
+    .neo-card:nth-child(2) .card-icon { animation-delay: 0.5s; }
+    .neo-card:nth-child(3) .card-icon { animation-delay: 0.6s; }
+    .neo-card:nth-child(4) .card-icon { animation-delay: 0.7s; }
+
+    @keyframes iconBounce {
+      from {
+        opacity: 0;
+        transform: scale(0) rotateZ(-20deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotateZ(0);
+      }
+    }
+
+    .card-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* ========== Premium Title Card ========== */
+    .premium-banner {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 24px;
+      padding: 28px 24px;
+      margin-bottom: 32px;
+      text-align: center;
+      animation: bannerSlideUp 0.7s ease-out 0.5s both;
+      box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.2),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.1),
+        0 12px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    @keyframes bannerSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .banner-text {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .banner-highlight {
+      color: #54d686;
+      font-weight: 700;
+      text-shadow: 0 0 20px rgba(84, 214, 134, 0.5);
+    }
+
+    /* ========== Buttons ========== */
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      animation: buttonsSlideUp 0.7s ease-out 0.6s both;
+    }
+
+    @keyframes buttonsSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn {
+      padding: 16px 32px;
+      border: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 600ms;
+    }
+
+    .btn:active::before {
+      transform: translateX(100%);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 248, 248, 0.9));
+      color: #1a7d56;
+      box-shadow: 
+        0 8px 32px rgba(255, 255, 255, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.5);
+      font-weight: 800;
+    }
+
+    .btn-primary:active {
+      transform: translateY(2px) scale(0.98);
+      box-shadow: 
+        0 4px 16px rgba(255, 255, 255, 0.2),
+        inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.1),
+        0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-secondary:active {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(2px);
+      box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.15),
+        0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.9);
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-outline:active {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: translateY(2px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="start-screen">
+    <div class="start-container">
+      <div class="start-header">
+        <div class="logo-badge">⚡ Elite Golf Experience</div>
+        <h1 class="app-title">LAS VEGAS</h1>
+        <p class="app-subtitle">ゴルフスコアゲーム</p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="neo-card">
+          <div class="card-icon">🏌️</div>
+          <div class="card-label">スマートスコア</div>
+        </div>
+        <div class="neo-card">
+          <div class="card-icon">🎯</div>
+          <div class="card-label">リアルタイム</div>
+        </div>
+        <div class="neo-card">
+          <div class="card-icon">🔄</div>
+          <div class="card-label">自動集計</div>
+        </div>
+        <div class="neo-card">
+          <div class="card-icon">📊</div>
+          <div class="card-label">分析機能</div>
+        </div>
+      </div>
+
+      <div class="premium-banner">
+        <div class="banner-text">
+          18ホール、最大4名でプレーしながら
+          <br>
+          <span class="banner-highlight">ラスベガスのスコアルーツを楽しむ</span>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-primary">新しいゲームを開始</button>
+        <button class="btn btn-secondary" style="display: none;">前回のゲームを再開</button>
+        <button class="btn btn-outline">ルールブック</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

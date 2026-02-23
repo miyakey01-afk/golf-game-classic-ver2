@@ -31,22 +31,47 @@ let App = {
   // --- Event binding ---
   bindEvents() {
     // Start screen
-    document.getElementById('new-game-btn').addEventListener('click', () => this.startSetup());
-    document.getElementById('resume-btn').addEventListener('click', () => this.resumeGame());
+    const newGameBtn = document.getElementById('new-game-btn');
+    const resumeBtn = document.getElementById('resume-btn');
+    const rulebookBtn = document.getElementById('rulebook-btn');
+    
+    if (!newGameBtn) {
+      console.error('new-game-btn not found');
+    } else {
+      newGameBtn.addEventListener('click', () => {
+        console.log('new-game-btn clicked');
+        this.startSetup();
+      });
+    }
+    
+    if (resumeBtn) {
+      resumeBtn.addEventListener('click', () => this.resumeGame());
+    }
+    
+    if (rulebookBtn) {
+      rulebookBtn.addEventListener('click', () => {
+        const rulebookModal = document.getElementById('rulebook-modal');
+        if (rulebookModal) {
+          rulebookModal.classList.add('active');
+        }
+      });
+    }
 
-    // Rulebook modal
+    // Rulebook modal close
+    const rulebookCloseBtn = document.getElementById('rulebook-close-btn');
     const rulebookModal = document.getElementById('rulebook-modal');
-    document.getElementById('rulebook-btn').addEventListener('click', () => {
-      rulebookModal.classList.add('active');
-    });
-    document.getElementById('rulebook-close-btn').addEventListener('click', () => {
-      rulebookModal.classList.remove('active');
-    });
-    rulebookModal.addEventListener('click', (e) => {
-      if (e.target === rulebookModal) rulebookModal.classList.remove('active');
-    });
-
-    // Setup steps (4 steps: 1=Course&Players, 2=CourseInfo+HC, 3=BattingOrder, 4=Confirm)
+    if (rulebookCloseBtn) {
+      rulebookCloseBtn.addEventListener('click', () => {
+        if (rulebookModal) {
+          rulebookModal.classList.remove('active');
+        }
+      });
+    }
+    if (rulebookModal) {
+      rulebookModal.addEventListener('click', (e) => {
+        if (e.target === rulebookModal) rulebookModal.classList.remove('active');
+      });
+    }
     document.getElementById('setup-next-1').addEventListener('click', () => this.setupStep1Next());
     document.getElementById('setup-back-2').addEventListener('click', () => this.showSetupStep(1));
     document.getElementById('setup-next-2').addEventListener('click', () => this.setupStep2Next());

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAS VEGAS - デザイン案 プレビュー</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      padding: 20px;
+    }
+
+    .header {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+      color: #1a7d56;
+    }
+
+    .header p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .guide-link {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #1a7d56;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 200ms ease;
+    }
+
+    .guide-link:hover {
+      background: #0f5a3e;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 125, 86, 0.2);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 20px;
+    }
+
+    .design-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      transition: all 300ms ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .design-card:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .design-preview {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #eee;
+      border-radius: 12px 12px 0 0;
+      overflow: hidden;
+      background: #f9f9f9;
+    }
+
+    .design-preview iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .design-info {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .design-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a7d56;
+      margin-bottom: 8px;
+    }
+
+    .design-subtitle {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .design-features {
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .feature-tag {
+      display: inline-block;
+      background: rgba(26, 125, 86, 0.1);
+      color: #1a7d56;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    .design-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 200ms ease;
+      font-size: 14px;
+    }
+
+    .btn-view {
+      background: #1a7d56;
+      color: white;
+    }
+
+    .btn-view:hover {
+      background: #0f5a3e;
+    }
+
+    .btn-view:active {
+      transform: scale(0.98);
+    }
+
+    .btn-code {
+      background: #f0f0f0;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+
+    .btn-code:hover {
+      background: #e8e8e8;
+    }
+
+    .rating {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .rating-label {
+      font-weight: 600;
+      color: #666;
+      width: 80px;
+    }
+
+    .rating-stars {
+      display: flex;
+      gap: 2px;
+    }
+
+    .star {
+      color: #ddd;
+    }
+
+    .star.filled {
+      color: #fbbf24;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .design-preview {
+        height: 400px;
+      }
+
+      .header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🎨 LAS VEGAS トップページ デザイン案</h1>
+    <p>4つのモダンなデザインから最適なものを選択</p>
+    <a href="DESIGN_GUIDE.md" class="guide-link">📖 詳細比較ガイドを見る</a>
+  </div>
+
+  <div class="container">
+    <!-- 案1 -->
+    <div class="design-card">
+      <div class="design-preview">
+        <iframe src="design-option-1-minimalist.html"></iframe>
+      </div>
+      <div class="design-info">
+        <div class="design-title">案1: ミニマリスト</div>
+        <div class="design-subtitle">シンプルで洗練、タイポグラフィ重視。時代を超えたデザイン。</div>
+        
+        <div class="rating">
+          <span class="rating-label">上品さ</span>
+          <div class="rating-stars">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+        </div>
+        
+        <div class="design-features">
+          <span class="feature-tag">白空間活用</span>
+          <span class="feature-tag">上品</span>
+          <span class="feature-tag">シンプル</span>
+          <span class="feature-tag">高速</span>
+        </div>
+
+        <div class="design-actions">
+          <button class="btn btn-view" onclick="window.open('design-option-1-minimalist.html', '_blank')">フルスクリーン</button>
+          <button class="btn btn-code">コピー</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 案2 -->
+    <div class="design-card">
+      <div class="design-preview">
+        <iframe src="design-option-2-glassmorphism.html"></iframe>
+      </div>
+      <div class="design-info">
+        <div class="design-title">案2: ガラスモーフィズム</div>
+        <div class="design-subtitle">モダンで高級感。透明なガラス調のカード。2024年トレンド。</div>
+        
+        <div class="rating">
+          <span class="rating-label">モダンさ</span>
+          <div class="rating-stars">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+        </div>
+        
+        <div class="design-features">
+          <span class="feature-tag">ガラスモーフィズム</span>
+          <span class="feature-tag">グラデーション</span>
+          <span class="feature-tag">エレガント</span>
+          <span class="feature-tag">🎯推奨</span>
+        </div>
+
+        <div class="design-actions">
+          <button class="btn btn-view" onclick="window.open('design-option-2-glassmorphism.html', '_blank')">フルスクリーン</button>
+          <button class="btn btn-code">コピー</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 案3 -->
+    <div class="design-card">
+      <div class="design-preview">
+        <iframe src="design-option-3-gradient-dynamic.html"></iframe>
+      </div>
+      <div class="design-info">
+        <div class="design-title">案3: グラデーション×ダイナミック</div>
+        <div class="design-subtitle">鮮やかで目立つ。エネルギッシュ。若年層向け。</div>
+        
+        <div class="rating">
+          <span class="rating-label">インパクト</span>
+          <div class="rating-stars">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+        </div>
+        
+        <div class="design-features">
+          <span class="feature-tag">アニメーション豊富</span>
+          <span class="feature-tag">ゲーム感</span>
+          <span class="feature-tag">SNS映え</span>
+          <span class="feature-tag">ダイナミック</span>
+        </div>
+
+        <div class="design-actions">
+          <button class="btn btn-view" onclick="window.open('design-option-3-gradient-dynamic.html', '_blank')">フルスクリーン</button>
+          <button class="btn btn-code">コピー</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 案4 -->
+    <div class="design-card">
+      <div class="design-preview">
+        <iframe src="design-option-4-bentogrid.html"></iframe>
+      </div>
+      <div class="design-info">
+        <div class="design-title">案4: ベントグリッド</div>
+        <div class="design-subtitle">情報充実。実用的。機能を先に知りたいユーザー向け。</div>
+        
+        <div class="rating">
+          <span class="rating-label">情報量</span>
+          <div class="rating-stars">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+        </div>
+        
+        <div class="design-features">
+          <span class="feature-tag">ベントグリッド</span>
+          <span class="feature-tag">機能充実</span>
+          <span class="feature-tag">統計情報</span>
+          <span class="feature-tag">実用的</span>
+        </div>
+
+        <div class="design-actions">
+          <button class="btn btn-view" onclick="window.open('design-option-4-bentogrid.html', '_blank')">フルスクリーン</button>
+          <button class="btn btn-code">コピー</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 案5 -->
+    <div class="design-card">
+      <div class="design-preview">
+        <iframe src="design-option-5-neomorphism-gradient.html"></iframe>
+      </div>
+      <div class="design-info">
+        <div class="design-title">案5: グラデーション×ネオモーフィズム</div>
+        <div class="design-subtitle">立体的で高級感。グラデーション背景×ネオモーフィックカード。最新トレンド。</div>
+        
+        <div class="rating">
+          <span class="rating-label">洗練度</span>
+          <div class="rating-stars">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+        </div>
+        
+        <div class="design-features">
+          <span class="feature-tag">ネオモーフィズム</span>
+          <span class="feature-tag">立体感</span>
+          <span class="feature-tag">メッシュグラデーション</span>
+          <span class="feature-tag">✨NEW</span>
+        </div>
+
+        <div class="design-actions">
+          <button class="btn btn-view" onclick="window.open('design-option-5-neomorphism-gradient.html', '_blank')">フルスクリーン</button>
+          <button class="btn btn-code">コピー</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 案6 -->
+    <div class="design-card">
+      <div class="design-preview">
+        <iframe src="design-option-6-classic-golf.html"></iframe>
+      </div>
+      <div class="design-info">
+        <div class="design-title">案6: クラシック・ゴルフ</div>
+        <div class="design-subtitle">シンプル。誠実。本物のゴルファー向け。クラシックで落ち着きのあるデザイン。</div>
+        
+        <div class="rating">
+          <span class="rating-label">誠実さ</span>
+          <div class="rating-stars">
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star filled">★</span>
+          </div>
+        </div>
+        
+        <div class="design-features">
+          <span class="feature-tag">クラシック</span>
+          <span class="feature-tag">シンプル</span>
+          <span class="feature-tag">ゴルフ感</span>
+          <span class="feature-tag">🏌️ NEW</span>
+        </div>
+
+        <div class="design-actions">
+          <button class="btn btn-view" onclick="window.open('design-option-6-classic-golf.html', '_blank')">フルスクリーン</button>
+          <button class="btn btn-code">コピー</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // コピーボタンの処理（今後実装）
+    document.querySelectorAll('.btn-code').forEach(btn => {
+      btn.addEventListener('click', () => {
+        alert('このボタンは今後HTMLコードコピー機能を提供予定です。');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAS VEGAS - Design Option 6: Classic Golf</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, #0f3a25 0%, #1a5a3e 50%, #0f3a25 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 背景の動的グランデーション層 */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(47, 168, 113, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(26, 90, 62, 0.15) 0%, transparent 50%);
+      pointer-events: none;
+      animation: subtleGlow 8s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes subtleGlow {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+
+    .start-screen {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 600px;
+      padding: 40px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: contentFadeIn 0.8s ease-out;
+    }
+
+    @keyframes contentFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ゴルフアイコン */
+    .golf-icon {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 40px;
+      position: relative;
+      animation: iconSlideDown 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @keyframes iconSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* グリーン（楕円） */
+    .golf-green {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 50px;
+      background: #2fa871;
+      border-radius: 50%;
+      box-shadow: 
+        inset 0 -4px 8px rgba(0, 0, 0, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* グリーンの質感 */
+    .golf-green::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: 
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 0, 0, 0.05) 2px,
+          rgba(0, 0, 0, 0.05) 4px
+        );
+      border-radius: 50%;
+    }
+
+    /* フラッグポール */
+    .flag-pole {
+      position: absolute;
+      left: 50%;
+      bottom: 50px;
+      width: 3px;
+      height: 35px;
+      background: linear-gradient(to right, #8B7355, #D4A574, #8B7355);
+      transform: translateX(-50%);
+      border-radius: 2px;
+      box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* フラッグ */
+    .flag {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 20px;
+      background: linear-gradient(135deg, #FF6B9D 0%, #FF5282 100%);
+      border-radius: 2px 8px 8px 2px;
+      box-shadow: -2px 2px 6px rgba(0, 0, 0, 0.2);
+      animation: flagWave 2s ease-in-out infinite;
+      transform-origin: left center;
+    }
+
+    @keyframes flagWave {
+      0%, 100% { transform: translateX(-50%) rotateZ(0deg); }
+      50% { transform: translateX(-48%) rotateZ(8deg); }
+    }
+
+    /* ボール */
+    .golf-ball {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      width: 14px;
+      height: 14px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.1);
+      animation: ballBounce 1.5s ease-in-out infinite;
+    }
+
+    @keyframes ballBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ボールのディンプル */
+    .golf-ball::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 40%),
+        radial-gradient(circle at 70% 70%, rgba(0, 0, 0, 0.1) 0%, transparent 40%);
+      border-radius: 50%;
+    }
+
+    /* タイトル */
+    .title {
+      font-size: 72px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: #FCD34D;
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.3),
+        4px 4px 8px rgba(0, 0, 0, 0.2);
+      margin: 40px 0 15px;
+      line-height: 1.1;
+      animation: titleSlideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+    }
+
+    @keyframes titleSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* タイトルの下線 */
+    .title-line {
+      width: 120px;
+      height: 3px;
+      background: linear-gradient(to right, transparent, #FCD34D, transparent);
+      margin: 15px auto 20px;
+      animation: lineExpand 0.8s ease-out 0.3s both;
+    }
+
+    @keyframes lineExpand {
+      from {
+        width: 0;
+        opacity: 0;
+      }
+      to {
+        width: 120px;
+        opacity: 1;
+      }
+    }
+
+    /* サブタイトル */
+    .subtitle {
+      font-size: 16px;
+      letter-spacing: 3px;
+      color: #2fa871;
+      margin-bottom: 50px;
+      font-weight: 500;
+      animation: subtitleFadeIn 0.8s ease-out 0.4s both;
+    }
+
+    @keyframes subtitleFadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* ボタンコンテナ */
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      max-width: 400px;
+      animation: buttonsSlideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both;
+    }
+
+    @keyframes buttonsSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn {
+      padding: 16px 32px;
+      border: 2px solid #FCD34D;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* メインボタン */
+    .btn-primary {
+      background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
+      color: #0f3a25;
+      box-shadow: 0 4px 15px rgba(252, 211, 77, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(252, 211, 77, 0.6);
+    }
+
+    .btn-primary:active {
+      transform: translateY(-1px);
+    }
+
+    /* セカンダリボタン */
+    .btn-secondary {
+      background: transparent;
+      color: #FCD34D;
+      border-color: #FCD34D;
+      box-shadow: 0 0 10px rgba(252, 211, 77, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(252, 211, 77, 0.1);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(252, 211, 77, 0.4);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(-1px);
+      background: rgba(252, 211, 77, 0.15);
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 480px) {
+      .title {
+        font-size: 48px;
+        letter-spacing: 2px;
+      }
+
+      .golf-icon {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 30px;
+      }
+
+      .btn {
+        padding: 14px 24px;
+        font-size: 16px;
+        border-radius: 10px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+        letter-spacing: 2px;
+      }
+
+      .start-screen {
+        padding: 30px 15px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .title {
+        font-size: 40px;
+        letter-spacing: 1px;
+      }
+
+      .golf-icon {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 20px;
+      }
+
+      .subtitle {
+        margin-bottom: 30px;
+        font-size: 12px;
+      }
+
+      .button-container {
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="start-screen">
+    <!-- ゴルフアイコン -->
+    <div class="golf-icon">
+      <div class="golf-green"></div>
+      <div class="flag-pole"></div>
+      <div class="flag"></div>
+      <div class="golf-ball"></div>
+    </div>
+
+    <!-- タイトル -->
+    <h1 class="title">LAS VEGAS</h1>
+    
+    <!-- タイトルの下線 -->
+    <div class="title-line"></div>
+
+    <!-- サブタイトル -->
+    <p class="subtitle">GOLF SCORE APP</p>
+
+    <!-- ボタン -->
+    <div class="button-container">
+      <button class="btn btn-primary" id="new-game-btn">新しいゲームを開始</button>
+      <button class="btn btn-secondary" id="rulebook-btn">ルールブック</button>
+    </div>
+  </div>
+
+  <script>
+    // ボタンイベント（実装時に接続）
+    document.getElementById('new-game-btn').addEventListener('click', function() {
+      console.log('New game started');
+      // メインアプリに統合時：window.location.href = '#setup-screen';
+    });
+
+    document.getElementById('rulebook-btn').addEventListener('click', function() {
+      console.log('Rulebook opened');
+      // メインアプリに統合時：document.getElementById('rulebook-modal').style.display = 'flex';
+    });
+  </script>
+</body>
+</html>
