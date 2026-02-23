@@ -316,7 +316,7 @@ let App = {
     const thead = document.getElementById('course-hc-head');
     thead.innerHTML = '';
     const headerRow = document.createElement('tr');
-    headerRow.innerHTML = '<th class="cht-hole">HOLE</th><th class="cht-par">PAR</th><th class="cht-hdcp">HDCP</th>';
+    headerRow.innerHTML = '<th class="cht-hole">HOLE</th><th class="cht-par">PAR</th><th class="cht-yard">YARD</th><th class="cht-hdcp">HDCP</th>';
     this._playerNames.forEach(name => {
       headerRow.innerHTML += `<th class="cht-player">${name}</th>`;
     });
@@ -325,7 +325,7 @@ let App = {
     // Build table body with OUT/IN sections
     const tbody = document.getElementById('course-hc-body');
     tbody.innerHTML = '';
-    const numCols = 3 + 4;
+    const numCols = 4 + 4;
 
     // OUT section
     const outHeader = document.createElement('tr');
@@ -354,6 +354,11 @@ let App = {
     parTd.className = 'cht-par-val';
     parTd.textContent = h.par;
     tr.appendChild(parTd);
+
+    const yardTd = document.createElement('td');
+    yardTd.className = 'cht-yard-val';
+    yardTd.textContent = h.yardage || '-';
+    tr.appendChild(yardTd);
 
     const hdcpTd = document.createElement('td');
     hdcpTd.className = 'cht-hdcp-val';
@@ -918,7 +923,7 @@ let App = {
     const thead = document.getElementById('hc-review-head');
     thead.innerHTML = '';
     const headerRow = document.createElement('tr');
-    headerRow.innerHTML = '<th class="cht-hole">HOLE</th><th class="cht-par">PAR</th><th class="cht-hdcp">HDCP</th>';
+    headerRow.innerHTML = '<th class="cht-hole">HOLE</th><th class="cht-par">PAR</th><th class="cht-yard">YARD</th><th class="cht-hdcp">HDCP</th>';
     gs.playerNames.forEach(name => {
       headerRow.innerHTML += `<th class="cht-player">${name}</th>`;
     });
@@ -941,6 +946,11 @@ let App = {
       parTd.className = 'cht-par-val';
       parTd.textContent = h.par;
       tr.appendChild(parTd);
+
+      const yardTd = document.createElement('td');
+      yardTd.className = 'cht-yard-val';
+      yardTd.textContent = h.yardage || '-';
+      tr.appendChild(yardTd);
 
       const hdcpTd = document.createElement('td');
       hdcpTd.className = 'cht-hdcp-val';

@@ -810,6 +810,7 @@ body {
 
 .cht-hole { width: 36px; }
 .cht-par { width: 36px; }
+.cht-yard { width: 44px; }
 .cht-hdcp { width: 40px; }
 .cht-player { min-width: 52px; }
 
@@ -822,6 +823,12 @@ body {
   font-weight: 600;
   color: var(--text-secondary);
   background: var(--neutral-100);
+}
+.cht-yard-val {
+  font-weight: 600;
+  color: var(--neutral-600);
+  background: var(--neutral-100);
+  font-size: 12px;
 }
 .cht-hdcp-val {
   font-weight: 600;
