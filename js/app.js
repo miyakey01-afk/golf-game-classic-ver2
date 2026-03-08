@@ -1187,7 +1187,7 @@ let App = {
     const header = document.getElementById('scorecard-header');
     header.innerHTML = '<th class="sc-label-col"></th><th class="sc-par-col">PAR</th>';
     gs.playerNames.forEach(name => {
-      header.innerHTML += `<th class="sc-player-col">${name}</th>`;
+      header.innerHTML += `<th class="sc-player-col">${name.slice(0, 3)}</th>`;
     });
 
     const tbody = document.getElementById('scorecard-body');
@@ -1308,7 +1308,7 @@ let App = {
     const header = document.getElementById('lv-points-header');
     header.innerHTML = '<th>H</th><th>チーム</th><th>LV</th>';
     gs.playerNames.forEach(name => {
-      header.innerHTML += `<th>${name}</th>`;
+      header.innerHTML += `<th>${name.slice(0, 3)}</th>`;
     });
 
     const tbody = document.getElementById('lv-points-body');
@@ -1331,7 +1331,8 @@ let App = {
       if (result) {
         const [a1, a2] = result.teams.teamA;
         const [b1, b2] = result.teams.teamB;
-        const teamStr = `${gs.playerNames[a1][0]}${gs.playerNames[a2][0]} vs ${gs.playerNames[b1][0]}${gs.playerNames[b2][0]}`;
+        const n = (i) => gs.playerNames[i].slice(0, 3);
+        const teamStr = `${n(a1)}・${n(a2)} vs ${n(b1)}・${n(b2)}`;
 
         const bi = result.birdieInfo;
         let lvDisplay = `${result.lasVegasA}-${result.lasVegasB}`;

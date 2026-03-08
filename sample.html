@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>モバイル最適化サンプル</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- ===== 改善CSS（本体への適用前にここで検証） ===== -->
+  <style>
+    /* ==========================================
+       mobile-ux-optimizer 改善CSS
+       ========================================== */
+
+    /* --- 改善1: ダブルタップズーム防止 --- */
+    button, a, input, select, .pref-chip, .course-item,
+    .cht-hc-cell, .hc-review-cell, .hc-count-btn,
+    .score-btn, .bo-order-btn, .start-type-btn,
+    .hc-toggle-btn, .sb-tab {
+      touch-action: manipulation;
+    }
+
+    /* --- 改善2: テーブル min-width 削除 & 横スクロール防止 --- */
+    .course-hc-table,
+    .scorecard-table,
+    .lv-points-table {
+      min-width: 0;
+      width: 100%;
+      table-layout: auto;
+    }
+
+    /* LVポイントテーブル: チーム列を折り返し可能に */
+    .lv-team {
+      white-space: normal;
+      word-break: keep-all;
+      font-size: 10px;
+      line-height: 1.3;
+      max-width: 100px;
+    }
+    .lv-nums {
+      font-size: 11px;
+    }
+
+    /* LVポイントテーブル: プレイヤー列を詰める */
+    .lv-points-table th {
+      padding: 8px 3px;
+      font-size: 10px;
+    }
+    .lv-points-table td {
+      padding: 6px 3px;
+    }
+
+    /* スコアカードテーブル: 列を詰める */
+    .scorecard-table th {
+      padding: 8px 4px;
+      font-size: 11px;
+    }
+    .scorecard-table td {
+      padding: 6px 4px;
+      font-size: 13px;
+    }
+    .sc-player-col { min-width: 40px; }
+
+    /* HCテーブル: 列を詰める */
+    .course-hc-table th {
+      padding: 8px 4px;
+      font-size: 11px;
+    }
+    .course-hc-table td {
+      padding: 6px 4px;
+    }
+    .cht-player { min-width: 40px; }
+
+    /* --- 改善3: 374px以下のブレークポイント強化 --- */
+    @media (max-width: 374px) {
+      /* チーム表示を小型端末で縮小 */
+      .team {
+        min-width: 120px;
+        padding: 10px 12px;
+      }
+      .team-label {
+        font-size: 10px;
+      }
+      .team-members {
+        font-size: 12px;
+      }
+      .team-vs {
+        font-size: 12px;
+      }
+
+      /* 結果ボックス縮小 */
+      .result-team {
+        min-width: 80px;
+      }
+      .lv-number {
+        font-size: 28px !important;
+      }
+      .result-team span {
+        font-size: 11px;
+      }
+
+      /* テーブルフォント更に縮小 */
+      .course-hc-table {
+        font-size: 11px;
+      }
+      .course-hc-table th {
+        padding: 6px 3px;
+        font-size: 10px;
+      }
+      .course-hc-table td {
+        padding: 5px 3px;
+      }
+      .cht-hole { width: 26px; }
+      .cht-par { width: 26px; }
+      .cht-yard { width: 34px; }
+      .cht-hdcp { width: 30px; }
+      .cht-player { min-width: 36px; }
+
+      .scorecard-table {
+        font-size: 12px;
+      }
+      .scorecard-table th {
+        padding: 6px 3px;
+        font-size: 10px;
+      }
+      .scorecard-table td {
+        padding: 5px 3px;
+        font-size: 12px;
+      }
+      .sc-label-col { width: 36px; }
+      .sc-par-col { width: 32px; }
+      .sc-player-col { min-width: 36px; }
+
+      .lv-points-table {
+        font-size: 10px;
+      }
+      .lv-points-table th {
+        padding: 6px 2px;
+        font-size: 9px;
+      }
+      .lv-points-table td {
+        padding: 5px 2px;
+      }
+      .lv-team {
+        font-size: 9px;
+        max-width: 80px;
+      }
+      .lv-nums {
+        font-size: 10px;
+      }
+      .lv-hole {
+        width: 24px;
+        font-size: 10px;
+      }
+
+      /* スコア入力行を詰める */
+      .score-input-row {
+        gap: var(--space-sm);
+      }
+      .score-label {
+        min-width: 44px;
+        font-size: 10px;
+        padding: 3px 4px;
+      }
+      .score-value {
+        width: 40px;
+      }
+      .score-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+      }
+      .tee-order-label {
+        min-width: 40px;
+        font-size: 10px;
+      }
+      .hc-badge {
+        padding: 2px 6px;
+        font-size: 10px;
+      }
+
+      /* ボタン */
+      .hole-nav .btn {
+        font-size: 12px;
+        padding: 10px var(--space-sm);
+      }
+
+      /* HC設定行 */
+      .hc-count-name {
+        min-width: 48px;
+        font-size: 11px;
+      }
+      .hc-count-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+      }
+
+      /* 打順 */
+      .bo-order-btn {
+        min-width: 80px;
+        padding: 6px 12px;
+        font-size: 13px;
+      }
+      .bo-player-name {
+        font-size: 14px;
+      }
+
+      /* ランキング */
+      .ranking-item {
+        padding: 10px var(--space-md);
+        gap: var(--space-md);
+      }
+      .rank-name {
+        font-size: 14px;
+      }
+      .rank-points {
+        font-size: 18px;
+      }
+    }
+
+    /* --- サンプルページ専用スタイル --- */
+    .sample-nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: var(--primary-dark);
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .sample-nav a {
+      color: var(--accent-gold-light);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border: 1px solid var(--accent-gold-light);
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .sample-nav a:active {
+      background: rgba(251, 191, 36, 0.2);
+    }
+    .sample-section {
+      padding: 24px 0;
+      border-bottom: 4px solid var(--neutral-300);
+    }
+    .sample-section-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--white);
+      background: var(--primary-dark);
+      padding: 12px 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .sample-device-info {
+      text-align: center;
+      padding: 8px;
+      background: var(--neutral-100);
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <!-- ナビゲーション -->
+  <div class="sample-nav">
+    <a href="#sec-round">ラウンド画面</a>
+    <a href="#sec-score-input">スコア入力</a>
+    <a href="#sec-result">ホール結果</a>
+    <a href="#sec-hc-setup">HC設定</a>
+    <a href="#sec-table-hc">HCテーブル</a>
+    <a href="#sec-batting">打順設定</a>
+    <a href="#sec-scoreboard">スコアボード</a>
+    <a href="#sec-ranking">ランキング</a>
+  </div>
+
+  <div class="sample-device-info" id="device-info"></div>
+
+  <!-- ===== ラウンド画面: チーム表示 ===== -->
+  <div id="sec-round" class="sample-section">
+    <div class="sample-section-title">ラウンド画面 - チーム表示</div>
+    <div class="container">
+      <div class="hole-header">
+        <h2>HOLE <span>5</span></h2>
+        <span class="hole-par">PAR <span>4</span></span>
+      </div>
+
+      <div class="team-display">
+        <div class="team team-a">
+          <span class="team-label">Team A</span>
+          <div class="team-members">田中 & 鈴木</div>
+        </div>
+        <span class="team-vs">VS</span>
+        <div class="team team-b">
+          <span class="team-label">Team B</span>
+          <div class="team-members">佐藤 & 山田</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== スコア入力 ===== -->
+  <div id="sec-score-input" class="sample-section">
+    <div class="sample-section-title">スコア入力</div>
+    <div class="container">
+      <div class="section">
+        <h3>スコア入力</h3>
+
+        <div class="score-input-row">
+          <span class="tee-order-label tee-order-owner">オーナー</span>
+          <span class="score-player-name">田中</span>
+          <span class="hc-badge">HC</span>
+          <div class="score-control">
+            <button class="score-btn minus">-</button>
+            <input type="number" class="score-value" value="4" readonly>
+            <button class="score-btn plus">+</button>
+          </div>
+          <span class="score-label score-par">PAR</span>
+        </div>
+
+        <div class="score-input-row">
+          <span class="tee-order-label">2番目</span>
+          <span class="score-player-name">鈴木</span>
+          <div class="score-control">
+            <button class="score-btn minus">-</button>
+            <input type="number" class="score-value" value="5" readonly>
+            <button class="score-btn plus">+</button>
+          </div>
+          <span class="score-label score-bogey">BOGEY</span>
+        </div>
+
+        <div class="score-input-row">
+          <span class="tee-order-label">3番目</span>
+          <span class="score-player-name">佐藤</span>
+          <div class="score-control">
+            <button class="score-btn minus">-</button>
+            <input type="number" class="score-value" value="3" readonly>
+            <button class="score-btn plus">+</button>
+          </div>
+          <span class="score-label score-birdie">BIRDIE</span>
+        </div>
+
+        <div class="score-input-row">
+          <span class="tee-order-label">4番目</span>
+          <span class="score-player-name">山田</span>
+          <div class="score-control">
+            <button class="score-btn minus">-</button>
+            <input type="number" class="score-value" value="6" readonly>
+            <button class="score-btn plus">+</button>
+          </div>
+          <span class="score-label score-dbogey">D.BOGEY</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ホール結果 ===== -->
+  <div id="sec-result" class="sample-section">
+    <div class="sample-section-title">ホール結果</div>
+    <div class="container">
+      <div class="birdie-flip-banner">BIRDIE FLIP! 佐藤がバーディ - Team Aのスコアが逆転!</div>
+
+      <div class="hole-result">
+        <div class="result-row">
+          <div class="result-team">
+            <span class="result-team-label">Team A</span>
+            <span>田中 & 山田</span>
+            <span class="lv-number">46</span>
+          </div>
+          <span class="result-vs">VS</span>
+          <div class="result-team">
+            <span class="result-team-label">Team B</span>
+            <span>鈴木 & 佐藤</span>
+            <span class="lv-number">35</span>
+          </div>
+        </div>
+
+        <div class="hc-cancel-note">HCがある人がバーディーを取った場合、スコアは-1されません</div>
+
+        <div class="result-points">
+          <span class="diff-label">差: 11 → 15</span>
+          <div class="points-list">
+            <span class="point-item lose">田中 -15</span>
+            <span class="point-item win">鈴木 +15</span>
+            <span class="point-item win">佐藤 +15</span>
+            <span class="point-item lose">山田 -15</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 累計ポイント -->
+      <div class="cumulative-points">
+        <h3>累計ポイント</h3>
+        <div class="cumulative-list">
+          <span class="cumulative-item win">田中 +30</span>
+          <span class="cumulative-item lose">鈴木 -10</span>
+          <span class="cumulative-item win">佐藤 +25</span>
+          <span class="cumulative-item lose">山田 -45</span>
+        </div>
+      </div>
+
+      <div class="hole-nav">
+        <button class="btn btn-secondary">前のホールへ</button>
+        <button class="btn btn-outline">スコアボード</button>
+        <button class="btn btn-primary">次のホールへ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HC設定 ===== -->
+  <div id="sec-hc-setup" class="sample-section">
+    <div class="sample-section-title">HC設定 (Step2)</div>
+    <div class="container">
+      <div class="hc-toggle-section">
+        <span class="hc-toggle-label">前半のハンディキャップを設定しますか？</span>
+        <div class="hc-toggle-btns">
+          <button class="hc-toggle-btn active">YES</button>
+          <button class="hc-toggle-btn">NO</button>
+        </div>
+      </div>
+
+      <div class="hc-count-section" style="display:flex; flex-direction:column; gap:12px;">
+        <div class="hc-count-row">
+          <span class="hc-count-name">田中</span>
+          <button class="hc-count-btn" data-value="2">2</button>
+          <span class="hc-count-status hc-status-ok">2/2</span>
+        </div>
+        <div class="hc-count-row">
+          <span class="hc-count-name">鈴木</span>
+          <button class="hc-count-btn" data-value="1">1</button>
+          <span class="hc-count-status hc-status-ng">0/1</span>
+        </div>
+        <div class="hc-count-row">
+          <span class="hc-count-name">佐藤</span>
+          <button class="hc-count-btn" data-value="0">0</button>
+        </div>
+        <div class="hc-count-row">
+          <span class="hc-count-name">山田</span>
+          <button class="hc-count-btn" data-value="3">3</button>
+          <span class="hc-count-status hc-status-ng">1/3</span>
+        </div>
+      </div>
+
+      <p class="hc-tap-hint" style="display:block;">ハンディキャップを設定したいホールをタップしてください</p>
+    </div>
+  </div>
+
+  <!-- ===== HCテーブル ===== -->
+  <div id="sec-table-hc" class="sample-section">
+    <div class="sample-section-title">HC テーブル</div>
+    <div class="container">
+      <div class="scorecard-scroll">
+        <table class="course-hc-table">
+          <thead>
+            <tr>
+              <th class="cht-hole">H</th>
+              <th class="cht-par">PAR</th>
+              <th class="cht-yard">YARD</th>
+              <th class="cht-hdcp">HC</th>
+              <th class="cht-player">田中</th>
+              <th class="cht-player">鈴木</th>
+              <th class="cht-player">佐藤</th>
+              <th class="cht-player">山田</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="cht-section-row"><td class="cht-section-label" colspan="8">OUT</td></tr>
+            <tr>
+              <td class="cht-hole-num">1</td>
+              <td class="cht-par-val">5</td>
+              <td class="cht-yard-val">485</td>
+              <td class="cht-hdcp-val">9</td>
+              <td class="cht-hc-cell hc-selected">HC</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell hc-selected">HC</td>
+            </tr>
+            <tr>
+              <td class="cht-hole-num">2</td>
+              <td class="cht-par-val">4</td>
+              <td class="cht-yard-val">380</td>
+              <td class="cht-hdcp-val">3</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell hc-selected">HC</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+            </tr>
+            <tr>
+              <td class="cht-hole-num">3</td>
+              <td class="cht-par-val">3</td>
+              <td class="cht-yard-val">165</td>
+              <td class="cht-hdcp-val">15</td>
+              <td class="cht-hc-cell hc-selected">HC</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell hc-selected">HC</td>
+            </tr>
+            <tr>
+              <td class="cht-hole-num">4</td>
+              <td class="cht-par-val">4</td>
+              <td class="cht-yard-val">410</td>
+              <td class="cht-hdcp-val">1</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell hc-selected">HC</td>
+            </tr>
+            <tr>
+              <td class="cht-hole-num">5</td>
+              <td class="cht-par-val">5</td>
+              <td class="cht-yard-val">520</td>
+              <td class="cht-hdcp-val">7</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+            </tr>
+            <tr>
+              <td class="cht-hole-num">6</td>
+              <td class="cht-par-val">4</td>
+              <td class="cht-yard-val">355</td>
+              <td class="cht-hdcp-val">11</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+            </tr>
+            <tr>
+              <td class="cht-hole-num">7</td>
+              <td class="cht-par-val">3</td>
+              <td class="cht-yard-val">175</td>
+              <td class="cht-hdcp-val">17</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+            </tr>
+            <tr>
+              <td class="cht-hole-num">8</td>
+              <td class="cht-par-val">4</td>
+              <td class="cht-yard-val">390</td>
+              <td class="cht-hdcp-val">5</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+            </tr>
+            <tr>
+              <td class="cht-hole-num">9</td>
+              <td class="cht-par-val">4</td>
+              <td class="cht-yard-val">400</td>
+              <td class="cht-hdcp-val">13</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+              <td class="cht-hc-cell">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 打順設定 ===== -->
+  <div id="sec-batting" class="sample-section">
+    <div class="sample-section-title">打順設定 (Step3)</div>
+    <div class="container">
+      <p class="step-desc">各プレイヤー名をタップして打順を設定してください</p>
+      <button class="btn btn-secondary random-order-btn">ランダムで決定</button>
+
+      <div>
+        <div class="batting-order-row">
+          <span class="bo-player-name">田中</span>
+          <button class="bo-order-btn assigned">オーナー</button>
+        </div>
+        <div class="batting-order-row">
+          <span class="bo-player-name">鈴木</span>
+          <button class="bo-order-btn assigned">2番目</button>
+        </div>
+        <div class="batting-order-row">
+          <span class="bo-player-name">佐藤</span>
+          <button class="bo-order-btn assigned">3番目</button>
+        </div>
+        <div class="batting-order-row">
+          <span class="bo-player-name">山田</span>
+          <button class="bo-order-btn">未設定</button>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn btn-secondary">戻る</button>
+        <button class="btn btn-primary">次へ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== スコアボード テーブル ===== -->
+  <div id="sec-scoreboard" class="sample-section">
+    <div class="sample-section-title">スコアボード - LVポイント</div>
+    <div class="container">
+      <div class="sb-tabs">
+        <button class="sb-tab active">ラスベガスポイント</button>
+        <button class="sb-tab">ラウンドスコア</button>
+      </div>
+
+      <div class="scorecard-scroll">
+        <table class="lv-points-table">
+          <thead>
+            <tr>
+              <th class="lv-hole">H</th>
+              <th class="lv-team">チーム</th>
+              <th class="lv-nums">LV数</th>
+              <th>田中</th>
+              <th>鈴木</th>
+              <th>佐藤</th>
+              <th>山田</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="lv-hole">1</td>
+              <td class="lv-team">田中・鈴木<br>vs<br>佐藤・山田</td>
+              <td class="lv-nums">45vs36</td>
+              <td class="lv-lose">-10</td>
+              <td class="lv-lose">-10</td>
+              <td class="lv-win">+10</td>
+              <td class="lv-win">+10</td>
+            </tr>
+            <tr>
+              <td class="lv-hole">2</td>
+              <td class="lv-team">田中・佐藤<br>vs<br>鈴木・山田</td>
+              <td class="lv-nums">35vs46</td>
+              <td class="lv-win">+15</td>
+              <td class="lv-lose">-15</td>
+              <td class="lv-win">+15</td>
+              <td class="lv-lose">-15</td>
+            </tr>
+            <tr>
+              <td class="lv-hole">3</td>
+              <td class="lv-team">田中・山田<br>vs<br>鈴木・佐藤</td>
+              <td class="lv-nums">56vs34</td>
+              <td class="lv-lose">-25</td>
+              <td class="lv-win">+25</td>
+              <td class="lv-win">+25</td>
+              <td class="lv-lose">-25</td>
+            </tr>
+            <tr class="lv-subtotal-row">
+              <td>OUT</td>
+              <td></td>
+              <td></td>
+              <td class="lv-lose">-20</td>
+              <td class="lv-win">+0</td>
+              <td class="lv-win">+50</td>
+              <td class="lv-lose">-30</td>
+            </tr>
+            <tr class="lv-total-row">
+              <td>TOTAL</td>
+              <td></td>
+              <td></td>
+              <td class="lv-lose">-20</td>
+              <td>0</td>
+              <td class="lv-win">+50</td>
+              <td class="lv-lose">-30</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ランキング ===== -->
+  <div id="sec-ranking" class="sample-section">
+    <div class="sample-section-title">ランキング</div>
+    <div class="container">
+      <div class="ranking">
+        <div class="ranking-title">RANKING</div>
+        <div class="ranking-item rank-1">
+          <span class="rank-medal">1</span>
+          <span class="rank-name">佐藤</span>
+          <span class="rank-points win">+50</span>
+        </div>
+        <div class="ranking-item rank-2">
+          <span class="rank-medal">2</span>
+          <span class="rank-name">鈴木</span>
+          <span class="rank-points">0</span>
+        </div>
+        <div class="ranking-item rank-3">
+          <span class="rank-medal">3</span>
+          <span class="rank-name">田中</span>
+          <span class="rank-points lose">-20</span>
+        </div>
+        <div class="ranking-item rank-4">
+          <span class="rank-medal">4</span>
+          <span class="rank-name">山田</span>
+          <span class="rank-points lose">-30</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // デバイス情報表示
+    const info = document.getElementById('device-info');
+    function updateInfo() {
+      info.textContent = `画面幅: ${window.innerWidth}px x ${window.innerHeight}px | DPR: ${window.devicePixelRatio}`;
+    }
+    updateInfo();
+    window.addEventListener('resize', updateInfo);
+  </script>
+</body>
+</html>
