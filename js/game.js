@@ -159,6 +159,39 @@ const LasVegas = {
     });
   },
 
+  // 打順計算: 前ホールのHC調整済みスコアが良い順に1,2,3,4
+  // 同スコアの場合はさらに前のホールを遡って比較
+  calcTeeOrder(gameState, currentHoleIndex) {
+    const gs = gameState;
+
+    // 1ホール目: セットアップの打順をそのまま使う
+    if (currentHoleIndex === 0) {
+      return [...gs.battingOrder];
+    }
+
+    // 2ホール目以降
+    const players = [0, 1, 2, 3];
+
+    players.sort((a, b) => {
+      for (let hi = currentHoleIndex - 1; hi >= 0; hi--) {
+        const holeNum = gs.holeOrder[hi];
+        const raw = gs.holeScores[holeNum];
+        if (!raw) continue;
+        const adjusted = LasVegas.applyHandicap(raw, holeNum, gs.handicapHoles);
+        if (adjusted[a] !== adjusted[b]) {
+          return adjusted[a] - adjusted[b];
+        }
+      }
+      return a - b;
+    });
+
+    const teeOrder = new Array(4);
+    players.forEach((playerIdx, rank) => {
+      teeOrder[playerIdx] = rank + 1;
+    });
+    return teeOrder;
+  },
+
   // 全ホールの累計ポイント計算
   calcTotalPoints(holeResults) {
     const totals = [0, 0, 0, 0];

@@ -100,6 +100,9 @@ let App = {
       document.getElementById('start-out-btn').classList.remove('active');
     });
 
+    // Random batting order
+    document.getElementById('random-order-btn').addEventListener('click', () => this.randomizeBattingOrder());
+
     // Round screen
     document.getElementById('next-hole-btn').addEventListener('click', () => this.nextHole());
     document.getElementById('prev-hole-btn').addEventListener('click', () => this.prevHole());
@@ -314,7 +317,9 @@ let App = {
     const front9 = course.holes.filter(h => h.hole <= 9);
     const back9 = course.holes.filter(h => h.hole >= 10);
 
-    // HC count inputs per player: OUT + IN separate
+    // HC count inputs per player: first half only
+    const firstHalf = this._startType === 'in' ? 'in' : 'out';
+    const firstHalfLabel = firstHalf.toUpperCase();
     const countSection = document.getElementById('hc-count-section');
     countSection.style.display = 'none';
     countSection.innerHTML = '';
@@ -325,30 +330,23 @@ let App = {
         <span class="hc-count-name">${name}</span>
         <div class="hc-count-halves">
           <div class="hc-count-half">
-            <label class="hc-count-label">OUT:
-              <input type="number" id="hc-count-out-${i}" min="0" max="9" value="0"
-                     class="hc-count-input">
-            </label>
-            <span class="hc-count-status" id="hc-status-out-${i}">0/0</span>
-          </div>
-          <div class="hc-count-half">
-            <label class="hc-count-label">IN:
-              <input type="number" id="hc-count-in-${i}" min="0" max="9" value="0"
-                     class="hc-count-input">
-            </label>
-            <span class="hc-count-status" id="hc-status-in-${i}">0/0</span>
+            <span class="hc-count-label">${firstHalfLabel}:</span>
+            <button type="button" id="hc-count-${firstHalf}-${i}" class="hc-count-btn" data-value="0">0</button>
+            <span class="hc-count-status" id="hc-status-${firstHalf}-${i}">0/0</span>
           </div>
         </div>`;
       countSection.appendChild(row);
     });
 
-    // Bind HC count change events
+    // Bind HC count tap events (tap to increment, cycles 0→1→...→9→0)
     for (let i = 0; i < 4; i++) {
-      document.getElementById(`hc-count-out-${i}`).addEventListener('change', () => {
-        this.onHcCountChange(i, 'out');
-      });
-      document.getElementById(`hc-count-in-${i}`).addEventListener('change', () => {
-        this.onHcCountChange(i, 'in');
+      document.getElementById(`hc-count-${firstHalf}-${i}`).addEventListener('click', (e) => {
+        const btn = e.currentTarget;
+        let val = (parseInt(btn.dataset.value) || 0) + 1;
+        if (val > 9) val = 0;
+        btn.dataset.value = val;
+        btn.textContent = val;
+        this.onHcCountChange(i, firstHalf);
       });
     }
 
@@ -367,19 +365,13 @@ let App = {
     tbody.innerHTML = '';
     const numCols = 4 + 4;
 
-    // OUT section
-    const outHeader = document.createElement('tr');
-    outHeader.className = 'cht-section-row';
-    outHeader.innerHTML = `<td colspan="${numCols}" class="cht-section-label">OUT</td>`;
-    tbody.appendChild(outHeader);
-    front9.forEach(h => tbody.appendChild(this._buildHcHoleRow(h)));
-
-    // IN section
-    const inHeader = document.createElement('tr');
-    inHeader.className = 'cht-section-row';
-    inHeader.innerHTML = `<td colspan="${numCols}" class="cht-section-label">IN</td>`;
-    tbody.appendChild(inHeader);
-    back9.forEach(h => tbody.appendChild(this._buildHcHoleRow(h)));
+    // Show first-half holes only
+    const firstHalfHoles = this._startType === 'in' ? back9 : front9;
+    const sectionHeader = document.createElement('tr');
+    sectionHeader.className = 'cht-section-row';
+    sectionHeader.innerHTML = `<td colspan="${numCols}" class="cht-section-label">${firstHalfLabel}</td>`;
+    tbody.appendChild(sectionHeader);
+    firstHalfHoles.forEach(h => tbody.appendChild(this._buildHcHoleRow(h)));
   },
 
   _buildHcHoleRow(h) {
@@ -422,6 +414,7 @@ let App = {
     document.getElementById('hc-yes-btn').classList.toggle('active', enabled);
     document.getElementById('hc-no-btn').classList.toggle('active', !enabled);
     document.getElementById('hc-count-section').style.display = enabled ? 'flex' : 'none';
+    document.getElementById('hc-tap-hint').style.display = enabled ? 'block' : 'none';
 
     // Toggle cell interactivity
     document.querySelectorAll('.cht-hc-cell').forEach(cell => {
@@ -445,7 +438,7 @@ let App = {
     if (!this._hcEnabled) return;
 
     const half = holeNum <= 9 ? 'out' : 'in';
-    const maxCount = parseInt(document.getElementById(`hc-count-${half}-${playerIdx}`).value) || 0;
+    const maxCount = parseInt(document.getElementById(`hc-count-${half}-${playerIdx}`).dataset.value) || 0;
     const holes = this._handicapHoles[playerIdx];
     const halfHoles = holes.filter(h => half === 'out' ? h <= 9 : h >= 10);
     const idx = holes.indexOf(holeNum);
@@ -472,7 +465,7 @@ let App = {
   },
 
   onHcCountChange(playerIdx, half) {
-    const maxCount = parseInt(document.getElementById(`hc-count-${half}-${playerIdx}`).value) || 0;
+    const maxCount = parseInt(document.getElementById(`hc-count-${half}-${playerIdx}`).dataset.value) || 0;
     const holes = this._handicapHoles[playerIdx];
     const isHalf = half === 'out' ? h => h <= 9 : h => h >= 10;
 
@@ -493,7 +486,7 @@ let App = {
   },
 
   updateHcStatus(playerIdx, half) {
-    const maxCount = parseInt(document.getElementById(`hc-count-${half}-${playerIdx}`).value) || 0;
+    const maxCount = parseInt(document.getElementById(`hc-count-${half}-${playerIdx}`).dataset.value) || 0;
     const current = this._handicapHoles[playerIdx].filter(h => half === 'out' ? h <= 9 : h >= 10).length;
     const statusEl = document.getElementById(`hc-status-${half}-${playerIdx}`);
     statusEl.textContent = `${current}/${maxCount}`;
@@ -503,14 +496,13 @@ let App = {
 
   setupStep2Next() {
     if (this._hcEnabled) {
+      const half = this._startType === 'in' ? 'in' : 'out';
       for (let i = 0; i < 4; i++) {
-        for (const half of ['out', 'in']) {
-          const maxCount = parseInt(document.getElementById(`hc-count-${half}-${i}`).value) || 0;
-          const currentCount = this._handicapHoles[i].filter(h => half === 'out' ? h <= 9 : h >= 10).length;
-          if (currentCount !== maxCount && maxCount > 0) {
-            alert(`${this._playerNames[i]}さんの${half.toUpperCase()} HCホールを${maxCount}個選択してください（現在${currentCount}個）`);
-            return;
-          }
+        const maxCount = parseInt(document.getElementById(`hc-count-${half}-${i}`).dataset.value) || 0;
+        const currentCount = this._handicapHoles[i].filter(h => half === 'out' ? h <= 9 : h >= 10).length;
+        if (currentCount !== maxCount && maxCount > 0) {
+          alert(`${this._playerNames[i]}さんの${half.toUpperCase()} HCホールを${maxCount}個選択してください（現在${currentCount}個）`);
+          return;
         }
       }
     } else {
@@ -570,6 +562,23 @@ let App = {
     btnEl.className = 'bo-order-btn' + (next > 0 ? ' assigned' : '');
   },
 
+  randomizeBattingOrder() {
+    const labels = ['未設定', 'オーナー', '2番目', '3番目', '4番目'];
+    // Fisher-Yates shuffle of [1,2,3,4]
+    const orders = [1, 2, 3, 4];
+    for (let i = orders.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [orders[i], orders[j]] = [orders[j], orders[i]];
+    }
+    this._battingOrder = orders;
+    // Update button labels
+    const btns = document.querySelectorAll('.bo-order-btn');
+    btns.forEach((btn, idx) => {
+      btn.textContent = labels[orders[idx]];
+      btn.className = 'bo-order-btn assigned';
+    });
+  },
+
   setupStep3Next() {
     // Validate all players have unique orders
     const orders = this._battingOrder;
@@ -605,19 +614,21 @@ let App = {
       <p style="margin-top:4px;font-weight:700;color:var(--primary);">${startLabel}（${startHoleNum}から）</p>
     </div>`;
 
+    const firstHalf = this._startType === 'in' ? 'in' : 'out';
+    const firstHalfLabel = firstHalf.toUpperCase();
     html += `<div class="confirm-section">
       <h4>プレイヤー & 打順</h4>
       <table class="confirm-table">
-        <thead><tr><th>プレイヤー</th><th>打順</th>${hcEnabled ? '<th>OUT HC</th><th>IN HC</th>' : ''}</tr></thead>
+        <thead><tr><th>プレイヤー</th><th>打順</th>${hcEnabled ? `<th>${firstHalfLabel} HC</th>` : ''}</tr></thead>
         <tbody>`;
     this._playerNames.forEach((name, i) => {
-      const outHoles = this._handicapHoles[i].filter(h => h <= 9).sort((a,b)=>a-b);
-      const inHoles = this._handicapHoles[i].filter(h => h >= 10).sort((a,b)=>a-b);
+      const hcHoles = this._handicapHoles[i]
+        .filter(h => firstHalf === 'out' ? h <= 9 : h >= 10)
+        .sort((a,b)=>a-b);
       html += `<tr>
         <td>${name}</td>
         <td>${orderLabels[this._battingOrder[i]]}</td>
-        ${hcEnabled ? `<td>${outHoles.length > 0 ? outHoles.join(',') : 'なし'}</td>` : ''}
-        ${hcEnabled ? `<td>${inHoles.length > 0 ? inHoles.join(',') : 'なし'}</td>` : ''}
+        ${hcEnabled ? `<td>${hcHoles.length > 0 ? hcHoles.join(',') : 'なし'}</td>` : ''}
       </tr>`;
     });
     html += `</tbody></table></div>`;
@@ -674,19 +685,10 @@ let App = {
     document.getElementById('hole-number').textContent = hole;
     document.getElementById('hole-par').textContent = courseHole ? courseHole.par : '-';
 
-    // Determine teams for display
+    // Determine teams for display (打順ベース: オーナー+4番目 vs 2番目+3番目)
     const holeIndex = gs.currentHoleIndex;
-    let teams, rankings;
-    if (holeIndex === 0) {
-      teams = LasVegas.formTeamsFromBattingOrder(gs.battingOrder);
-    } else {
-      const prevHoleNum = gs.holeOrder[holeIndex - 1];
-      const prevScores = gs.holeScores[prevHoleNum];
-      if (prevScores) {
-        rankings = LasVegas.calcRankings(prevScores);
-        teams = LasVegas.formTeams(rankings);
-      }
-    }
+    const teeOrder = LasVegas.calcTeeOrder(gs, holeIndex);
+    const teams = LasVegas.formTeamsFromBattingOrder(teeOrder);
 
     // Team display
     const teamDisplay = document.getElementById('team-display');
@@ -711,13 +713,17 @@ let App = {
     const inputArea = document.getElementById('score-inputs');
     inputArea.innerHTML = '';
     const existingScores = gs.holeScores[hole] || [0, 0, 0, 0];
+    const orderLabels = ['オーナー', '2番目', '3番目', '4番目'];
+    const sortedPlayers = [0, 1, 2, 3].sort((a, b) => teeOrder[a] - teeOrder[b]);
 
-    gs.playerNames.forEach((name, pIdx) => {
+    sortedPlayers.forEach((pIdx, displayIdx) => {
+      const name = gs.playerNames[pIdx];
       const isHcHole = gs.handicapHoles[pIdx].includes(hole);
       const row = document.createElement('div');
       row.className = 'score-input-row';
 
       row.innerHTML = `
+        <span class="tee-order-label${displayIdx === 0 ? ' tee-order-owner' : ''}">${orderLabels[displayIdx]}</span>
         <span class="score-player-name">${name}</span>
         ${isHcHole ? '<span class="hc-badge">HC</span>' : ''}
         <div class="score-control">
@@ -810,20 +816,9 @@ let App = {
     // Store raw scores
     gs.holeScores[hole] = rawScores;
 
-    // Get teams
-    let teams;
-    if (gs.currentHoleIndex === 0) {
-      teams = LasVegas.formTeamsFromBattingOrder(gs.battingOrder);
-    } else {
-      const prevHoleNum = gs.holeOrder[gs.currentHoleIndex - 1];
-      const prevScores = gs.holeScores[prevHoleNum];
-      if (prevScores) {
-        const rankings = LasVegas.calcRankings(prevScores);
-        teams = LasVegas.formTeams(rankings);
-      } else {
-        return; // Can't calculate without previous hole
-      }
-    }
+    // Get teams (打順ベース: オーナー+4番目 vs 2番目+3番目)
+    const teeOrder = LasVegas.calcTeeOrder(gs, gs.currentHoleIndex);
+    const teams = LasVegas.formTeamsFromBattingOrder(teeOrder);
 
     // Calculate (rawScores, par, handicapHoles, hole for birdie + HC cancel)
     const result = LasVegas.calcHolePoints(scores, teams, rawScores, par, gs.handicapHoles, hole);
@@ -882,6 +877,7 @@ let App = {
           <span class="lv-number">${lvBDisplay}</span>
         </div>
       </div>
+      ${hcCancelled.length > 0 ? '<div class="hc-cancel-note">HCがある人がバーディーを取った場合、スコアは-1されません（相手チームのスコアは逆転します）</div>' : ''}
       <div class="result-points">
         <span class="diff-label">差: ${Math.abs(result.diff)} → ${result.roundedDiff}点</span>
         <div class="points-list">
@@ -893,8 +889,9 @@ let App = {
         </div>
       </div>`;
 
-    // Save
+    // Save & update cumulative
     Storage.saveGame(gs);
+    this.renderCumulativePoints();
   },
 
   renderCumulativePoints() {
@@ -921,7 +918,7 @@ let App = {
     }
 
     // Show HC review after the 9th hole played (index 8)
-    if (gs.currentHoleIndex === 8 && gs.hcEnabled) {
+    if (gs.currentHoleIndex === 8) {
       this.showHcReview();
       return;
     }
@@ -978,10 +975,8 @@ let App = {
         <span class="hc-count-name">${name}</span>
         <div class="hc-count-halves">
           <div class="hc-count-half">
-            <label class="hc-count-label">${halfLabel} HC数:
-              <input type="number" id="hc-review-count-${i}" min="0" max="9" value="${count}"
-                     class="hc-count-input">
-            </label>
+            <span class="hc-count-label">${halfLabel}:</span>
+            <button type="button" id="hc-review-count-${i}" class="hc-count-btn" data-value="${count}">${count}</button>
             <span class="hc-count-status" id="hc-review-status-${i}">${count}/${count}</span>
           </div>
         </div>`;
@@ -989,7 +984,12 @@ let App = {
     });
 
     for (let i = 0; i < 4; i++) {
-      document.getElementById(`hc-review-count-${i}`).addEventListener('change', () => {
+      document.getElementById(`hc-review-count-${i}`).addEventListener('click', (e) => {
+        const btn = e.currentTarget;
+        let val = (parseInt(btn.dataset.value) || 0) + 1;
+        if (val > 9) val = 0;
+        btn.dataset.value = val;
+        btn.textContent = val;
         this.onHcReviewCountChange(i);
       });
     }
@@ -1062,7 +1062,7 @@ let App = {
     const gs = this.gameState;
     const startType = gs.startType || 'out';
     const halfLabel = (startType === 'in') ? 'OUT' : 'IN';
-    const maxCount = parseInt(document.getElementById(`hc-review-count-${playerIdx}`).value) || 0;
+    const maxCount = parseInt(document.getElementById(`hc-review-count-${playerIdx}`).dataset.value) || 0;
     const holes = this._reviewSecondHalfHoles[playerIdx];
     const idx = holes.indexOf(holeNum);
 
@@ -1088,7 +1088,7 @@ let App = {
   },
 
   onHcReviewCountChange(playerIdx) {
-    const maxCount = parseInt(document.getElementById(`hc-review-count-${playerIdx}`).value) || 0;
+    const maxCount = parseInt(document.getElementById(`hc-review-count-${playerIdx}`).dataset.value) || 0;
     const holes = this._reviewSecondHalfHoles[playerIdx];
 
     while (holes.length > maxCount) {
@@ -1104,7 +1104,7 @@ let App = {
   },
 
   updateHcReviewStatus(playerIdx) {
-    const maxCount = parseInt(document.getElementById(`hc-review-count-${playerIdx}`).value) || 0;
+    const maxCount = parseInt(document.getElementById(`hc-review-count-${playerIdx}`).dataset.value) || 0;
     const current = this._reviewSecondHalfHoles[playerIdx].length;
     const statusEl = document.getElementById(`hc-review-status-${playerIdx}`);
     statusEl.textContent = `${current}/${maxCount}`;
@@ -1129,7 +1129,7 @@ let App = {
 
     // Validate
     for (let i = 0; i < 4; i++) {
-      const maxCount = parseInt(document.getElementById(`hc-review-count-${i}`).value) || 0;
+      const maxCount = parseInt(document.getElementById(`hc-review-count-${i}`).dataset.value) || 0;
       const currentCount = this._reviewSecondHalfHoles[i].length;
       if (currentCount !== maxCount && maxCount > 0) {
         alert(`${gs.playerNames[i]}さんの${halfLabel} HCホールを${maxCount}個選択してください（現在${currentCount}個）`);
@@ -1144,6 +1144,11 @@ let App = {
         ...gs.handicapHoles[i].filter(keepFn),
         ...this._reviewSecondHalfHoles[i]
       ];
+    }
+
+    // Enable HC if any player has HC holes set
+    if (gs.handicapHoles.some(holes => holes.length > 0)) {
+      gs.hcEnabled = true;
     }
 
     gs.currentHoleIndex = 9;

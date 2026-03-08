@@ -190,7 +190,7 @@
         <h3 id="course-info-title"></h3>
 
         <div class="hc-toggle-section">
-          <span class="hc-toggle-label">ハンディキャップを設定しますか？</span>
+          <span class="hc-toggle-label">前半のハンディキャップを設定しますか？</span>
           <div class="hc-toggle-btns">
             <button id="hc-yes-btn" class="hc-toggle-btn">YES</button>
             <button id="hc-no-btn" class="hc-toggle-btn active">NO</button>
@@ -198,6 +198,7 @@
         </div>
 
         <div id="hc-count-section" class="hc-count-section" style="display:none;"></div>
+        <p id="hc-tap-hint" class="hc-tap-hint" style="display:none;">ハンディキャップを設定したいホールをタップしてください</p>
 
         <div class="scorecard-scroll">
           <table class="course-hc-table" id="course-hc-table">
@@ -216,6 +217,7 @@
       <div id="setup-step-3" class="setup-step">
         <h2>Step 3: 1番ホールの打順</h2>
         <p class="step-desc">各プレイヤー名をタップして打順を設定してください</p>
+        <button type="button" id="random-order-btn" class="btn btn-secondary random-order-btn">ランダムで決定</button>
         <div id="batting-order-list"></div>
         <div class="step-nav">
           <button id="setup-back-3" class="btn btn-secondary">戻る</button>
@@ -269,6 +271,7 @@
       <p class="step-desc" id="hc-review-desc-text">INコース（10-18H）のハンディキャップを変更できます</p>
 
       <div id="hc-review-count-section" class="hc-count-section"></div>
+      <p class="hc-tap-hint">ハンディキャップを設定したいホールをタップしてください</p>
 
       <div class="scorecard-scroll">
         <table class="course-hc-table" id="hc-review-table">

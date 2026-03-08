@@ -779,20 +779,31 @@ body {
   text-transform: uppercase;
   font-weight: 700;
 }
-.hc-count-input {
-  width: 52px;
-  padding: 6px;
+.hc-count-btn {
+  width: 44px;
+  height: 44px;
   border: 2px solid var(--neutral-300);
   border-radius: var(--radius-md);
+  background: var(--white);
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--primary);
+  cursor: pointer;
   transition: all var(--transition-base);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
-.hc-count-input:focus {
+.hc-count-btn:active {
+  background: var(--primary);
+  color: var(--white);
   border-color: var(--primary);
-  outline: none;
+  transform: scale(0.95);
+}
+.hc-count-btn[data-value="0"] {
+  color: var(--neutral-400);
+  border-color: var(--neutral-200);
 }
 .hc-count-status {
   font-size: 11px;
@@ -944,6 +955,10 @@ body {
 }
 
 /* ========== Batting Order ========== */
+.random-order-btn {
+  width: 100%;
+  margin-bottom: var(--space-md);
+}
 .batting-order-row {
   display: flex;
   justify-content: space-between;
@@ -1132,6 +1147,16 @@ body {
   font-size: 15px;
   color: var(--text);
 }
+.tee-order-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--neutral-500);
+  flex-shrink: 0;
+  min-width: 48px;
+}
+.tee-order-owner {
+  color: var(--primary);
+}
 .hc-badge {
   background: var(--accent-gold);
   color: var(--white);
@@ -1308,6 +1333,18 @@ body {
 }
 .result-points {
   text-align: center;
+}
+.hc-tap-hint {
+  font-size: 13px;
+  color: var(--neutral-500);
+  text-align: center;
+  margin: var(--space-sm) 0;
+}
+.hc-cancel-note {
+  font-size: 11px;
+  color: var(--neutral-500);
+  text-align: center;
+  padding: 4px 8px;
 }
 .diff-label {
   font-size: 14px;
